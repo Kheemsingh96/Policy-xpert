@@ -7,7 +7,7 @@ import decorBlue from "../../assets/images/decorative.png";
 import decorMail from "../../assets/images/decorative2.png";
 import whyChooseIcon from "../../assets/images/tick.png";
 
-function Hero() {
+function Hero({ openForm }) {
   return (
     <section className="hero">
       <div className="hero-container">
@@ -25,7 +25,8 @@ function Hero() {
           </p>
 
           <div className="hero-actions">
-            <button className="primary-btn">
+            {/* ONLY CHANGE HERE */}
+            <button className="primary-btn" onClick={openForm}>
               Claim Your Free Consultation
             </button>
 

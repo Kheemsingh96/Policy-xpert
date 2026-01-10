@@ -2,7 +2,7 @@ import "./header.css";
 import logo from "../../assets/images/logo.png";
 import callIcon from "../../assets/images/call.png";
 
-function Header() {
+function Header({ openForm }) {
   return (
     <header className="header">
       <div className="header-container">
@@ -22,7 +22,8 @@ function Header() {
             <a href="#">About Us</a>
           </nav>
 
-          <button className="header-btn">
+          {/* ONLY CHANGE IS HERE */}
+          <button className="header-btn" onClick={openForm}>
             <img src={callIcon} alt="Call" />
             Free Call with Expert
           </button>
