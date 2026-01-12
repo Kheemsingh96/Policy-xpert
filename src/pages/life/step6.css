@@ -196,6 +196,8 @@
   box-shadow: 0 8px 20px rgba(53, 123, 216, 0.25);
 }
 
+
+
 @media (max-width: 768px) {
   .life-step-box {
     padding: 28px 20px 32px;

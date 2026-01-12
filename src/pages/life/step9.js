@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./step9.css"; 
 import arrowRight from "../../assets/images/arrow2.png";
@@ -7,7 +7,6 @@ import arrowLeft from "../../assets/images/arrow-left.png";
 function LifeStep9() {
   const navigate = useNavigate();
   const location = useLocation();
-  const data = location.state || {};
 
   const steps = [
     { id: 1, label: "Basic" },
@@ -19,8 +18,14 @@ function LifeStep9() {
   const currentStep = 3;
   const progressPercent = 75; 
 
-  const [nomineeResponse, setNomineeResponse] = useState(data.nomineeResponse || "");
-  const [error, setError] = useState("");
+  const [nomineeResponse, setNomineeResponse] = useState(location.state?.nomineeResponse || "");
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (location.state?.nomineeResponse) {
+      setNomineeResponse(location.state.nomineeResponse);
+    }
+  }, [location.state]);
 
   const options = [
     "Can handle the money confidently without feeling overwhelmed",
@@ -29,27 +34,43 @@ function LifeStep9() {
     "Could be misled into purchasing unnecessary financial products"
   ];
 
-  const handleNext = () => {
-    if (!nomineeResponse) {
-      setError("Please select an option");
-      return;
+  const handleInputChange = (field, value, setter) => {
+    setter(value);
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
     }
+  };
 
-    const finalData = { ...data, nomineeResponse };
-    console.log("Step 9 Data:", finalData);
+  const validate = () => {
+    let newErrors = {};
+    if (!nomineeResponse) newErrors.nomineeResponse = "Please select an option to proceed.";
     
-    // CORRECTION: Alert hata diya aur navigate chalu kar diya
-    navigate("/life/step-10", { state: finalData });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validate()) {
+      navigate("/life/step-10", {
+        state: { ...location.state, nomineeResponse }
+      });
+    }
+  };
+
+  const handlePrevious = () => {
+    navigate("/life/step-8", { state: location.state });
   };
 
   return (
     <section className="life-step">
       <div className="progress-wrapper">
         <div className="progress-steps">
-          {steps.map((step) => (
-            <span key={step.id} className={step.id <= currentStep ? "active" : ""}>
-              {step.label}
-            </span>
+          {steps.map((s) => (
+            <span key={s.id} className={s.id <= currentStep ? "active" : ""}>{s.label}</span>
           ))}
         </div>
         <div className="progress-bar">
@@ -66,31 +87,28 @@ function LifeStep9() {
           {options.map((option, index) => (
             <button
               key={index}
+              type="button"
               className={`option-btn ${nomineeResponse === option ? "active" : ""}`}
-              onClick={() => {
-                setNomineeResponse(option);
-                setError("");
-              }}
+              onClick={() => handleInputChange("nomineeResponse", option, setNomineeResponse)}
             >
               {option}
             </button>
           ))}
         </div>
 
-        {error && <span className="field-error">{error}</span>}
+        {errors.nomineeResponse && (
+          <span className="error-text" style={{ display: 'block', textAlign: 'center', marginTop: '10px' }}>
+            {errors.nomineeResponse}
+          </span>
+        )}
 
         <div className="step-footer space-between">
-          <button
-            className="prev-btn"
-            onClick={() => navigate("/life/step-8", { state: data })}
-          >
-            <img src={arrowLeft} alt="previous" />
-            Previous
+          <button type="button" className="prev-btn" onClick={handlePrevious}>
+            <img src={arrowLeft} alt="previous" /> Previous
           </button>
 
-          <button className="next-btn" onClick={handleNext}>
-            Next
-            <img src={arrowRight} alt="next" />
+          <button type="button" className="next-btn" onClick={handleNext}>
+            Next <img src={arrowRight} alt="next" />
           </button>
         </div>
       </div>

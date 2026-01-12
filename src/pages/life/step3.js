@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./step3.css";
 import "./stepslayout.css"; 
@@ -16,43 +16,54 @@ function LifeStep3() {
     { id: 4, label: "04 Assets & Liabilities" }
   ];
 
-  const currentStep = 1;
-  const totalBasicPages = 3;
-  const currentBasicPage = 3; 
-  const progressPercent = (100 / steps.length) / totalBasicPages * currentBasicPage;
 
-  const data = location.state || {};
+  const progressPercent = 14; 
 
-  const [tobacco, setTobacco] = useState(data.tobacco || "");
-  const [error, setError] = useState(false);
+  const [tobacco, setTobacco] = useState(location.state?.tobacco || "");
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (location.state?.tobacco) {
+      setTobacco(location.state.tobacco);
+    }
+  }, [location.state]);
+
+  const handleInputChange = (field, value, setter) => {
+    setter(value);
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+  };
+
+  const validate = () => {
+    let newErrors = {};
+    if (!tobacco) newErrors.tobacco = "Please select an option to proceed.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleNext = () => {
-    if (tobacco) {
-      setError(false);
-      const finalData = { ...data, tobacco };
-      navigate("/life/step-4", { state: finalData });
-    } else {
-      setError(true);
+    if (validate()) {
+      navigate("/life/step-4", {
+        state: { ...location.state, tobacco }
+      });
     }
   };
 
   const handlePrevious = () => {
-    navigate("/life/step-2", { state: data });
-  };
-
-  const selectOption = (val) => {
-    setTobacco(val);
-    setError(false);
+    navigate("/life/step-2", { state: location.state });
   };
 
   return (
     <section className="life-step">
       <div className="progress-wrapper">
         <div className="progress-steps">
-          {steps.map((step) => (
-            <span key={step.id} className={step.id <= currentStep ? "active" : ""}>
-              {step.label}
-            </span>
+          {steps.map((s) => (
+            <span key={s.id} className={s.id === 1 ? "active" : ""}>{s.label}</span>
           ))}
         </div>
         <div className="progress-bar">
@@ -62,47 +73,27 @@ function LifeStep3() {
 
       <div className="life-step-box center-box">
         <h2 className="step-title">Do you use tobacco in any form?</h2>
-
         <div className="tobacco-options">
           <button
             type="button"
             className={tobacco === "yes" ? "active" : ""}
-            onClick={() => selectOption("yes")}
-          >
-            Yes
-          </button>
-
+            onClick={() => handleInputChange("tobacco", "yes", setTobacco)}
+          >Yes</button>
           <button
             type="button"
             className={tobacco === "no" ? "active" : ""}
-            onClick={() => selectOption("no")}
-          >
-            No
-          </button>
+            onClick={() => handleInputChange("tobacco", "no", setTobacco)}
+          >No</button>
         </div>
-
-        {error && (
-          <p style={{ color: "red", fontSize: "14px", marginTop: "10px", textAlign: "center" }}>
-            Please select an option to proceed.
-          </p>
-        )}
-
+        {errors.tobacco && <span className="error-text" style={{ display: 'block', textAlign: 'center', marginTop: '10px' }}>{errors.tobacco}</span>}
         <div className="info-area">
-          <p className="tobacco-hint">
-            Select ‘Yes’ if you’ve used tobacco within the past year.
-          </p>
+          <p className="tobacco-hint">Select ‘Yes’ if you’ve used tobacco within the past year.</p>
         </div>
-
         <div className="step-footer space-between">
           <button type="button" className="prev-btn" onClick={handlePrevious}>
             <img src={arrowLeft} alt="previous" /> Previous
           </button>
-
-          <button 
-            type="button" 
-            className="next-btn" 
-            onClick={handleNext}
-          >
+          <button type="button" className="next-btn" onClick={handleNext}>
             Next <img src={arrowRight} alt="next" />
           </button>
         </div>

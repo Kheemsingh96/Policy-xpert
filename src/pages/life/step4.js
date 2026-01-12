@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./step4.css";
 import arrowRight from "../../assets/images/arrow2.png";
@@ -15,61 +15,70 @@ function LifeStep4() {
     { id: 4, label: "04 Assets & Liabilities" }
   ];
 
-  const currentStep = 1;
-  const progressPercent = 22; 
+ 
+  const progressPercent = 20; 
 
-  const data = location.state || {};
+  const [alcohol, setAlcohol] = useState(location.state?.alcohol || "");
+  const [errors, setErrors] = useState({});
 
-  const [alcohol, setAlcohol] = useState(data.alcohol || "");
-  const [error, setError] = useState(false);
+  useEffect(() => {
+    if (location.state?.alcohol) {
+      setAlcohol(location.state.alcohol);
+    }
+  }, [location.state]);
 
-  const handleNext = () => {
-    if (alcohol) {
-      setError(false);
-      const finalData = { ...data, alcohol };
-      navigate("/life/step-5", { state: finalData });
-    } else {
-      setError(true);
+  const handleInputChange = (field, value, setter) => {
+    setter(value);
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
     }
   };
 
-  const selectOption = (val) => {
-    setAlcohol(val);
-    setError(false);
+  const validate = () => {
+    let newErrors = {};
+    if (!alcohol) newErrors.alcohol = "Please select an option to proceed.";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validate()) {
+      navigate("/life/step-5", {
+        state: { ...location.state, alcohol }
+      });
+    }
+  };
+
+  const handlePrevious = () => {
+    navigate("/life/step-3", { state: location.state });
   };
 
   return (
     <section className="life-step">
       <div className="progress-wrapper">
         <div className="progress-steps">
-          {steps.map((step) => (
-            <span
-              key={step.id}
-              className={step.id <= currentStep ? "active" : ""}
-            >
-              {step.label}
-            </span>
+          {steps.map((s) => (
+            <span key={s.id} className={s.id === 1 ? "active" : ""}>{s.label}</span>
           ))}
         </div>
-
         <div className="progress-bar">
-          <div
-            className="progress-fill"
-            style={{ width: `${progressPercent}%` }}
-          ></div>
+          <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
         </div>
       </div>
 
       <div className="life-step-box center-box">
-        <h2 className="step-title">
-          Do you drink alcohol?
-        </h2>
+        <h2 className="step-title">Do you drink alcohol?</h2>
 
         <div className="tobacco-options">
           <button
             type="button"
             className={alcohol === "yes" ? "active" : ""}
-            onClick={() => selectOption("yes")}
+            onClick={() => handleInputChange("alcohol", "yes", setAlcohol)}
           >
             Yes
           </button>
@@ -77,35 +86,25 @@ function LifeStep4() {
           <button
             type="button"
             className={alcohol === "no" ? "active" : ""}
-            onClick={() => selectOption("no")}
+            onClick={() => handleInputChange("alcohol", "no", setAlcohol)}
           >
             No
           </button>
         </div>
 
-        {error && (
-          <p className="error-message">
-            Please select an option to proceed.
-          </p>
-        )}
+        {errors.alcohol && <span className="error-text" style={{ display: 'block', textAlign: 'center', marginTop: '10px' }}>{errors.alcohol}</span>}
 
         <p className="tobacco-hint">
           Select ‘Yes’ if you’ve had alcohol within the past year.
         </p>
 
         <div className="step-footer space-between">
-          <button
-            type="button"
-            className="prev-btn"
-            onClick={() => navigate("/life/step-3", { state: data })}
-          >
-            <img src={arrowLeft} alt="previous" />
-            Previous
+          <button type="button" className="prev-btn" onClick={handlePrevious}>
+            <img src={arrowLeft} alt="previous" /> Previous
           </button>
 
           <button type="button" className="next-btn" onClick={handleNext}>
-            Next
-            <img src={arrowRight} alt="next" />
+            Next <img src={arrowRight} alt="next" />
           </button>
         </div>
       </div>

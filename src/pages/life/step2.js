@@ -14,10 +14,11 @@ function LifeStep2() {
     { id: 4, label: "04 Assets & Liabilities" }
   ];
 
-  const totalBasicPages = 3;
+  const totalBasicPages = 3; 
   const currentBasicPage = 2; 
-  const mainStepWidth = 100 / steps.length;
-  const progressPercent = (currentBasicPage / totalBasicPages) * mainStepWidth;
+  
+  const sectionWeight = 100 / steps.length;
+  const progressPercent = ((currentBasicPage - 1) / totalBasicPages) * sectionWeight;
 
   const [firstName, setFirstName] = useState(location.state?.firstName || "");
   const [lastName, setLastName] = useState(location.state?.lastName || "");
@@ -138,7 +139,7 @@ function LifeStep2() {
           </div>
         </div>
 
-        <div className="step-footer">
+        <div className="step-footer" style={{ display: "flex", justifyContent: "flex-end" }}>
           <button className="next-btn" onClick={handleNext}>
             Next <img src={arrowRight} alt="next" />
           </button>

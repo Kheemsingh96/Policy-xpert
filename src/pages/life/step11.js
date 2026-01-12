@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./step11.css"; 
 import arrowRight from "../../assets/images/arrow2.png";
@@ -7,7 +7,6 @@ import arrowLeft from "../../assets/images/arrow-left.png";
 function LifeStep11() {
   const navigate = useNavigate();
   const location = useLocation();
-  const data = location.state || {};
 
   const steps = [
     { id: 1, label: "Basic" },
@@ -17,32 +16,54 @@ function LifeStep11() {
   ];
 
   const currentStep = 4; 
-  const progressPercent = 90; // Almost done
+  const progressPercent = 90;
 
-  const [hasExpenses, setHasExpenses] = useState(data.hasExpenses || "");
-  const [error, setError] = useState("");
+  const [hasExpenses, setHasExpenses] = useState(location.state?.hasExpenses || "");
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (location.state?.hasExpenses) {
+      setHasExpenses(location.state.hasExpenses);
+    }
+  }, [location.state]);
+
+  const handleInputChange = (field, value, setter) => {
+    setter(value);
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+  };
+
+  const validate = () => {
+    let newErrors = {};
+    if (!hasExpenses) newErrors.hasExpenses = "Please select an option to proceed.";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleNext = () => {
-    if (!hasExpenses) {
-      setError("Please select an option");
-      return;
+    if (validate()) {
+      navigate("/life/step-12", {
+        state: { ...location.state, hasExpenses }
+      });
     }
+  };
 
-    const finalData = { ...data, hasExpenses };
-    console.log("Step 11 Data:", finalData);
-    
-    // UPDATED: Ab yeh seedha Step 12 par jayega
-    navigate("/life/step-12", { state: finalData });
+  const handlePrevious = () => {
+    navigate("/life/step-10", { state: location.state });
   };
 
   return (
     <section className="life-step">
       <div className="progress-wrapper">
         <div className="progress-steps">
-          {steps.map((step) => (
-            <span key={step.id} className={step.id <= currentStep ? "active" : ""}>
-              {step.label}
-            </span>
+          {steps.map((s) => (
+            <span key={s.id} className={s.id <= currentStep ? "active" : ""}>{s.label}</span>
           ))}
         </div>
         <div className="progress-bar">
@@ -59,37 +80,37 @@ function LifeStep11() {
           Examples include higher education for a spouse or sibling, wedding costs, or clearing major family-related financial obligations.
         </p>
 
-        {/* Buttons: Yes on Left, No on Right */}
         <div className="expense-options">
           <button
+            type="button"
             className={hasExpenses === "yes" ? "active" : ""}
-            onClick={() => { setHasExpenses("yes"); setError(""); }}
+            onClick={() => handleInputChange("hasExpenses", "yes", setHasExpenses)}
           >
             Yes
           </button>
 
           <button
+            type="button"
             className={hasExpenses === "no" ? "active" : ""}
-            onClick={() => { setHasExpenses("no"); setError(""); }}
+            onClick={() => handleInputChange("hasExpenses", "no", setHasExpenses)}
           >
             No
           </button>
         </div>
 
-        {error && <span className="field-error">{error}</span>}
+        {errors.hasExpenses && (
+          <span className="error-text" style={{ display: 'block', textAlign: 'center', marginTop: '10px' }}>
+            {errors.hasExpenses}
+          </span>
+        )}
 
         <div className="step-footer space-between">
-          <button
-            className="prev-btn"
-            onClick={() => navigate("/life/step-10", { state: data })}
-          >
-            <img src={arrowLeft} alt="previous" />
-            Previous
+          <button type="button" className="prev-btn" onClick={handlePrevious}>
+            <img src={arrowLeft} alt="previous" /> Previous
           </button>
 
-          <button className="next-btn" onClick={handleNext}>
-            Next
-            <img src={arrowRight} alt="next" />
+          <button type="button" className="next-btn" onClick={handleNext}>
+            Next <img src={arrowRight} alt="next" />
           </button>
         </div>
       </div>

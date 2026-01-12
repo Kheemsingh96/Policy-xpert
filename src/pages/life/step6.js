@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./step6.css";
 import arrowRight from "../../assets/images/arrow2.png";
@@ -7,7 +7,6 @@ import arrowLeft from "../../assets/images/arrow-left.png";
 function LifeStep6() {
   const navigate = useNavigate();
   const location = useLocation();
-  const data = location.state || {};
 
   const steps = [
     { id: 1, label: "Basic" },
@@ -19,43 +18,56 @@ function LifeStep6() {
   const currentStep = 2;
   const progressPercent = 42;
 
-  const [stability, setStability] = useState(data.stability || "");
-  const [error, setError] = useState(false);
+  const [stability, setStability] = useState(location.state?.stability || "");
+  const [errors, setErrors] = useState({});
 
-  const handleNext = () => {
-    if (stability) {
-      setError(false);
-      const finalData = { ...data, stability };
-      console.log("Step 6 Data:", finalData);
-      navigate("/life/step-7", { state: finalData });
-    } else {
-      setError(true);
+  useEffect(() => {
+    if (location.state?.stability) {
+      setStability(location.state.stability);
+    }
+  }, [location.state]);
+
+  const handleInputChange = (field, value, setter) => {
+    setter(value);
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
     }
   };
 
-  const selectOption = (val) => {
-    setStability(val);
-    setError(false);
+  const validate = () => {
+    let newErrors = {};
+    if (!stability) newErrors.stability = "Please select an option to proceed.";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validate()) {
+      navigate("/life/step-7", {
+        state: { ...location.state, stability }
+      });
+    }
+  };
+
+  const handlePrevious = () => {
+    navigate("/life/step-5", { state: location.state });
   };
 
   return (
     <section className="life-step">
       <div className="progress-wrapper">
         <div className="progress-steps">
-          {steps.map((step) => (
-            <span
-              key={step.id}
-              className={step.id <= currentStep ? "active" : ""}
-            >
-              {step.label}
-            </span>
+          {steps.map((s) => (
+            <span key={s.id} className={s.id <= currentStep ? "active" : ""}>{s.label}</span>
           ))}
         </div>
         <div className="progress-bar">
-          <div
-            className="progress-fill"
-            style={{ width: `${progressPercent}%` }}
-          ></div>
+          <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
         </div>
       </div>
 
@@ -68,7 +80,7 @@ function LifeStep6() {
           <button
             type="button"
             className={stability === "Stable & Promising" ? "active" : ""}
-            onClick={() => selectOption("Stable & Promising")}
+            onClick={() => handleInputChange("stability", "Stable & Promising", setStability)}
           >
             Stable & Promising
           </button>
@@ -76,7 +88,7 @@ function LifeStep6() {
           <button
             type="button"
             className={stability === "Unsure" ? "active" : ""}
-            onClick={() => selectOption("Unsure")}
+            onClick={() => handleInputChange("stability", "Unsure", setStability)}
           >
             Unsure
           </button>
@@ -84,16 +96,16 @@ function LifeStep6() {
           <button
             type="button"
             className={stability === "Less stable" ? "active" : ""}
-            onClick={() => selectOption("Less stable")}
+            onClick={() => handleInputChange("stability", "Less stable", setStability)}
           >
             Less stable
           </button>
         </div>
 
-        {error && (
-          <p className="error-message">
-            Please select an option to proceed.
-          </p>
+        {errors.stability && (
+          <span className="error-text" style={{ display: 'block', textAlign: 'center', marginTop: '10px' }}>
+            {errors.stability}
+          </span>
         )}
 
         <p className="tobacco-hint">
@@ -101,18 +113,12 @@ function LifeStep6() {
         </p>
 
         <div className="step-footer space-between">
-          <button
-            type="button"
-            className="prev-btn"
-            onClick={() => navigate("/life/step-5", { state: data })}
-          >
-            <img src={arrowLeft} alt="previous" />
-            Previous
+          <button type="button" className="prev-btn" onClick={handlePrevious}>
+            <img src={arrowLeft} alt="previous" /> Previous
           </button>
 
           <button type="button" className="next-btn" onClick={handleNext}>
-            Next
-            <img src={arrowRight} alt="next" />
+            Next <img src={arrowRight} alt="next" />
           </button>
         </div>
       </div>

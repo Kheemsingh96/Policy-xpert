@@ -93,12 +93,11 @@
   line-height: 1.4;
 }
 
-/* --- Buttons Styling --- */
 .dependant-options {
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin: 30px 0 60px;
+  margin: 30px 0 40px;
 }
 
 .dependant-options button {
@@ -111,17 +110,14 @@
   font-weight: 500;
   color: #334155;
   cursor: pointer;
-  /* Animation removed */
   transition: none !important;
 }
 
-/* Hover effect sirf tab jab button active NA ho */
 .dependant-options button:not(.active):hover {
   border-color: #4685C4;
   background: #eef6ff;
 }
 
-/* Active State (Selected) */
 .dependant-options .active {
   background: #4685C4;
   color: #ffffff;
@@ -129,23 +125,22 @@
   box-shadow: 0 8px 20px rgba(70, 133, 196, 0.25);
 }
 
-/* Selected button par hover karne se koi change na ho */
 .dependant-options .active:hover {
   background: #4685C4;
   color: #ffffff;
   border-color: #4685C4;
 }
 
-/* Error Message */
 .field-error {
   font-size: 13px;
   color: #ED2F59;
-  margin-top: -40px; 
+  margin-top: 0px; 
   margin-bottom: 20px;
   display: block;
+  width: 100%;
+  text-align: center;
 }
 
-/* Footer Buttons */
 .step-footer {
   display: flex;
   align-items: center;
@@ -196,12 +191,50 @@
   transition: none !important;
 }
 
+.center-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dependant-options {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px 0 20px;
+  width: 100%;
+}
+
+.error-center-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.field-error {
+  font-size: 13px;
+  color: #ED2F59;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 100%;
+}
+
+.step-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
 .next-btn:hover {
   background: #357bd8;
   box-shadow: 0 8px 20px rgba(53, 123, 216, 0.25);
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .life-step-box {
     padding: 28px 20px 32px;

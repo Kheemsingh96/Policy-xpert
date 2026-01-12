@@ -303,6 +303,44 @@
   box-shadow: 0 8px 20px rgba(53, 123, 216, 0.25);
 }
 
+
+.total-income-summary-box {
+  background: #EFFBFF; 
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideDown 0.3s ease-out;
+}
+
+.summary-content {
+  font-size: 14px;
+  color: #585D6A;
+}
+
+.summary-content strong {
+  font-size: 16px;
+  color: #4685C4;
+  margin-left: 10px;
+}
+
+.field-error {
+  color: #d93025;
+  background: #fce8e6;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 @media (max-width: 768px) {
   .life-step-box {
     padding: 28px 20px 32px;
