@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom"; // 1. Link import karein
 import "./secondsection.css";
 
 import lifeIcon from "../../assets/images/life.png";
@@ -11,19 +12,15 @@ function Counter({ end, suffix, start }) {
   const ref = useRef(null);
 
   useEffect(() => {
-    // Agar start false hai (scroll nahi kiya), to ginti shuru mat karo
     if (!start) return;
-
-    const duration = 2000; // Animation thoda smooth karne ke liye time badha diya
+    const duration = 2000; 
     const startTime = performance.now();
-
     const update = (now) => {
       const progress = Math.min((now - startTime) / duration, 1);
       const value = Math.floor(progress * end);
       if (ref.current) ref.current.textContent = value + suffix;
       if (progress < 1) requestAnimationFrame(update);
     };
-
     requestAnimationFrame(update);
   }, [end, suffix, start]);
 
@@ -32,7 +29,7 @@ function Counter({ end, suffix, start }) {
 
 function Secondsection() {
   const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false); // State to track visibility
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -42,7 +39,7 @@ function Secondsection() {
       ([entry]) => {
         if (entry.isIntersecting) {
           section.classList.add("is-visible");
-          setIsVisible(true); // Jab section dikhe, tabhi state true karo
+          setIsVisible(true);
           observer.disconnect();
         }
       },
@@ -57,7 +54,10 @@ function Secondsection() {
     <section className="plans js-animate" ref={sectionRef}>
       <div className="plans-container">
         <div className="plans-left">
-          <a href="/life-insurance.html" className="plan-card card-blue">
+          
+          {/* --- LIFE INSURANCE CARD UPDATED --- */}
+          {/* 2. 'a' tag ko 'Link' se badla aur href ko 'to' se */}
+          <Link to="/life" className="plan-card card-blue">
             <div className="icon-circle blue">
               <img src={lifeIcon} alt="" />
             </div>
@@ -65,8 +65,9 @@ function Secondsection() {
             <p className="ss-fade ss-delay-2">
               Financial protection for your family's future
             </p>
-          </a>
+          </Link>
 
+          {/* Baaki sab same rahega */}
           <a href="/health-insurance.html" className="plan-card card-red">
             <div className="icon-circle red">
               <img src={healthIcon} alt="" />
@@ -103,13 +104,10 @@ function Secondsection() {
             Find the <span>Insurance</span> Plan That Truly <br />
             <span className="highlight">Fits</span> Your Life
           </h2>
-
           <p className="ss-fade ss-delay-2">
             Everyone’s needs are different, and the right insurance should match them.
-            Compare health, life, auto, and travel plans in one place to find coverage
-            that fits your lifestyle and budget with ease.
+            Compare health, life, auto, and travel plans in one place...
           </p>
-
           <ul className="ss-fade ss-delay-3">
             <li><img src={tickIcon} alt="" /> Compare health, life, auto, and travel insurance in one place</li>
             <li><img src={tickIcon} alt="" /> Get plans tailored to your lifestyle and budget</li>
@@ -119,10 +117,8 @@ function Secondsection() {
         </div>
       </div>
 
-      {/* Added 'ss-fade' class here too, so the whole block slides up */}
       <div className="plans-stats ss-fade ss-delay-3">
         <div>
-          {/* Passed 'isVisible' to start prop */}
           <Counter end={220} suffix="%" start={isVisible} />
           <span>Growth Every Years</span>
         </div>

@@ -14,50 +14,86 @@ import shield from "../../assets/images/shild.png";
 import expertImg1 from "../../assets/images/1.png";
 import expertImg2 from "../../assets/images/2.png";
 import expertImg3 from "../../assets/images/24px.png";
-import expertImg4 from "../../assets/images/review.png"; 
+import expertImg4 from "../../assets/images/review.png";
+
+const TEMP_EMAIL_DOMAINS = [
+  "tempmail",
+  "10minutemail",
+  "mailinator",
+  "guerrillamail",
+  "yopmail"
+];
 
 function ConsultationForm({ onClose }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
+
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
 
-  // Updated Reviews Data with specific images
   const reviews = [
     {
-      id: 1,
       name: "Jordan Smith",
-      image: expertImg1, 
-      text: "Our expert movers delivered excellent service. Their experience and professionalism stood out. He wasn't pushy at all and finished everything quickly."
+      image: expertImg1,
+      text: "Our expert movers delivered excellent service. Their experience and professionalism stood out."
     },
     {
-      id: 2,
       name: "Amit Sharma",
       image: expertImg2,
-      text: "Policy Xpert helped me choose the best health plan for my family. The comparison was unbiased and very easy to understand. Highly recommended!"
+      text: "Policy Xpert helped me choose the best plan. Clear, unbiased guidance."
     },
     {
-      id: 3,
       name: "Priya Kapoor",
       image: expertImg3,
-      text: "I was confused about term insurance, but the expert explained everything patiently. The claim support promise gives me peace of mind."
+      text: "The expert explained everything patiently. No pressure at all."
     },
     {
-      id: 4,
       name: "Rahul Verma",
       image: expertImg4,
-      text: "The 30-minute consultation was a game changer. No spam calls, just genuine advice. I got my policy issued within 2 days."
+      text: "30-minute consultation was a game changer. Genuine advice."
     }
   ];
 
-  // Auto-rotate logic (4 seconds)
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentReviewIndex((prevIndex) => 
-        prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
+      setCurrentReviewIndex((prev) =>
+        prev === reviews.length - 1 ? 0 : prev + 1
       );
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [reviews.length]);
+  }, []);
+
+  const isTempEmail = (email) =>
+    TEMP_EMAIL_DOMAINS.some((domain) => email.includes(domain));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!name.trim()) {
+      setError("Enter your full name");
+      return;
+    }
+
+    if (
+      !email ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+      isTempEmail(email)
+    ) {
+      setError("Enter a valid email address");
+      return;
+    }
+
+    if (!phone || phone.length < 10) {
+      setError("Enter a valid mobile number");
+      return;
+    }
+
+    setError("");
+    alert("Form Submitted Successfully");
+    onClose();
+  };
 
   return (
     <div className="consult-overlay">
@@ -98,16 +134,14 @@ function ConsultationForm({ onClose }) {
           </div>
 
           <div className="expert-card">
-            {/* Animation Wrapper Key added here */}
             <div key={currentReviewIndex} className="review-content-animate">
-              <img 
-                src={reviews[currentReviewIndex].image} 
-                alt={reviews[currentReviewIndex].name} 
-                className="card-avatar" 
+              <img
+                src={reviews[currentReviewIndex].image}
+                alt=""
+                className="card-avatar"
               />
               <h4>{reviews[currentReviewIndex].name}</h4>
               <img src={star} alt="" className="stars-image-small" />
-              
               <p className="card-review">
                 {reviews[currentReviewIndex].text}
               </p>
@@ -118,31 +152,53 @@ function ConsultationForm({ onClose }) {
         <div className="consult-right">
           <h2>Get 1:1 Advice from Leading Insurance Experts.</h2>
           <p className="sub-heading">
-            Only the top insurance professionals across India are empanelled with
-            Policy Xpert. Book a consultation for clear, unbiased guidance—no spam,
-            no sales pressure.
+            Clear, unbiased guidance—no spam, no sales pressure.
           </p>
 
-          <form className="main-form">
-            <input type="text" placeholder="Full Name" className="form-input" />
-            <input type="email" placeholder="Email Address" className="form-input" />
+          <form className="main-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="form-input"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                setError("");
+              }}
+            />
+
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="form-input"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError("");
+              }}
+            />
 
             <div className="phone-input-wrapper">
               <PhoneInput
                 country={"in"}
                 value={phone}
-                onChange={(phone) => setPhone(phone)}
-                enableSearch={true}
+                onChange={(val) => {
+                  setPhone(val);
+                  setError("");
+                }}
+                enableSearch
                 placeholder="Mobile Number"
                 inputClass="custom-phone-input"
                 buttonClass="custom-flag-dropdown"
               />
             </div>
 
-            <button className="submit-btn">
+            <button type="submit" className="submit-btn">
               <img src={phoneWhite} alt="" className="btn-icon" />
               Free Call with Expert
             </button>
+
+            {error && <span className="form-error">{error}</span>}
           </form>
 
           <div className="form-meta">
