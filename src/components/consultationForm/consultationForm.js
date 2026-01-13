@@ -36,22 +36,22 @@ function ConsultationForm({ onClose }) {
     {
       name: "Jordan Smith",
       image: expertImg1,
-      text: "Our expert movers delivered excellent service. Their experience and professionalism stood out."
+      text: "PolicyExpert helped me choose the right insurance clearly. No pressure, honest advice, and quick support throughout the entire process."
     },
     {
       name: "Amit Sharma",
       image: expertImg2,
-      text: "Policy Xpert helped me choose the best plan. Clear, unbiased guidance."
+      text: "Very professional experience with PolicyExpert. Experts explained plans simply and helped me avoid unnecessary coverage and extra costs."
     },
     {
       name: "Priya Kapoor",
       image: expertImg3,
-      text: "The expert explained everything patiently. No pressure at all."
+      text: "Trusted guidance from PolicyExpert made insurance decisions easy. Clear explanations, fast responses, and genuinely helpful experts who focused on my needs."
     },
     {
       name: "Rahul Verma",
       image: expertImg4,
-      text: "30-minute consultation was a game changer. Genuine advice."
+      text: "PolicyExpert provided unbiased advice and compared plans properly. I felt confident choosing a policy that fits my family’s needs."
     }
   ];
 
@@ -150,9 +150,10 @@ function ConsultationForm({ onClose }) {
         </div>
 
         <div className="consult-right">
-          <h2>Get 1:1 Advice from Leading Insurance Experts.</h2>
+          <h2>Dedicated Insurance Experts Helping You Make Smarter Decisions</h2>
           <p className="sub-heading">
-            Clear, unbiased guidance—no spam, no sales pressure.
+          Certified experts help you compare the right plans with clear,
+           honest guidance — no sales pressure, just protection that fits your needs.
           </p>
 
           <form className="main-form" onSubmit={handleSubmit}>

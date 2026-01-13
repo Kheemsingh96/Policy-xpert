@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./step2.css";
+import "./stepslayout.css";
 import arrowRight from "../../assets/images/arrow2.png";
 
 function LifeStep2() {
@@ -24,7 +25,7 @@ function LifeStep2() {
   const [lastName, setLastName] = useState(location.state?.lastName || "");
   const [dob, setDob] = useState(location.state?.dob || "");
   const [education, setEducation] = useState(location.state?.education || "");
-  const [gender] = useState(location.state?.gender || "");
+  const [gender] = useState(location.state?.gender || ""); 
   const [pincode] = useState(location.state?.pincode || "");
   
   const [errors, setErrors] = useState({});
@@ -71,7 +72,7 @@ function LifeStep2() {
   };
 
   return (
-    <section className="life-step">
+    <section className="life-step" style={{ width: "100%", maxWidth: "100vw", overflowX: "hidden", boxSizing: "border-box" }}>
       <div className="progress-wrapper">
         <div className="progress-steps">
           {steps.map((s) => (
@@ -107,11 +108,14 @@ function LifeStep2() {
             {errors.lastName && <span className="error-text">{errors.lastName}</span>}
           </div>
 
-          <div className="field">
+          {/* === FIXED DATE FIELD === */}
+          <div className="field date-wrapper">
             <input 
-              type="date" 
+              type="date"
+              className="styled-date-input"
               max={maxDobValue} 
               value={dob} 
+              required  /* Ye zaruri hai taaki hum CSS se detect karein ki field khali hai */
               onChange={(e) => handleInputChange("dob", e.target.value, setDob)} 
             />
             {errors.dob && <span className="error-text">{errors.dob}</span>}
@@ -134,6 +138,9 @@ function LifeStep2() {
               <option>Graduate</option>
               <option>Post Graduate</option>
               <option>Doctorate</option>
+              <option>12th Pass</option>
+              <option>10th Pass</option>
+              <option>10th Below</option>
             </select>
             {errors.education && <span className="error-text">{errors.education}</span>}
           </div>

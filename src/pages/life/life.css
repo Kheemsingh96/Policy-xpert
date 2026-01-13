@@ -242,17 +242,95 @@
   transform: translateY(0);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .life-hero {
+    padding: 30px 20px 120px;
+  }
+
   .life-title {
-    font-size: 36px;
-    line-height: 46px;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 40px;
+  }
+
+  .life-bg-circle {
+    width: 700px;
+    height: 700px;
+    bottom: -220px;
   }
 
   .life-form {
-    grid-template-columns: 1fr;
+    max-width: 720px;
+    padding: 28px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
-  .life-plus {
-    display: none;
+  .life-error {
+    grid-column: span 2;
+  }
+
+  .life-btn {
+    height: 50px;
+    font-size: 15px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .life-hero {
+    padding: 2px 16px 100px;
+  }
+
+  .life-title {
+    font-size: 30px;
+    line-height: 50px;
+    margin-bottom: 28px;
+  }
+
+  .life-bg-circle {
+    width: 520px;
+    height: 520px;
+    bottom: -180px;
+  }
+
+  .life-chat {
+    width: 56px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .life-form {
+    max-width: 100%;
+    padding: 22px 18px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .life-error {
+    grid-column: span 1;
+    font-size: 12px;
+  }
+
+  .life-field label {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .life-field input,
+  .life-field select {
+    padding: 12px 14px;
+    font-size: 16px;
+  }
+
+  .gender-btn {
+    padding: 13px 0;
+    font-size: 13px;
+  }
+
+  .life-btn {
+    height: 48px;
+    font-size: 16px;
   }
 }

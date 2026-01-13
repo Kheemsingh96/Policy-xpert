@@ -63,11 +63,11 @@ function Secondsection() {
             </div>
             <h4 className="ss-fade ss-delay-1">Life insurance</h4>
             <p className="ss-fade ss-delay-2">
-              Financial protection for your family's future
+             Financial protection for your family’s long-term future
             </p>
           </Link>
 
-          {/* Baaki sab same rahega */}
+          
           <a href="/health-insurance.html" className="plan-card card-red">
             <div className="icon-circle red">
               <img src={healthIcon} alt="" />

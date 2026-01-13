@@ -1,53 +1,63 @@
+.consult-overlay * {
+  box-sizing: border-box;
+}
+
 .consult-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.6);
+  background: rgba(0,0,0,0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 5px;
+  padding: 20px 40px;
 }
 
 .consult-box {
   width: 1080px;
   max-width: 100%;
-  max-height: 100%;
+  height: 90vh;
+  max-height: 800px;
   background: #ffffff;
   border-radius: 24px;
   display: flex;
+  flex-direction: row;
   position: relative;
-  overflow-y: auto;
-  box-shadow: 0 20px 40px rgba(0,0,0,.2);
+  box-shadow: 0 80px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
 }
 
 .close-btn {
   position: absolute;
-  top: 14px;
-  right: 18px;
+  top: 15px;
+  right: 20px;
   background: none;
   border: none;
-  font-size: 22px;
+  font-size: 28px;
   color: #273846;
   cursor: pointer;
-  z-index: 20;
+  z-index: 50;
+  line-height: 1;
+  padding: 0;
 }
 
 .consult-left {
-  width: 42%;
+  width: 50%;
   background: #F6FCFE;
-  padding: 28px 30px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .left-heading {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: #273846;
   margin-bottom: 16px;
-  line-height: 1.35;
+  line-height: 30px;
+  margin-top: 0;
 }
 
 .feature-list {
@@ -69,6 +79,7 @@
   width: 18px;
   height: 18px;
   margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .social-proof-container {
@@ -81,7 +92,6 @@
 .review-box {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
 }
 
 .review-top-row {
@@ -104,12 +114,12 @@
   font-size: 13px;
   font-weight: 600;
   color: #273846;
-  margin-top: 4px; 
+  margin-top: 4px;
 }
 
 .expert-group-box {
   display: flex;
-  align-items: center; 
+  align-items: center;
   gap: 8px;
 }
 
@@ -125,20 +135,20 @@
 }
 
 .expert-card {
-  margin-top: auto;
+  margin-top: 20px;
   background: #fff;
   border-radius: 20px;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(70, 133, 196, 0.15); 
-  min-height: 180px;
+  box-shadow: 0 10px 30px rgba(70, 133, 196, 0.15);
+  min-height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
   transition: transform 0.3s ease;
+  overflow: hidden;
 }
 
 .expert-card:hover {
@@ -196,49 +206,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
   animation: fadeUp 0.6s ease-in-out;
 }
 
 @keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .consult-right {
-  flex: 1;
-  padding: 20px 20px;
+  width: 60%;
+  padding: 30px 40px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .consult-right h2 {
   font-size: 26px;
-  font-weight: 700;
+  font-weight: 600;
   color: #273846;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   line-height: 40px;
+  margin-top: 0;
 }
 
 .sub-heading {
-  font-size: 15px;
+  font-size: 16px;
   color: #585D6A;
   line-height: 1.6;
-  margin-bottom: 24px;
-  max-width: 100%;
+  margin-bottom: 40px;
 }
 
 .main-form {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 25px;
 }
 
 .form-error {
@@ -250,13 +255,15 @@
 }
 
 .form-input {
+  width: 100%;
   background: #F8FBFF;
   border: 1px solid #E6EFF8;
   border-radius: 8px;
-  padding: 18px 16px;
+  padding: 16px;
   font-size: 15px;
   outline: none;
   color: #1f2937;
+  height: 50px;
 }
 
 .form-input::placeholder {
@@ -271,56 +278,44 @@
 
 .phone-input-wrapper {
   width: 100%;
+  position: relative;
 }
 
-.custom-phone-input {
+.react-tel-input {
+  font-family: inherit !important;
   width: 100% !important;
-  height: 48px !important;
+}
+
+.react-tel-input .custom-phone-input {
+  width: 100% !important;
+  height: 50px !important;
   background: #F8FBFF !important;
   border: 1px solid #E6EFF8 !important;
   border-radius: 8px !important;
   font-size: 15px !important;
-  padding-left: 48px !important;
-  font-family: inherit !important;
+  padding-left: 58px !important;
   color: #1f2937 !important;
-  transition: all 0.2s ease;
 }
 
-.custom-phone-input::placeholder {
-  color: #148CAD !important;
-  opacity: .7 !important;
-}
-
-.custom-phone-input:focus {
-  background: #fff !important;
-  border-color: #3B82F6 !important;
-  box-shadow: none !important;
-}
-
-.custom-flag-dropdown {
+.react-tel-input .custom-flag-dropdown {
   background: transparent !important;
   border: none !important;
   border-right: 1px solid #E6EFF8 !important;
   border-radius: 8px 0 0 8px !important;
+  position: absolute !important;
+  top: 1px !important;
+  bottom: 1px !important;
+  left: 1px !important;
+}
+
+.react-tel-input .selected-flag {
+  background: transparent !important;
   width: 44px !important;
-}
-
-.custom-flag-dropdown:hover, .custom-flag-dropdown.open {
-   background: transparent !important;
-}
-
-.react-tel-input .country-list {
-   text-align: left;
-   font-size: 14px;
-   color: #333;
-   border-radius: 8px !important;
-   box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
-   border: 1px solid #E6EFF8 !important;
-   margin-top: 4px !important;
+  border-radius: 8px 0 0 8px !important;
 }
 
 .submit-btn {
-  margin-top: 12px;
+  margin-top: 10px;
   padding: 16px;
   background: #4685C4;
   color: #fff;
@@ -332,6 +327,7 @@
   justify-content: center;
   gap: 10px;
   cursor: pointer;
+  width: 100%;
 }
 
 .submit-btn:hover {
@@ -339,15 +335,15 @@
 }
 
 .btn-icon {
-  width: 20px;
+  width: 22px;
   filter: brightness(0) invert(1);
 }
 
 .form-meta {
   display: flex;
   justify-content: flex-start;
-  gap: 36px;
-  margin-top: 22px;
+  gap: 20px;
+  margin-top: 40px;
   flex-wrap: wrap;
 }
 
@@ -365,15 +361,140 @@
   width: 18px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .consult-box {
-    flex-direction: column;
-    height: 90vh;
+    width: 95%;
+    height: auto;
+    max-height: 90vh;
+  }
+  
+  .consult-left, .consult-right {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .consult-overlay {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 10px;
   }
 
-  .consult-left,
+  .consult-box {
+    flex-direction: column;
+    width: 100% !important;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    margin-bottom: 20px;
+  }
+
   .consult-right {
+    order: 1;
     width: 100%;
-    padding: 24px;
+    padding: 35px 20px 20px 20px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .consult-left {
+    order: 2;
+    width: 100%;
+    padding: 25px 20px 15px 20px;
+    background: #F6FCFE;
+    border-radius: 0 0 24px 24px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .close-btn {
+    top: 10px;
+    right: 15px;
+    background: #F6FCFE;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  .consult-right h2 {
+    font-size: 22px;
+    line-height: 35px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .sub-heading {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+
+  .left-heading {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .form-meta {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .social-proof-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .review-box, .expert-group-box {
+    flex: 1;
+  }
+
+  .single-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .group-image {
+    height: 28px;
+  }
+
+  .stars-image {
+    height: 14px;
+  }
+
+  .review-text, .expert-text {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .expert-card {
+    margin-top: 0;
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .card-avatar {
+    width: 45px;
+    height: 45px;
+  }
+
+  .expert-card h4 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .card-review {
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: auto;
   }
 }
