@@ -34,11 +34,11 @@
 }
 
 .hero-left p {
-  margin-top: 16px;
+  margin-top: 1px;
   max-width: 663px;
-  font-size: 24px;
+  font-size: 22px;
   color: #585D6A;
-  line-height: 1.6;
+  line-height: 40px;
   animation: fadeUp 1s ease forwards;
 }
 
