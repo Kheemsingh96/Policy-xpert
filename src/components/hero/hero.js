@@ -13,26 +13,24 @@ function Hero({ openForm }) {
       <div className="hero-container">
         <div className="hero-left">
           <h1>
-            Find the Right <span>Insurance</span><br />
-            <span className="highlight">Coverage</span> Fast Simple<br />
-            and Reliable
+            Welcome to <sup>&reg;</sup> <span className="highlight">PolicyXpert</span><br />
+            India’s <span className="highlight">Insurance</span> Advisory Platform<br />
+            
           </h1>
 
           <p>
-            Compare trusted insurance plans instantly, customize coverage
-            easily, and secure reliable protection for life, health, auto,
-            and travel needs.
+            Unbiased insurance guidance to help you understand your options
+            and make confident decisions — without pressure to buy.
           </p>
 
           <div className="hero-actions">
-            {/* ONLY CHANGE HERE */}
             <button className="primary-btn" onClick={openForm}>
-              Claim Your Free Consultation
+              Talk to an Insurance Advisor
             </button>
 
             <div className="why-choose">
-              <img src={whyChooseIcon} alt="Why choose us" />
-              <span>Why Choose Us?</span>
+              <img src={whyChooseIcon} alt="Check icon" />
+              <span>Understand My Options</span>
             </div>
           </div>
         </div>

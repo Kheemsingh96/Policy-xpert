@@ -15,11 +15,17 @@
 }
 
 .hero-left h1 {
-  font-size: 60px;
+  font-size: 65px;
   line-height: 90px;
   font-weight: 700;
   color: #273846;
   animation: fadeUp 0.8s ease forwards;
+}
+
+.hero-left h1 sup {
+  font-size: 30px;
+  color: #273846;
+  top: -0.2em;
 }
 
 .hero-left span,
@@ -30,7 +36,7 @@
 .hero-left p {
   margin-top: 16px;
   max-width: 663px;
-  font-size: 22px;
+  font-size: 24px;
   color: #585D6A;
   line-height: 1.6;
   animation: fadeUp 1s ease forwards;
@@ -141,7 +147,6 @@
   100% { transform: translateY(0); }
 }
 
-
 @media (max-width: 1024px) {
   .hero-container {
     flex-direction: column;
@@ -189,7 +194,6 @@
   }
 }
 
-
 @media (max-width: 768px) {
   .hero {
     padding: 1px 0;
@@ -197,7 +201,7 @@
 
   .hero-left h1 {
     font-size: 30px;
-    line-height: 55px;
+    line-height: 50px;
     margin-bottom: 10px;
   }
 
