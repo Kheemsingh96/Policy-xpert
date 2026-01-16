@@ -1,0 +1,337 @@
+.health9-step {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+  background: radial-gradient(
+    circle at bottom center,
+    rgba(70, 133, 196, 0.18),
+    rgba(70, 133, 196, 0.06),
+    #F6FCFE 70%
+  );
+  box-sizing: border-box;
+}
+
+.health9-progress-wrapper {
+  width: 100%;
+  max-width: 950px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.health9-progress-steps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.health9-progress-steps .active {
+  color: #4685C4;
+  font-weight: 700;
+}
+
+.health9-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #D1F1FA;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.health9-progress-fill {
+  height: 100%;
+  background: #4685C4;
+  border-radius: 10px;
+  display: block; 
+}
+
+.health9-step-box {
+  width: 100%;
+  max-width: 950px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 40px 48px 48px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.health9-step-box::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(70, 133, 196, 0.14) 0%,
+    rgba(70, 133, 196, 0.9) 50%,
+    rgba(70, 133, 196, 0.14) 100%
+  );
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.health9-step-box:hover::after {
+  opacity: 1;
+}
+
+.health9-step-box:hover {
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+}
+
+.health9-header {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 700px;
+}
+
+.health9-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  color: #263746;
+  line-height: 1.4;
+}
+
+.health9-yesno-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.yesno-btn {
+  width: 200px;
+  padding: 25px 0;
+  border: 1px solid #cce7ff;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  color: #7f8c8d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.yesno-btn:hover {
+  border-color: #4685C4;
+  background: #eef6ff;
+  color: #4685C4;
+}
+
+.yesno-btn.active {
+  background: #ffffff; 
+  border-color: #4685C4;
+  color: #4685C4;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(70, 133, 196, 0.15);
+}
+
+.health9-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 30px;
+  transition: opacity 0.3s ease;
+}
+
+.health9-grid.disabled-grid {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.health9-card {
+  width: 130px;
+  height: 160px;
+  background: #ffffff;
+  border: 1px solid #ffffff; 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.health9-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.health9-icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background-color: #fcece8; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.health9-card:nth-child(2) .health9-icon { background-color: #fcece8; }
+.health9-card:nth-child(3) .health9-icon { background-color: #fcece8; }
+
+.health9-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.health9-card span {
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1;
+}
+
+.health9-card.active {
+  background: #4685C4;
+  border-color: #4685C4;
+  box-shadow: 0 8px 20px rgba(70, 133, 196, 0.3);
+}
+
+.health9-card.active span {
+  color: white;
+}
+
+.health9-card.active .health9-icon {
+  background-color: rgba(255, 255, 255, 0.2); 
+}
+
+.health9-error {
+  color: #e53e3e;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.health9-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.health9-next-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 35px;
+  background: #4685C4;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.health9-next-btn img {
+  width: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.health9-next-btn:hover {
+  background: #357bd8;
+  box-shadow: 0 8px 20px rgba(53, 123, 216, 0.25);
+}
+
+.health9-prev-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 25px;
+  background: white;
+  color: #7f8c8d;
+  border: 1px solid #dcdcdc;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.health9-prev-btn img {
+  width: 18px;
+  opacity: 0.6;
+}
+
+.health9-prev-btn:hover {
+  border-color: #4685C4;
+  color: #4685C4;
+}
+
+@media (max-width: 768px) {
+  .health9-step {
+    padding: 2px 16px 50px;
+  }
+
+  .health9-progress-wrapper {
+    max-width: 100%;
+    margin-bottom: 20px;
+    padding: 0 5px;
+  }
+
+  .health9-progress-steps {
+    font-size: 12px;
+  }
+
+  .health9-step-box {
+    padding: 22px 18px;
+    max-width: 100%;
+  }
+
+  .health9-title {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .health9-yesno-container {
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .yesno-btn {
+    width: 100%;
+    padding: 15px 0;
+  }
+
+  .health9-grid {
+    gap: 12px;
+  }
+  
+  .health9-card {
+    width: 46%; 
+    height: 160px;
+  }
+  
+  .health9-footer {
+    margin-top: 10px;
+  }
+}

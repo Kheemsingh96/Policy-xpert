@@ -11,39 +11,53 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 20px;
+  gap: 50px;
 }
 
 .hero-left h1 {
   font-size: 65px;
-  line-height: 90px;
+  line-height: 1.1;
   font-weight: 700;
   color: #273846;
   animation: fadeUp 0.8s ease forwards;
+  margin-top: 50px;
+}
+
+.hero-subtitle {
+  font-size: 52px;
+  line-height: 90px;
+  display: block;
+  margin-top: 20px;
 }
 
 .hero-left h1 sup {
-  font-size: 30px;
+  font-size: 40px;
   color: #273846;
-  top: -0.2em;
+  top: -20px;
+  position: relative;
+  vertical-align: baseline;
 }
 
-.hero-left span,
-.hero-left .highlight {
+.highlight-red {
   color: #ED2F59;
 }
 
+.highlight-blue {
+  color: #4685C4;
+}
+
 .hero-left p {
-  margin-top: 1px;
+  margin-top: -25px;
+  margin-bottom: 50px;
   max-width: 663px;
-  font-size: 22px;
+  font-size: 20px;
   color: #585D6A;
-  line-height: 40px;
+  line-height: 1.6;
   animation: fadeUp 1s ease forwards;
 }
 
 .hero-actions {
-  margin-top: 28px;
+  margin-top: 25px;
   display: flex;
   align-items: center;
   gap: 28px;
@@ -164,7 +178,11 @@
 
   .hero-left h1 {
     font-size: 40px;
-    line-height: 60px;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 30px;
   }
 
   .hero-left p {
@@ -196,42 +214,80 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 1px 0;
+    padding: 10px 0 0;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    padding: 0 16px;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .hero-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero-left h1 {
     font-size: 30px;
+    line-height: 1.2;
+    margin-bottom: 2px;
+    margin-top: 10px;
+  }
+
+  .hero-left h1 sup {
+    font-size: 30px;
+    top: 2px;
+    left: 2px;
+  }
+  
+  .hero-subtitle {
+    font-size: 25px;
     line-height: 50px;
-    margin-bottom: 10px;
+    margin-top: 8px;
+    display: block;
   }
 
   .hero-left p {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 30px;
-    margin-top: 0;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding: 0 10px;
   }
 
   .hero-actions {
-    margin-top: 10px;
-    gap: 16px;
+    flex-direction: column;
+    margin-top: 25px;
+    gap: 15px;
+    width: 100%;
   }
 
   .primary-btn {
+    width: 100%;
+    max-width: 280px;
     font-size: 18px;
-    padding: 12px 22px;
-    margin-bottom: 10px;
+    padding: 14px 20px;
+    margin-bottom: 5px;
   }
 
   .why-choose {
-    font-size: 16px;
+    font-size: 14px;
+    justify-content: center;
   }
 
   .hero-right {
-    margin-top: 5px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
   }
 
   .hero-man {
-    width: 300px;
-    margin-top: -10px;
+    width: 280px;
+    max-width: 90%;
+    margin-top: 0;
   }
 }

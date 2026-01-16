@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
 
@@ -8,19 +8,23 @@ import callIcon from "../../assets/images/call.png";
 function Header({ openForm }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
-  };
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
 
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "unset";
     };
   }, [isMenuOpen]);
 
@@ -28,7 +32,7 @@ function Header({ openForm }) {
     <header className="header">
       <div className="header-container">
         <div className="logo">
-          <Link to="/" onClick={() => setIsMenuOpen(false)}>
+          <Link to="/" onClick={closeMenu}>
             <img src={logo} alt="Policy Xpert Logo" />
           </Link>
         </div>
@@ -44,12 +48,11 @@ function Header({ openForm }) {
 
         <div className={`header-right ${isMenuOpen ? "open" : ""}`}>
           <nav className="nav">
-            <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
-            <Link to="/life" onClick={() => setIsMenuOpen(false)}>Life</Link>
-            <a href="#" onClick={() => setIsMenuOpen(false)}>Health</a>
-            <a href="#" onClick={() => setIsMenuOpen(false)}>Auto</a>
-            <a href="#" onClick={() => setIsMenuOpen(false)}>Travel</a>
-            <a href="#" onClick={() => setIsMenuOpen(false)}>About Us</a>
+            <Link to="/" onClick={closeMenu}>Home</Link>
+            <Link to="#" onClick={closeMenu}>About us</Link>
+            <Link to="#" onClick={closeMenu}>Insurance & more</Link>
+            <a href="#" onClick={closeMenu}>Claims</a>
+            <a href="#" onClick={closeMenu}>Resource & Tools</a>
           </nav>
 
           {openForm && (
@@ -57,7 +60,7 @@ function Header({ openForm }) {
               className="header-btn"
               onClick={() => {
                 openForm();
-                setIsMenuOpen(false);
+                closeMenu();
               }}
             >
               <img src={callIcon} alt="Call" />

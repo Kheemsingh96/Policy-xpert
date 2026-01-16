@@ -13,9 +13,11 @@ function Hero({ openForm }) {
       <div className="hero-container">
         <div className="hero-left">
           <h1>
-            Welcome to <sup>&reg;</sup> <span className="highlight">PolicyXpert</span><br />
-            India’s <span className="highlight">Insurance</span> Advisory Platform<br />
-            
+            Welcome to <span className="highlight-red">Policy</span><span className="highlight-blue">Xpert</span> <sup>&reg;</sup><br />
+            <span className="hero-subtitle">
+              India’s <span className="highlight-red">Insurance</span> Advisory<br />
+              Platform
+            </span>
           </h1>
 
           <p>

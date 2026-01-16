@@ -1,0 +1,411 @@
+.health10-step {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+  background: radial-gradient(
+    circle at bottom center,
+    rgba(70, 133, 196, 0.18),
+    rgba(70, 133, 196, 0.06),
+    #F6FCFE 70%
+  );
+  box-sizing: border-box;
+}
+
+.health10-progress-wrapper {
+  width: 100%;
+  max-width: 950px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.health10-progress-steps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.health10-progress-steps .active {
+  color: #4685C4;
+  font-weight: 700;
+}
+
+.health10-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #D1F1FA;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.health10-progress-fill {
+  height: 100%;
+  background: #4685C4;
+  border-radius: 10px;
+  display: block; 
+}
+
+.health10-step-box {
+  width: 100%;
+  max-width: 950px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 40px 48px 48px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  position: relative;
+  /* overflow: hidden; Removed to allow dropdown to flow out */
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.health10-step-box::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(70, 133, 196, 0.14) 0%,
+    rgba(70, 133, 196, 0.9) 50%,
+    rgba(70, 133, 196, 0.14) 100%
+  );
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Allows clicking through */
+}
+
+.health10-step-box:hover {
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+}
+
+.health10-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.health10-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  color: #263746;
+  margin-bottom: 10px;
+}
+
+.health10-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.health10-row {
+  display: flex;
+  align-items: center;
+  background: #f8fbff;
+  border: 1px solid #eef6ff;
+  border-radius: 16px;
+  padding: 20px 25px;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.health10-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 180px;
+}
+
+.health10-icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.health10-icon-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.health10-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #263746;
+}
+
+/* Custom Multi-Select Styling */
+.health10-multiselect-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.health10-multiselect-box {
+  min-height: 48px;
+  border: 1px solid #cce7ff;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 5px 30px 5px 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.health10-multiselect-box:hover {
+  border-color: #4685C4;
+}
+
+.health10-multiselect-box.active {
+  border-color: #4685C4;
+  box-shadow: 0 0 0 3px rgba(70, 133, 196, 0.1);
+}
+
+.selected-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+}
+
+.placeholder-text {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.selected-tag {
+  background: #eef6ff;
+  border: 1px solid #cce7ff;
+  color: #4685C4;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.selected-tag:hover {
+  background: #dceeff;
+}
+
+.tag-remove {
+  font-size: 16px;
+  line-height: 1;
+  color: #8faecb;
+  font-weight: bold;
+}
+
+.tag-remove:hover {
+  color: #e53e3e;
+}
+
+.health10-arrow-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+
+.health10-dropdown-list {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 5px 0;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f1f5f9;
+  color: #4685C4;
+}
+
+.dropdown-item.selected {
+  background: #eef6ff;
+  color: #4685C4;
+  font-weight: 500;
+}
+
+.check-mark {
+  font-size: 12px;
+  color: #4685C4;
+}
+
+.health10-clear-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.health10-clear-btn:hover {
+  color: #e53e3e;
+}
+
+.health10-error {
+  color: #e53e3e;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.health10-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.health10-next-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 35px;
+  background: #4685C4;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.health10-next-btn img {
+  width: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.health10-next-btn:hover {
+  background: #357bd8;
+  box-shadow: 0 8px 20px rgba(53, 123, 216, 0.25);
+}
+
+.health10-prev-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 25px;
+  background: white;
+  color: #7f8c8d;
+  border: 1px solid #dcdcdc;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.health10-prev-btn img {
+  width: 18px;
+  opacity: 0.6;
+}
+
+.health10-prev-btn:hover {
+  border-color: #4685C4;
+  color: #4685C4;
+}
+
+@media (max-width: 900px) {
+  .health10-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .health10-multiselect-wrapper {
+    width: 100%;
+  }
+  
+  .health10-clear-btn {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+  .health10-step {
+    padding: 2px 16px 50px;
+  }
+
+  .health10-progress-wrapper {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 5px;
+  }
+
+  .health10-progress-steps {
+    font-size: 12px;
+  }
+
+  .health10-step-box {
+    padding: 22px 18px;
+    max-width: 100%;
+  }
+
+  .health10-title {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .health10-row {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .health10-info {
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .health10-footer {
+    margin-top: 10px;
+  }
+}

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom"; // 1. Link import karein
+import { Link } from "react-router-dom";
 import "./secondsection.css";
 
 import lifeIcon from "../../assets/images/life.png";
@@ -55,8 +55,6 @@ function Secondsection() {
       <div className="plans-container">
         <div className="plans-left">
           
-          {/* --- LIFE INSURANCE CARD UPDATED --- */}
-          {/* 2. 'a' tag ko 'Link' se badla aur href ko 'to' se */}
           <Link to="/life" className="plan-card card-blue">
             <div className="icon-circle blue">
               <img src={lifeIcon} alt="" />
@@ -67,8 +65,7 @@ function Secondsection() {
             </p>
           </Link>
 
-          
-          <a href="/health-insurance.html" className="plan-card card-red">
+          <Link to="/health" className="plan-card card-red">
             <div className="icon-circle red">
               <img src={healthIcon} alt="" />
             </div>
@@ -76,7 +73,7 @@ function Secondsection() {
             <p className="ss-fade ss-delay-2">
               Coverage for hospitalization and medical emergencies
             </p>
-          </a>
+          </Link>
 
           <a href="/auto-insurance.html" className="plan-card card-red">
             <div className="icon-circle red">
