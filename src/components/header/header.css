@@ -75,6 +75,8 @@
   z-index: 1100;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  padding: 10px;
+  border-radius: 6px;
 }
 
 .hamburger .bar {
@@ -117,8 +119,8 @@
     position: fixed;
     top: 0;
     right: 0;
-    width: 280px;
-    height: 100vh;
+    bottom: 0;
+    width: 210px;
     background: #ffffff;
     display: flex;
     flex-direction: column;
@@ -131,6 +133,7 @@
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     box-shadow: -5px 0 15px rgba(0,0,0,0.05);
   }
 
@@ -153,5 +156,20 @@
 
   .header-btn {
     width: fit-content;
+  }
+
+  .menu-overlay {
+    display: none;
+  }
+
+  .menu-overlay.show {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 280px;
+    bottom: 0;
+    background: rgba(0,0,0,0.03);
+    z-index: 1045;
   }
 }

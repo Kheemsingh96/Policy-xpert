@@ -39,6 +39,14 @@ const Faq = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "918080854433";
+    const message = "Hello Policy Xpert, I need help choosing a policy.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <section className="faq">
       <div className="faq-container">
@@ -65,7 +73,7 @@ const Faq = () => {
 
         <div className="faq-cta">
           <p>Have Questions or Need Help Making the Right Choice?</p>
-          <button className="faq-whatsapp">
+          <button className="faq-whatsapp" onClick={handleWhatsAppClick}>
             <img src={WhatsappIcon} alt="WhatsApp" />
             Chat with us
           </button>

@@ -120,9 +120,9 @@
 }
 
 .error-message {
-  color: #ff0000;
-  font-size: 12px;
-  font-weight: 500;
+  color: #ff3333;
+  font-size: 13px;
+  font-weight: 400;
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;

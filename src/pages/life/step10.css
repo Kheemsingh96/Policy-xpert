@@ -93,7 +93,7 @@
   line-height: 1.4;
 }
 
-/* --- Loan Options Buttons --- */
+
 .loan-options {
   display: flex;
   justify-content: center;
@@ -111,16 +111,16 @@
   font-weight: 500;
   color: #334155;
   cursor: pointer;
-  transition: none !important; /* No Animation */
+  transition: none !important; 
 }
 
-/* Hover effect only if not active */
+
 .loan-options button:not(.active):hover {
   border-color: #4685C4;
   background: #eef6ff;
 }
 
-/* Active State */
+
 .loan-options .active {
   background: #4685C4;
   color: #ffffff;
@@ -128,7 +128,7 @@
   box-shadow: 0 8px 20px rgba(70, 133, 196, 0.25);
 }
 
-/* Active Hover (Stays same) */
+
 .loan-options .active:hover {
   background: #4685C4;
   color: #ffffff;

@@ -1,0 +1,248 @@
+.varient-step {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+  background: radial-gradient(
+    circle at bottom center,
+    rgba(70, 133, 196, 0.18),
+    rgba(70, 133, 196, 0.06),
+    #F6FCFE 70%
+  );
+  box-sizing: border-box;
+}
+
+.varient-progress-wrapper {
+  width: 100%;
+  max-width: 870px;
+  margin-bottom: 38px;
+  box-sizing: border-box;
+}
+
+.varient-progress-steps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.varient-progress-steps .active {
+  color: #4685C4;
+  font-weight: 700;
+}
+
+.varient-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #D1F1FA;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.varient-progress-fill {
+  height: 100%;
+  background: #4685C4;
+  border-radius: 10px;
+  display: block; 
+}
+
+.varient-step-box {
+  width: 100%;
+  max-width: 870px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 40px 20px 40px; 
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 500px; 
+}
+
+.varient-header {
+  text-align: center;
+  margin-bottom: 60px;
+  margin-top: 20px;
+}
+
+.varient-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #273846;
+  margin: 0;
+}
+
+.highlight-model {
+  color: #4685C4;
+}
+
+.varient-options-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.varient-option-card {
+  width: 180px; 
+  height: 80px;
+  background: #ffffff;
+  border: 1px solid #cce7ff;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  flex-shrink: 0; 
+}
+
+.varient-option-card:hover {
+  border-color: #4685C4;
+  box-shadow: 0 4px 15px rgba(70, 133, 196, 0.12);
+}
+
+.varient-option-card.selected {
+  background-color: #4685C4;
+  border-color: #4685C4;
+  color: #ffffff;
+}
+
+.fuel-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #586975;
+}
+
+.varient-option-card.selected .fuel-text {
+  color: #ffffff;
+}
+
+.error-text {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #ff0000;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.varient-footer {
+  width: 100%;
+  max-width: 830px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.varient-prev-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid #cce7ff;
+  color: #4685C4;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.prev-icon {
+  width: 16px;
+  height: auto;
+  opacity: 0.6;
+}
+
+.varient-prev-btn:hover {
+  border-color: #94a3b8;
+  color: #263746;
+}
+
+.varient-next-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 35px;
+  background: #4685C4;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  opacity: 1;
+}
+
+.varient-next-btn img {
+  width: 20px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.varient-next-btn:hover {
+  background: #357bd8;
+  box-shadow: 0 8px 20px rgba(53, 123, 216, 0.25);
+}
+
+@media (max-width: 768px) {
+  .varient-step-box {
+    padding: 28px 20px 32px;
+    min-height: auto;
+    width: 95%;
+  }
+
+  .varient-title {
+    font-size: 22px;
+  }
+
+  .varient-options-container {
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px; 
+  }
+
+  .varient-option-card {
+    width: 120px;
+    height: 60px;
+    min-width: auto;
+  }
+
+  .fuel-text {
+    font-size: 14px;
+  }
+
+  .varient-footer {
+    padding: 0;
+    margin-top: 10px;
+    justify-content: space-between; 
+  }
+
+  .varient-prev-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .varient-next-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+}

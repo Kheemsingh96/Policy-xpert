@@ -124,8 +124,8 @@
 }
 
 .error-message {
-  color: red;
-  font-size: 14px;
+  color: #ff3333;
+  font-size: 13px;
   margin-top: 10px;
   text-align: center;
   font-weight: 400;

@@ -210,28 +210,17 @@
   box-shadow: 0 8px 20px rgba(53, 123, 216, 0.25);
 }
 
-.error-text {
-  color: red;
-  font-size: 12px;
-  margin-top: 4px;
+.life-error-text {
+  font-size: 13px;
+  color: #ff3333;
+  margin-top: 10px;
   display: block;
   text-align: left;
+  font-weight: 400;
 }
 
-.field-error {
-  position: absolute;
-  top: 100px; 
-  left: 4px;
-  font-size: 11px;
-  text-align: left;
-  color: #e53e3e; 
-  display: block;
-  font-weight: 500;
-  white-space: nowrap;
-  line-height: 1;
-}
 
-/* Date Input Styling Fix */
+
 .date-wrapper {
   position: relative;
   display: flex;
@@ -248,7 +237,6 @@
   width: 100%;
 }
 
-
 .styled-date-input:invalid::-webkit-datetime-edit {
   color: transparent;
 }
@@ -261,7 +249,7 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none; 
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .styled-date-input::-webkit-calendar-picker-indicator {

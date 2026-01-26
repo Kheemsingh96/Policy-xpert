@@ -10,7 +10,7 @@ import Mail from "../../assets/images/Email.png";
 import Phone from "../../assets/images/Phone.png";
 import Location from "../../assets/images/Location.png";
 
-/* 🔥 SINGLE PLACE TO CHANGE ALL FOOTER HEADINGS */
+
 const FOOTER_SECTION_TITLES = [
   "Quick Links",
   "Services for Policy xpert",
@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* BRAND */}
+        
         <div className="footer-col brand">
           <img src={Logo} alt="Policy Xpert" className="footer-logo" />
           <p>
@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* QUICK LINKS */}
+      
         <div className="footer-col">
           <h4>{FOOTER_SECTION_TITLES[0]}</h4>
           <ul>
@@ -49,18 +49,18 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* SERVICES */}
+    
         <div className="footer-col">
           <h4>{FOOTER_SECTION_TITLES[1]}</h4>
           <ul>
             <li>Life Insurance</li>
             <li>Health Insurance</li>
-            <li>Auto Insurance</li>
+            <li>Car Insurance</li>
             <li>Travel Insurance</li>
           </ul>
         </div>
 
-        {/* CONTACT */}
+
         <div className="footer-col">
           <h4>{FOOTER_SECTION_TITLES[2]}</h4>
 

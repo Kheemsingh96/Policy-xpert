@@ -95,7 +95,7 @@ function LifeStep2() {
               value={firstName} 
               onChange={(e) => handleInputChange("firstName", e.target.value, setFirstName)} 
             />
-            {errors.firstName && <span className="error-text">{errors.firstName}</span>}
+            {errors.firstName && <span className="life-error-text">{errors.firstName}</span>}
           </div>
 
           <div className="field">
@@ -105,20 +105,20 @@ function LifeStep2() {
               value={lastName} 
               onChange={(e) => handleInputChange("lastName", e.target.value, setLastName)} 
             />
-            {errors.lastName && <span className="error-text">{errors.lastName}</span>}
+            {errors.lastName && <span className="life-error-text">{errors.lastName}</span>}
           </div>
 
-          {/* === FIXED DATE FIELD === */}
+        
           <div className="field date-wrapper">
             <input 
               type="date"
               className="styled-date-input"
               max={maxDobValue} 
               value={dob} 
-              required  /* Ye zaruri hai taaki hum CSS se detect karein ki field khali hai */
+              required  
               onChange={(e) => handleInputChange("dob", e.target.value, setDob)} 
             />
-            {errors.dob && <span className="error-text">{errors.dob}</span>}
+            {errors.dob && <span className="life-error-text">{errors.dob}</span>}
           </div>
 
           <div className="field">
@@ -142,7 +142,7 @@ function LifeStep2() {
               <option>10th Pass</option>
               <option>10th Below</option>
             </select>
-            {errors.education && <span className="error-text">{errors.education}</span>}
+            {errors.education && <span className="life-error-text">{errors.education}</span>}
           </div>
         </div>
 

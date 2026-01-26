@@ -71,19 +71,19 @@ function Secondsection() {
             </div>
             <h4 className="ss-fade ss-delay-1">Health insurance</h4>
             <p className="ss-fade ss-delay-2">
-              Coverage for hospitalization and medical emergencies
+               Coverage for hospitalization and medical emergencies
             </p>
           </Link>
 
-          <a href="/auto-insurance.html" className="plan-card card-red">
+          <Link to="/auto" className="plan-card card-red">
             <div className="icon-circle red">
               <img src={autoIcon} alt="" />
             </div>
-            <h4 className="ss-fade ss-delay-1">Auto insurance</h4>
+            <h4 className="ss-fade ss-delay-1">Car insurance</h4>
             <p className="ss-fade ss-delay-2">
               Protection against accidents, theft, and damage
             </p>
-          </a>
+          </Link>
 
           <a href="/travel-insurance.html" className="plan-card card-blue">
             <div className="icon-circle blue">

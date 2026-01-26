@@ -4,15 +4,14 @@ import "./health.css";
 
 import plusIcon from "../../assets/images/plus.png";
 import chatIcon from "../../assets/images/health4.png";
-import arrowIcon from "../../assets/images/arrow.png"; // Changed to match your requested icon name if needed, or keep arrow2.png
-
+import arrowIcon from "../../assets/images/arrow.png"; 
 function Health() {
   const navigate = useNavigate();
 
   const [selectedMember, setSelectedMember] = useState("");
   const [pincode, setPincode] = useState("");
   const [error, setError] = useState("");
-  const [activeIndex, setActiveIndex] = useState(null); // Renamed to match your FAQ code
+  const [activeIndex, setActiveIndex] = useState(null); 
 
   const handleSubmit = () => {
     if (!selectedMember) {

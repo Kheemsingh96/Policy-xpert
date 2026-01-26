@@ -134,7 +134,7 @@
   box-shadow: 0 4px 15px rgba(70, 133, 196, 0.15);
 }
 
-/* Policy Count Section */
+
 .health13-policy-count-section {
   width: 100%;
   background: #f8fbff;
@@ -188,10 +188,10 @@
 }
 
 .health13-error {
-  color: #e53e3e;
+  color: #ff3333;
   margin-bottom: 20px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
   text-align: center;
 }
 

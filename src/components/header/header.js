@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
 
@@ -7,6 +7,7 @@ import callIcon from "../../assets/images/call.png";
 
 function Header({ openForm }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const scrollYRef = useRef(0);
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
@@ -16,15 +17,41 @@ function Header({ openForm }) {
     setIsMenuOpen(false);
   }, []);
 
+  // Lock page scroll when menu is open and restore on close.
   useEffect(() => {
     if (isMenuOpen) {
+      // store scroll position
+      scrollYRef.current = window.scrollY || window.pageYOffset || 0;
+      // lock body
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+      // ensure no native overscroll on body
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      // restore scroll and remove lock
+      const stored = scrollYRef.current || 0;
+      // clear styles
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      // restore scroll position
+      window.scrollTo(0, stored);
     }
 
+    // cleanup in case component unmounts while menu is open
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
 
@@ -40,11 +67,21 @@ function Header({ openForm }) {
         <div
           className={`hamburger ${isMenuOpen ? "active" : ""}`}
           onClick={toggleMenu}
+          role="button"
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
         >
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
         </div>
+
+        {/* overlay — click to close (covers page left of the menu) */}
+        <div
+          className={`menu-overlay ${isMenuOpen ? "show" : ""}`}
+          onClick={closeMenu}
+          aria-hidden={!isMenuOpen}
+        />
 
         <div className={`header-right ${isMenuOpen ? "open" : ""}`}>
           <nav className="nav">

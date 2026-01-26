@@ -1,6 +1,8 @@
 import "./App.css";
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+
+import Scrolltotop from "./components/Scrolltotop/Scrolltotop";
 
 import Header from "./components/header/header";
 import Hero from "./components/hero/hero";
@@ -41,14 +43,30 @@ import HealthStep13 from "./pages/health/health13";
 import HealthStep14 from "./pages/health/health14";
 import HealthReport from "./pages/health/healthreport";
 
-function App() {
+import Auto from "./pages/auto/auto";
+import Auto2 from "./pages/auto/auto2";
+import CarBrand from "./pages/auto/carbrand";
+import CarModel from "./pages/auto/carmodel";
+import Varient from "./pages/auto/varient";
+import Varients2 from "./pages/auto/varients2";
+import Review from "./pages/auto/review";
+import PersonalDetails from "./pages/auto/personaldetails";
+import ThankYou from "./pages/auto/thankyou";
+
+function Layout() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const location = useLocation();
 
   const openForm = () => setIsFormOpen(true);
   const closeForm = () => setIsFormOpen(false);
 
+  useEffect(() => {
+    setIsFormOpen(false);
+  }, [location.pathname]);
+
   return (
-    <BrowserRouter>
+    <>
+      <Scrolltotop />
       <Header openForm={openForm} />
 
       <Routes>
@@ -72,11 +90,11 @@ function App() {
         <Route path="/life/step-5" element={<LifeStep5 />} />
         <Route path="/life/step-6" element={<LifeStep6 />} />
         <Route path="/life/step-7" element={<LifeStep7 />} />
-        <Route path="/life/step-8" element={<LifeStep8 />} /> 
-        <Route path="/life/step-9" element={<LifeStep9 />} /> 
-        <Route path="/life/step-10" element={<LifeStep10 />} /> 
-        <Route path="/life/step-11" element={<LifeStep11 />} /> 
-        <Route path="/life/step-12" element={<LifeStep12 />} /> 
+        <Route path="/life/step-8" element={<LifeStep8 />} />
+        <Route path="/life/step-9" element={<LifeStep9 />} />
+        <Route path="/life/step-10" element={<LifeStep10 />} />
+        <Route path="/life/step-11" element={<LifeStep11 />} />
+        <Route path="/life/step-12" element={<LifeStep12 />} />
         <Route path="/life/report" element={<Lifereport openForm={openForm} />} />
 
         <Route path="/health" element={<Health />} />
@@ -94,11 +112,29 @@ function App() {
         <Route path="/health/step-13" element={<HealthStep13 />} />
         <Route path="/health/step-14" element={<HealthStep14 />} />
         <Route path="/health/report" element={<HealthReport openForm={openForm} />} />
+
+        <Route path="/auto" element={<Auto />} />
+        <Route path="/auto2" element={<Auto2 />} />
+        <Route path="/carbrand" element={<CarBrand />} />
+        <Route path="/auto/step-2" element={<CarModel />} />
+        <Route path="/auto/step-3" element={<Varient />} />
+        <Route path="/auto/varients-list" element={<Varients2 />} />
+        <Route path="/auto/step-4" element={<Review />} />
+        <Route path="/auto/step-5" element={<PersonalDetails />} />
+        <Route path="/auto/thank-you" element={<ThankYou />} />
       </Routes>
 
       <Footer />
 
       {isFormOpen && <ConsultationForm onClose={closeForm} />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
     </BrowserRouter>
   );
 }

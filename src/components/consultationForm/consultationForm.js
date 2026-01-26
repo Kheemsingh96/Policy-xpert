@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "./consultationForm.css";
@@ -29,8 +29,8 @@ function ConsultationForm({ onClose }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
-
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
+  const scrollYRef = useRef(0);
 
   const reviews = [
     {
@@ -63,6 +63,27 @@ function ConsultationForm({ onClose }) {
     }, 4000);
 
     return () => clearInterval(interval);
+  }, [reviews.length]);
+
+  useEffect(() => {
+    scrollYRef.current = window.scrollY || 0;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollYRef.current}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      const stored = scrollYRef.current || 0;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, stored);
+    };
   }, []);
 
   const isTempEmail = (email) =>
@@ -152,8 +173,8 @@ function ConsultationForm({ onClose }) {
         <div className="consult-right">
           <h2>Dedicated Insurance Experts Helping You Make Smarter Decisions</h2>
           <p className="sub-heading">
-          Certified experts help you compare the right plans with clear,
-           honest guidance — no sales pressure, just protection that fits your needs.
+            Certified experts help you compare the right plans with clear,
+            honest guidance — no sales pressure, just protection that fits your needs.
           </p>
 
           <form className="main-form" onSubmit={handleSubmit}>
@@ -191,6 +212,7 @@ function ConsultationForm({ onClose }) {
                 placeholder="Mobile Number"
                 inputClass="custom-phone-input"
                 buttonClass="custom-flag-dropdown"
+                dropdownStyle={{ zIndex: 1001 }}
               />
             </div>
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./step9.css"; 
+import "./stepslayout.css";
 import arrowRight from "../../assets/images/arrow2.png";
 import arrowLeft from "../../assets/images/arrow-left.png";
 

@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   padding: 20px 40px;
 }
 
@@ -25,9 +25,10 @@
   position: relative;
   box-shadow: 0 80px 40px rgba(0,0,0,0.2);
   overflow: hidden;
+  font-family: inherit;
 }
 
-.close-btn {
+.consult-box .close-btn {
   position: absolute;
   top: 15px;
   right: 20px;
@@ -41,7 +42,7 @@
   padding: 0;
 }
 
-.consult-left {
+.consult-box .consult-left {
   width: 50%;
   background: #F6FCFE;
   padding: 30px;
@@ -51,7 +52,7 @@
   height: 100%;
 }
 
-.left-heading {
+.consult-box .left-heading {
   font-size: 20px;
   font-weight: 600;
   color: #273846;
@@ -60,13 +61,13 @@
   margin-top: 0;
 }
 
-.feature-list {
+.consult-box .feature-list {
   list-style: none;
   padding: 0;
   margin: 0 0 22px;
 }
 
-.feature-list li {
+.consult-box .feature-list li {
   display: flex;
   gap: 10px;
   margin-bottom: 12px;
@@ -75,66 +76,66 @@
   line-height: 1.4;
 }
 
-.check-icon {
+.consult-box .check-icon {
   width: 18px;
   height: 18px;
   margin-top: 2px;
   flex-shrink: 0;
 }
 
-.social-proof-container {
+.consult-box .social-proof-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
 }
 
-.review-box {
+.consult-box .review-box {
   display: flex;
   flex-direction: column;
 }
 
-.review-top-row {
+.consult-box .review-top-row {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.single-avatar {
+.consult-box .single-avatar {
   width: 34px;
   height: 34px;
   border-radius: 50%;
 }
 
-.stars-image {
+.consult-box .stars-image {
   height: 16px;
 }
 
-.review-text {
+.consult-box .review-text {
   font-size: 13px;
   font-weight: 600;
   color: #273846;
   margin-top: 4px;
 }
 
-.expert-group-box {
+.consult-box .expert-group-box {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.group-image {
+.consult-box .group-image {
   height: 34px;
 }
 
-.expert-text {
+.consult-box .expert-text {
   font-size: 13px;
   font-weight: 600;
   color: #273846;
   white-space: nowrap;
 }
 
-.expert-card {
+.consult-box .expert-card {
   margin-top: 20px;
   background: #fff;
   border-radius: 20px;
@@ -151,11 +152,11 @@
   overflow: hidden;
 }
 
-.expert-card:hover {
+.consult-box .expert-card:hover {
   transform: translateY(-5px);
 }
 
-.expert-card::after {
+.consult-box .expert-card::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -167,11 +168,11 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.expert-card:hover::after {
+.consult-box .expert-card:hover::after {
   opacity: 1;
 }
 
-.card-avatar {
+.consult-box .card-avatar {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -179,19 +180,19 @@
   object-fit: cover;
 }
 
-.expert-card h4 {
+.consult-box .expert-card h4 {
   font-size: 18px;
   font-weight: 600;
   color: #273846;
   margin-bottom: 5px;
 }
 
-.stars-image-small {
+.consult-box .stars-image-small {
   height: 18px;
   margin: 6px 0 8px;
 }
 
-.card-review {
+.consult-box .card-review {
   font-size: 13px;
   color: #585D6A;
   line-height: 1.6;
@@ -202,7 +203,7 @@
   justify-content: center;
 }
 
-.review-content-animate {
+.consult-box .review-content-animate {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -215,7 +216,7 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 
-.consult-right {
+.consult-box .consult-right {
   width: 60%;
   padding: 30px 40px;
   display: flex;
@@ -224,7 +225,7 @@
   height: 100%;
 }
 
-.consult-right h2 {
+.consult-box .consult-right h2 {
   font-size: 26px;
   font-weight: 600;
   color: #273846;
@@ -233,20 +234,20 @@
   margin-top: 0;
 }
 
-.sub-heading {
+.consult-box .sub-heading {
   font-size: 16px;
   color: #585D6A;
   line-height: 1.6;
   margin-bottom: 40px;
 }
 
-.main-form {
+.consult-box .main-form {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-.form-error {
+.consult-box .form-error {
   display: block;
   margin-top: 6px;
   font-size: 12px;
@@ -254,7 +255,7 @@
   text-align: center;
 }
 
-.form-input {
+.consult-box .form-input {
   width: 100%;
   background: #F8FBFF;
   border: 1px solid #E6EFF8;
@@ -266,17 +267,17 @@
   height: 50px;
 }
 
-.form-input::placeholder {
+.consult-box .form-input::placeholder {
   color: #148CAD;
   opacity: .7;
 }
 
-.form-input:focus {
+.consult-box .form-input:focus {
   background: #fff;
   border-color: #3B82F6;
 }
 
-.phone-input-wrapper {
+.consult-box .phone-input-wrapper {
   width: 100%;
   position: relative;
 }
@@ -314,14 +315,15 @@
   border-radius: 8px 0 0 8px !important;
 }
 
-.submit-btn {
+.consult-box .submit-btn {
   margin-top: 10px;
-  padding: 16px;
+  padding: 15px;
   background: #4685C4;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 8px !important; 
+  font-size: 16px !important;
+  font-weight: 400 !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -330,16 +332,16 @@
   width: 100%;
 }
 
-.submit-btn:hover {
+.consult-box .submit-btn:hover {
   background: #357bd8;
 }
 
-.btn-icon {
+.consult-box .btn-icon {
   width: 22px;
   filter: brightness(0) invert(1);
 }
 
-.form-meta {
+.consult-box .form-meta {
   display: flex;
   justify-content: flex-start;
   gap: 20px;
@@ -347,7 +349,7 @@
   flex-wrap: wrap;
 }
 
-.meta-item {
+.consult-box .meta-item {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -357,7 +359,7 @@
   white-space: nowrap;
 }
 
-.meta-icon {
+.consult-box .meta-icon {
   width: 18px;
 }
 
@@ -368,7 +370,8 @@
     max-height: 90vh;
   }
   
-  .consult-left, .consult-right {
+  .consult-box .consult-left, 
+  .consult-box .consult-right {
     padding: 24px;
   }
 }
@@ -389,7 +392,7 @@
     margin-bottom: 20px;
   }
 
-  .consult-right {
+  .consult-box .consult-right {
     order: 1;
     width: 100%;
     padding: 35px 20px 20px 20px;
@@ -397,7 +400,7 @@
     overflow: visible;
   }
 
-  .consult-left {
+  .consult-box .consult-left {
     order: 2;
     width: 100%;
     padding: 25px 20px 15px 20px;
@@ -407,7 +410,7 @@
     overflow: visible;
   }
 
-  .close-btn {
+  .consult-box .close-btn {
     top: 10px;
     right: 15px;
     background: #F6FCFE;
@@ -420,31 +423,31 @@
     font-size: 22px;
   }
 
-  .consult-right h2 {
+  .consult-box .consult-right h2 {
     font-size: 22px;
     line-height: 35px;
     text-align: center;
     margin-top: 20px;
   }
 
-  .sub-heading {
+  .consult-box .sub-heading {
     text-align: center;
     font-size: 16px;
     margin-bottom: 30px;
     margin-top: 10px;
   }
 
-  .left-heading {
+  .consult-box .left-heading {
     font-size: 20px;
     text-align: center;
   }
 
-  .form-meta {
+  .consult-box .form-meta {
     justify-content: center;
     gap: 20px;
   }
 
-  .social-proof-container {
+  .consult-box .social-proof-container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -454,45 +457,47 @@
     margin-bottom: 15px;
   }
 
-  .review-box, .expert-group-box {
+  .consult-box .review-box, 
+  .consult-box .expert-group-box {
     flex: 1;
   }
 
-  .single-avatar {
+  .consult-box .single-avatar {
     width: 28px;
     height: 28px;
   }
 
-  .group-image {
+  .consult-box .group-image {
     height: 28px;
   }
 
-  .stars-image {
+  .consult-box .stars-image {
     height: 14px;
   }
 
-  .review-text, .expert-text {
+  .consult-box .review-text, 
+  .consult-box .expert-text {
     font-size: 11px;
     margin-top: 2px;
   }
 
-  .expert-card {
+  .consult-box .expert-card {
     margin-top: 0;
     min-height: auto;
     padding: 15px;
   }
 
-  .card-avatar {
+  .consult-box .card-avatar {
     width: 45px;
     height: 45px;
   }
 
-  .expert-card h4 {
+  .consult-box .expert-card h4 {
     font-size: 16px;
     margin-bottom: 4px;
   }
 
-  .card-review {
+  .consult-box .card-review {
     font-size: 13px;
     line-height: 1.5;
     min-height: auto;

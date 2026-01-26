@@ -29,7 +29,7 @@ function HealthStep10() {
   const [affectedMembers, setAffectedMembers] = useState([]);
   const [error, setError] = useState("");
   
-  // Track which dropdown is open (by index)
+ 
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const dropdownRef = useRef(null);
 
@@ -74,13 +74,13 @@ function HealthStep10() {
         ...m,
         icon,
         displayLabel,
-        abnormalDetails: [] // Array for multiple selections
+        abnormalDetails: [] 
       };
     });
 
     setAffectedMembers(processed);
 
-    // Click outside to close dropdown
+   
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpenDropdownIndex(null);
@@ -126,7 +126,7 @@ function HealthStep10() {
     const finalMembersList = allMembers.map(m => {
       const affected = affectedMembers.find(a => a.id === m.id);
       if (affected) {
-        // Convert array to string for storage if backend expects string, or keep as array
+
         return { ...m, abnormalDetails: affected.abnormalDetails }; 
       }
       return m;
@@ -170,7 +170,7 @@ function HealthStep10() {
                 <span className="health10-label">{member.displayLabel}</span>
               </div>
 
-              {/* Custom Multi-Select Dropdown */}
+            
               <div className="health10-multiselect-wrapper" ref={openDropdownIndex === index ? dropdownRef : null}>
                 <div 
                   className={`health10-multiselect-box ${openDropdownIndex === index ? 'active' : ''}`}

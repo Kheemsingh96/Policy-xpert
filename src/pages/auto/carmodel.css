@@ -1,0 +1,290 @@
+.carmodel-step {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+  background: radial-gradient(
+    circle at bottom center,
+    rgba(70, 133, 196, 0.18),
+    rgba(70, 133, 196, 0.06),
+    #F6FCFE 70%
+  );
+  box-sizing: border-box;
+}
+
+.carmodel-progress-wrapper {
+  width: 100%;
+  max-width: 870px;
+  margin-bottom: 38px;
+  box-sizing: border-box;
+}
+
+.carmodel-progress-steps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.carmodel-progress-steps .active {
+  color: #4685C4;
+  font-weight: 700;
+}
+
+.carmodel-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #D1F1FA;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carmodel-progress-fill {
+  height: 100%;
+  background: #4685C4;
+  border-radius: 10px;
+  display: block; 
+}
+
+
+.carmodel-step-box {
+  width: 100%;
+  max-width: 870px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 20px 20px 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  
+  
+  min-height: 300px; 
+  max-height: 600px; 
+}
+
+.carmodel-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.carmodel-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #273846;
+  margin-bottom: 20px;
+}
+
+.highlight-brand {
+  color: #4685C4;
+}
+
+.carmodel-search-box {
+  display: flex;
+  align-items: center;
+  background: #FCFEFF;
+  border: 1px solid #cce7ff;
+  border-radius: 12px;
+  padding: 14px 20px;
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+}
+
+.carmodel-search-box:focus-within {
+  border-color: #4685C4;
+  box-shadow: 0 4px 15px rgba(70, 133, 196, 0.12);
+}
+
+.search-icon-img {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  opacity: 0.6;
+}
+
+.carmodel-search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  color: #334155;
+  background: transparent;
+}
+
+
+.carmodel-list-wrapper {
+  width: 100%;
+  max-width: 780px;
+  flex: 1;
+  max-height: 450px; 
+  overflow-y: auto;
+  margin-bottom: 30px;
+  scrollbar-width: thin;
+  scrollbar-color: #DFE7F5 transparent;
+}
+
+.carmodel-list-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.carmodel-list-wrapper::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+.carmodel-list-wrapper::-webkit-scrollbar-thumb {
+  background-color: #cce7ff;
+  border-radius: 10px;
+}
+
+.carmodel-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid #EAF4F8;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.carmodel-item:hover {
+  background-color: #F6FCFE;
+}
+
+.carmodel-item.selected {
+  background-color: #EBF5FF;
+  border-radius: 8px;
+  border-bottom: 1px solid transparent;
+}
+
+.model-name {
+  font-size: 16px;
+  font-weight: 450;
+  color: #273846;
+}
+
+.carmodel-item.selected .model-name {
+  color: #4685C4;
+  font-weight: 600;
+}
+
+.chevron-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.4;
+  filter: brightness(0); 
+  transition: all 0.3s ease;
+}
+
+.carmodel-item.selected .chevron-icon {
+  opacity: 1;
+  filter: brightness(0) saturate(100%) invert(46%) sepia(29%) saturate(968%) hue-rotate(175deg) brightness(92%) contrast(87%);
+}
+
+.no-data-text {
+  text-align: center;
+  color: #94a3b8;
+  margin-top: 20px;
+}
+
+.carmodel-footer {
+  width: 100%;
+  max-width: 780px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: auto;
+}
+
+.carmodel-prev-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid #cce7ff;
+  color: #4685C4;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.prev-icon {
+  width: 16px;
+  height: auto;
+  opacity: 0.6;
+}
+
+.carmodel-prev-btn:hover {
+  border-color: #94a3b8;
+  color: #263746;
+}
+
+.carmodel-next-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 35px;
+  background: #4685C4;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  opacity: 1; 
+}
+
+.carmodel-next-btn img {
+  width: 20px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.carmodel-next-btn:hover {
+  background: #357bd8;
+  box-shadow: 0 8px 20px rgba(53, 123, 216, 0.25);
+}
+
+@media (max-width: 768px) {
+  .carmodel-step-box {
+    padding: 20px 15px;
+    max-height: 85vh; 
+    min-height: 500px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .carmodel-title {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+  
+  .carmodel-search-box {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .carmodel-search-box input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .carmodel-list-wrapper {
+    max-height: 350px;
+  }
+}

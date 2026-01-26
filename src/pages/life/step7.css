@@ -98,7 +98,7 @@
   margin-bottom: 40px;
 }
 
-/* Center the single dropdown */
+
 .single-input-container {
   display: flex;
   justify-content: center;
@@ -116,7 +116,7 @@
   outline: none;
   transition: all 0.3s ease;
   cursor: pointer;
-  text-align: center; /* Center text inside dropdown */
+  text-align: center; 
 }
 
 .single-input-container select:focus {
