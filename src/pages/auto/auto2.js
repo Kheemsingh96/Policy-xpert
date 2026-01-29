@@ -72,7 +72,7 @@ function Auto2() {
                 <label>Mobile Number</label>
                 <input
                   type="text"
-                  placeholder="+91 5888445544"
+                  placeholder="+91 9563100008"
                   value={mobile}
                   maxLength={10}
                   className={error ? "input-error" : ""}

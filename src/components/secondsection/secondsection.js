@@ -71,7 +71,7 @@ function Secondsection() {
             </div>
             <h4 className="ss-fade ss-delay-1">Health insurance</h4>
             <p className="ss-fade ss-delay-2">
-               Coverage for hospitalization and medical emergencies
+                Coverage for hospitalization and medical emergencies
             </p>
           </Link>
 
@@ -98,9 +98,10 @@ function Secondsection() {
 
         <div className="plans-right">
           <h2 className="ss-fade ss-delay-1">
-            Find the <span>Insurance</span> Plan That Truly <br />
-            <span className="highlight">Fits</span> Your Life
-          </h2>
+  Find the <span>Insurance</span> Plan That Truly <br />
+  <span className="highlight">Fits</span> Your Life
+</h2>
+
           <p className="ss-fade ss-delay-2">
             Everyone’s needs are different, and the right insurance should match them.
             Compare health, life, auto, and travel plans in one place...

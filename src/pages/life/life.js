@@ -30,12 +30,8 @@ function Life() {
     }
 
     setError("");
-    navigate("/life/step-2", {
-      state: {
-        gender: gender,
-        pincode: pincode,
-      },
-    });
+
+    navigate("/life/step-2", { state: { gender, age, pincode } });
   };
 
   return (

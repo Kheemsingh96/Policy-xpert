@@ -5,7 +5,10 @@ const Scrolltotop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollContainer = document.getElementById("scroll-container");
+    if (scrollContainer) {
+      scrollContainer.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   return null;

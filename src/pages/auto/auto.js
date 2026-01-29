@@ -70,7 +70,7 @@ function Auto() {
                 <label>Registration Number</label>
                 <input
                   type="text"
-                  placeholder="KA04DK8337"
+                  placeholder="MH02AR2085"
                   value={regNumber}
                   className={errors.reg ? "input-error" : ""}
                   onChange={(e) => {
@@ -85,7 +85,7 @@ function Auto() {
                 <label>Mobile Number</label>
                 <input
                   type="text"
-                  placeholder="+91 5888445544"
+                  placeholder="+91 9563100008"
                   value={mobile}
                   maxLength={10}
                   className={errors.mobile ? "input-error" : ""}

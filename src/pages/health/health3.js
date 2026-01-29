@@ -15,7 +15,6 @@ function HealthStep3() {
   const navigate = useNavigate();
   const location = useLocation();
   const selectedMembers = location.state?.members || {};
-  // Received Pincode from Step 2
   const globalPincode = location.state?.pincode || "";
 
   const steps = [
@@ -49,7 +48,7 @@ function HealthStep3() {
     if (selectedMembers.father) generatedForms.push({ id: "father", label: "Father", icon: fatherIcon, defaultGender: "Male" });
     if (selectedMembers.mother) generatedForms.push({ id: "mother", label: "Mother", icon: motherIcon, defaultGender: "Female" });
 
-    // Initialize forms with Pincode from Step 1
+  
     const initializedData = generatedForms.map(m => ({
       ...m,
       fullName: "",
@@ -63,12 +62,11 @@ function HealthStep3() {
 
   const handleInputChange = (index, field, value) => {
     const updatedForms = memberForms.map((member, i) => {
-      // Logic: If Self (index 0) pincode is changed, change for everyone
       if (index === 0 && field === "pincode") {
          return { ...member, pincode: value };
       }
       
-      // Normal update for specific field
+      
       if (i === index) {
         return { ...member, [field]: value };
       }

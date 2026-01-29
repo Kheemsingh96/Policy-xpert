@@ -228,50 +228,118 @@
   }
 }
 
-@media (max-width: 768px) {
-  .testimonials {
-    padding: 20px 0;
-  }
+@media (min-width: 375px) and (max-width: 575px) {
 
   .testimonials .subtitle {
     font-size: 14px;
-    font-weight: 500;
+    line-height: 1.4;
   }
 
   .testimonials .title {
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 24px;
+    line-height: 42px;
+    font-weight: 600;
+  }
+
+  .testimonials .testimonial-card p {
+    font-size: 16px;
+    line-height: 30px;
+  }
+}
+
+
+@media (min-width: 576px) and (max-width: 768px) {
+
+  .testimonials .subtitle {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .testimonials .title {
+    font-size: 30px;
+    line-height: 48px;
+    font-weight: 600;
+  }
+
+  .testimonials .testimonial-card p {
+    font-size: 18px;
+    line-height: 32px;
+  }
+}
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .testimonials .subtitle {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .testimonials .title {
+    font-size: 34px;
+    line-height: 60px;
+    font-weight: 600;
+  }
+
+  .testimonials .testimonial-card p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+}
+
+
+@media (min-width: 1025px) and (max-width: 1240px) {
+
+  .testimonials .subtitle {
+    font-size: 16px;
+  }
+
+  .testimonials .title {
+    font-size: 32px;
+    line-height: 55px;
+    font-weight: 600;
+  }
+
+  .testimonials .testimonial-card p {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+
+@media (min-width: 1241px) and (max-width: 1439px) {
+
+  .testimonials .subtitle {
+    font-size: 16px;
+  }
+
+  .testimonials .title {
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 70px;
+    
+  }
+
+  .testimonials .testimonial-card p {
+    font-size: 18px;
     line-height: 40px;
-    margin-top: 8px;
+  }
+}
+
+
+@media (min-width: 1620px) and (max-width: 1920px) {
+
+  .testimonials .subtitle {
+    font-size: 18px;
   }
 
-  .testimonials .slider {
-    margin-top: 30px;
+  .testimonials .title {
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 80px;
   }
 
-  .testimonials .testimonial-card {
-    width: 260px;
-    padding: 18px 16px;
+  .testimonials .testimonial-card p {
+    font-size: 20px;
+    line-height: 34px;
   }
-
-  .testimonials .avatar {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 8px;
-  }
-
-  .testimonials .stars {
-    margin-bottom: 10px;
-  }
-
-  .testimonials .nav {
-    width: 36px;
-    height: 36px;
-  }
-
-  .testimonials .nav img {
-    width: 20px;
-    height: 20px;
-  }
-
 }

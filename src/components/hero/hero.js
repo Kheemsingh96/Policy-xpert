@@ -1,5 +1,4 @@
 import "./hero.css";
-
 import heroMan from "../../assets/images/hero-image.png";
 import reviewBadge from "../../assets/images/customer-review.png";
 import expertSupport from "../../assets/images/expert.png";
@@ -15,7 +14,7 @@ function Hero({ openForm }) {
           <h1>
             Welcome to <span className="highlight-red">Policy</span><span className="highlight-blue">Xpert</span> <sup>&reg;</sup><br />
             <span className="hero-subtitle">
-              India’s <span className="highlight-red">Insurance</span> Advisory<br />
+              India’s <span className="highlight-red">Insurance</span> Advisory <br />
               Platform
             </span>
           </h1>

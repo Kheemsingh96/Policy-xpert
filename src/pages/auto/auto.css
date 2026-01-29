@@ -273,80 +273,436 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 375px) and (max-width: 575px) {
   .auto-hero {
     padding: 20px 16px 50px;
+    min-height: auto;
+    flex-direction: column;
   }
-
   .auto-container {
+    flex-direction: column;
+    text-align: center;
     gap: 30px;
   }
-
-  .auto-left h1 {
-    font-size: 26px;
-    line-height: 40px;
-    margin-bottom: 20px;
-    max-width: 100%;
+  .auto-left {
+    padding-left: 0;
+    width: 100%;
+    align-items: center;
   }
-
+  .auto-left h1 {
+    font-size: 24px;
+    line-height: 34px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .auto-left h1 br {
+    display: none;
+  }
   .auto-image-box {
     max-width: 100%;
-    padding: 0 10px;
+    margin-bottom: 10px;
   }
-
   .auto-right {
-    max-width: 100%;
+    width: 100%;
+    padding-right: 0;
+    flex: none;
   }
-
   .auto-form-card {
     padding: 20px 16px;
     border-radius: 16px;
     gap: 20px;
   }
-
   .auto-badge {
     font-size: 13px;
     padding: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
-
   .auto-field label {
-    font-size: 16px;
-    margin-bottom: 6px;
+    font-size: 14px;
+    margin-bottom: 8px;
     text-align: left;
   }
-
   .auto-field input {
-    padding: 12px 14px;
+    height: 48px;
+    padding: 0 16px;
     font-size: 14px;
-    height: 46px;
+    width: 100%;
+    border-radius: 10px;
   }
-
   .view-prices-btn {
-    padding: 12px;
+    height: 48px;
+    padding: 0;
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
+  .brand-new-btn {
+    height: 48px;
+    padding: 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .auto-error-text {
+    font-size: 12px;
+  }
+  
+  .auto-info-section {
+    padding: 30px 16px;
+  }
+  .auto-info-container h2 {
+    font-size: 24px;
+    line-height: 34px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .auto-info-container h2 br {
+    display: none;
+  }
+  .auto-info-container p {
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    text-align-last: center;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+}
+
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .auto-hero {
+    padding: 30px 20px 60px;
+    min-height: auto;
+    flex-direction: column;
+  }
+  .auto-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 35px;
+  }
+  .auto-left {
+    padding-left: 0;
+    width: 100%;
+    align-items: center;
+  }
+  .auto-left h1 {
+    font-size: 30px;
+    line-height: 42px;
+    margin-bottom: 25px;
+    text-align: center;
+    max-width: 100%;
+    text-wrap: balance;
+  }
+  
+  .auto-image-box {
+    max-width: 500px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+  .auto-right {
+    width: 100%;
+    padding-right: 0;
+    flex: none;
+    max-width: 540px;
+  }
+  .auto-form-card {
+    padding: 24px;
+    border-radius: 18px;
+    gap: 22px;
+  }
+  .auto-badge {
+    font-size: 14px;
+    padding: 13px;
+    margin-bottom: 12px;
+  }
+  .auto-field label {
+    font-size: 15px;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .auto-field input {
+    height: 50px;
+    padding: 0 16px;
+    font-size: 15px;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .view-prices-btn {
+    height: 50px;
+    padding: 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
+  .brand-new-btn {
+    height: 50px;
+    padding: 0;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .auto-error-text {
+    font-size: 13px;
   }
 
+  .auto-info-section {
+    padding: 40px 20px;
+  }
+  .auto-info-container h2 {
+    font-size: 28px;
+    line-height: 40px;
+    margin-bottom: 25px;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .auto-info-container h2 br {
+    display: none;
+  }
+  .auto-info-container p {
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    text-align-last: center;
+    padding: 0;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .auto-hero {
+    padding: 40px 30px 60px;
+    min-height: auto;
+    flex-direction: column;
+  }
+  .auto-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+  .auto-left {
+    padding-left: 0;
+    width: 100%;
+    align-items: center;
+  }
+  .auto-left h1 {
+    font-size: 34px;
+    line-height: 48px;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 80%;
+    text-wrap: balance;
+  }
+
+  .auto-image-box {
+    max-width: 600px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .auto-right {
+    width: 100%;
+    padding-right: 0;
+    flex: none;
+    max-width: 600px;
+  }
+  .auto-form-card {
+    padding: 30px;
+    border-radius: 20px;
+    gap: 24px;
+  }
+  .auto-badge {
+    font-size: 15px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .auto-field label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  .auto-field input {
+    height: 52px;
+    padding: 0 16px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .view-prices-btn {
+    height: 52px;
+    padding: 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
   .brand-new-btn {
-    padding: 12px;
+    height: 52px;
+    padding: 0;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .auto-error-text {
     font-size: 14px;
   }
 
   .auto-info-section {
-    padding: 20px 16px;
+    padding: 50px 30px;
+  }
+  .auto-info-container h2 {
+    font-size: 34px;
+    line-height: 48px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .auto-info-container h2 br {
+    display: none;
+  }
+  .auto-info-container p {
+    font-size: 18px;
+    line-height: 32px;
+    text-align: center;
+    text-align-last: center;
+    padding: 0 20px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .auto-hero {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 5px 20px 20px !important;
+    min-height: 100vh;
+  }
+
+  .auto-container {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 1140px !important;
+  }
+
+  .auto-left {
+    flex: 1 !important;
+    width: auto !important;
+    max-width: 60% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding-left: 0 !important;
+    text-align: left !important;
+  }
+
+  .auto-left h1 {
+    font-size: 34px !important;
+    line-height: 48px !important;
+    margin-bottom: 30px !important;
+    text-align: left !important;
+    max-width: 100% !important;
+    text-wrap: balance !important;
+  }
+
+
+  .auto-image-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+  }
+
+  .car-hero-img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .auto-right {
+    flex: 0 0 400px !important;
+    width: 400px !important;
+    max-width: 400px !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+  }
+
+  .auto-form-card {
+    padding: 25px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 20px !important;
+  }
+
+  .auto-badge {
+    font-size: 14px !important;
+    padding: 12px !important;
+    margin-bottom: 15px !important;
+  }
+
+  .auto-field label {
+    font-size: 15px !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;
+  }
+
+  .auto-field input {
+    height: 52px !important;
+    padding: 0 16px !important;
+    font-size: 15px !important;
+    width: 100% !important;
+  }
+
+  .view-prices-btn {
+    height: 52px !important;
+    font-size: 16px !important;
+    margin-top: 10px !important;
+  }
+
+  .brand-new-btn {
+    height: 52px !important;
+    font-size: 15px !important;
+  }
+
+  .auto-error-text {
+    font-size: 13px !important;
+  }
+
+  .auto-info-section {
+    padding: 50px 40px !important;
   }
 
   .auto-info-container h2 {
-    font-size: 26px;
-    margin-bottom: 25px;
-    line-height: 1.3;
+    font-size: 32px !important;
+    line-height: 46px !important;
+    margin-bottom: 30px !important;
+    text-align: center !important;
+    text-wrap: balance !important;
+  }
+
+  .auto-info-container h2 br {
+    display: none !important;
   }
 
   .auto-info-container p {
-    font-size: 16px;
-    line-height: 30px;
-    text-align: center;
-    text-align-last: center;
-    padding: 0;
+    font-size: 16px !important;
+    line-height: 30px !important;
+    text-align: justify !important;
+    text-align-last: center !important;
+    padding: 0 20px !important;
+    margin-bottom: 30px !important;
   }
 }
+

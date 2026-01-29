@@ -6,8 +6,8 @@ import ChatIcon from "../../assets/images/whatsapp.png";
 
 const cards = [
   {
-    title: "Schedule Call With Expert",
-    desc: "Insurance policies and complex clauses can be confusing. That’s why we recommend scheduling a free call with a qualified expert at a time that suits your schedule.",
+    title: "Book a Call With an Expert Now",
+    desc: "Insurance policies and complex clauses can be confusing, which is why we recommend scheduling a free call with a qualified expert who will guide you, answer your questions, and help you choose the right coverage ",
     whatsappMsg: "Hi PolicyXpert, I want to schedule a free call with an expert to understand insurance clauses better. Please let me know the available slots."
   },
   {

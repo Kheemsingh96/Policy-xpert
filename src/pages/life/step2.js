@@ -7,6 +7,7 @@ import arrowRight from "../../assets/images/arrow2.png";
 function LifeStep2() {
   const navigate = useNavigate();
   const location = useLocation();
+  const stateData = location.state || {};
 
   const steps = [
     { id: 1, label: "Basic" },
@@ -15,18 +16,18 @@ function LifeStep2() {
     { id: 4, label: "04 Assets & Liabilities" }
   ];
 
-  const totalBasicPages = 3; 
-  const currentBasicPage = 2; 
+  const totalBasicPages = 3;
+  const currentBasicPage = 2;
   
   const sectionWeight = 100 / steps.length;
   const progressPercent = ((currentBasicPage - 1) / totalBasicPages) * sectionWeight;
 
-  const [firstName, setFirstName] = useState(location.state?.firstName || "");
-  const [lastName, setLastName] = useState(location.state?.lastName || "");
-  const [dob, setDob] = useState(location.state?.dob || "");
-  const [education, setEducation] = useState(location.state?.education || "");
-  const [gender] = useState(location.state?.gender || ""); 
-  const [pincode] = useState(location.state?.pincode || "");
+  const [firstName, setFirstName] = useState(stateData.firstName || "");
+  const [lastName, setLastName] = useState(stateData.lastName || "");
+  const [dob, setDob] = useState(stateData.dob || "");
+  const [education, setEducation] = useState(stateData.education || "");
+  const [gender] = useState(stateData.gender || ""); 
+  const [pincode] = useState(stateData.pincode || "");
   
   const [errors, setErrors] = useState({});
 
@@ -66,7 +67,7 @@ function LifeStep2() {
   const handleNext = () => {
     if (validate()) {
       navigate("/life/step-3", {
-        state: { ...location.state, firstName, lastName, dob, education }
+        state: { ...stateData, firstName, lastName, dob, education }
       });
     }
   };
