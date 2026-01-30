@@ -13,6 +13,7 @@ import Faq from "./components/faq/faq";
 import Footer from "./components/footer/footer";
 import ConsultationForm from "./components/consultationForm/consultationForm";
 import StickyFooter from "./components/stickyfooter/stickyfooter";
+import Thanks from "./components/thanks/thanks";
 
 import Life from "./pages/life/life";
 import LifeStep2 from "./pages/life/step2";
@@ -104,6 +105,8 @@ function Layout() {
               </>
             }
           />
+
+          <Route path="/thanks" element={<Thanks />} />
 
           <Route path="/life" element={<Life />} />
           <Route path="/life/step-2" element={<LifeStep2 />} />

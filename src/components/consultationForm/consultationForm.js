@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "./consultationForm.css";
@@ -28,9 +29,12 @@ function ConsultationForm({ onClose }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [error, setError] = useState("");
+  const [countryData, setCountryData] = useState({ countryCode: "in", dialCode: "91" });
+  const [errors, setErrors] = useState({});
+  
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
   const scrollYRef = useRef(0);
+  const navigate = useNavigate();
 
   const reviews = [
     {
@@ -89,31 +93,66 @@ function ConsultationForm({ onClose }) {
   const isTempEmail = (email) =>
     TEMP_EMAIL_DOMAINS.some((domain) => email.includes(domain));
 
+  const validateForm = () => {
+    let tempErrors = {};
+    let isValid = true;
+
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    if (!name.trim()) {
+      tempErrors.name = "Full Name is required";
+      isValid = false;
+    } else if (name.trim().length < 3) {
+      tempErrors.name = "Name must be at least 3 characters";
+      isValid = false;
+    } else if (!nameRegex.test(name)) {
+      tempErrors.name = "Name should contain letters only";
+      isValid = false;
+    }
+
+    if (!email) {
+      tempErrors.email = "Email Address is required";
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      tempErrors.email = "Invalid email format";
+      isValid = false;
+    } else if (isTempEmail(email)) {
+      tempErrors.email = "Temporary emails are not allowed";
+      isValid = false;
+    }
+
+    const dialCodeLength = countryData.dialCode ? countryData.dialCode.length : 0;
+    const actualPhoneNumberLength = phone.length - dialCodeLength;
+    const actualPhoneNumber = phone.substring(dialCodeLength);
+
+    if (!phone || actualPhoneNumberLength < 4) {
+      tempErrors.phone = "Mobile Number is required";
+      isValid = false;
+    } else if (/^0+$/.test(actualPhoneNumber)) {
+      tempErrors.phone = "Invalid mobile number";
+      isValid = false;
+    } else if (countryData.countryCode === 'in') {
+      if (actualPhoneNumberLength !== 10 || ["0", "1", "2", "3", "4", "5"].includes(actualPhoneNumber[0])) {
+        tempErrors.phone = "Enter a valid 10-digit Indian mobile number";
+        isValid = false;
+      }
+    } else {
+      if (actualPhoneNumberLength < 7 || actualPhoneNumberLength > 15) {
+        tempErrors.phone = "Enter a valid mobile number for your country";
+        isValid = false;
+      }
+    }
+
+    setErrors(tempErrors);
+    return isValid;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name.trim()) {
-      setError("Enter your full name");
-      return;
+    if (validateForm()) {
+      navigate("/thanks", { state: { fullName: name } });
+      if (onClose) onClose();
     }
-
-    if (
-      !email ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-      isTempEmail(email)
-    ) {
-      setError("Enter a valid email address");
-      return;
-    }
-
-    if (!phone || phone.length < 10) {
-      setError("Enter a valid mobile number");
-      return;
-    }
-
-    setError("");
-    alert("Form Submitted Successfully");
-    onClose();
   };
 
   return (
@@ -178,50 +217,58 @@ function ConsultationForm({ onClose }) {
           </p>
 
           <form className="main-form" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="form-input"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-                setError("");
-              }}
-            />
+            
+            <div className="input-block">
+              <input
+                type="text"
+                placeholder="Full Name"
+                className={`form-input ${errors.name ? "input-error" : ""}`}
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (errors.name) setErrors({ ...errors, name: "" });
+                }}
+              />
+              {errors.name && <div className="error-message">{errors.name}</div>}
+            </div>
 
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="form-input"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setError("");
-              }}
-            />
+            <div className="input-block">
+              <input
+                type="email"
+                placeholder="Email Address"
+                className={`form-input ${errors.email ? "input-error" : ""}`}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (errors.email) setErrors({ ...errors, email: "" });
+                }}
+              />
+              {errors.email && <div className="error-message">{errors.email}</div>}
+            </div>
 
-            <div className="phone-input-wrapper">
+            <div className="input-block">
               <PhoneInput
                 country={"in"}
                 value={phone}
-                onChange={(val) => {
+                onChange={(val, country) => {
                   setPhone(val);
-                  setError("");
+                  setCountryData(country);
+                  if (errors.phone) setErrors({ ...errors, phone: "" });
                 }}
                 enableSearch
                 placeholder="Mobile Number"
-                inputClass="custom-phone-input"
+                inputClass={`custom-phone-input ${errors.phone ? "input-error" : ""}`}
                 buttonClass="custom-flag-dropdown"
                 dropdownStyle={{ zIndex: 1001 }}
               />
+              {errors.phone && <div className="error-message">{errors.phone}</div>}
             </div>
 
             <button type="submit" className="submit-btn">
               <img src={phoneWhite} alt="" className="btn-icon" />
               Free Call with Expert
             </button>
-
-            {error && <span className="form-error">{error}</span>}
+            
           </form>
 
           <div className="form-meta">
