@@ -244,22 +244,20 @@
 .consult-box .main-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px;
 }
-
-
 
 .error-message {
   color: #e74c3c;
   font-size: 12px;
-  margin-top: 10px !important;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
   text-align: left !important;
   font-weight: 500;
   padding-left: 2px;
   line-height: 1.2;
   width: 100%;
 }
-
 
 .react-tel-input .form-control.input-error {
   border: 1px solid #e74c3c !important;
@@ -881,18 +879,18 @@
     color: #273846;
   }
 
-.consult-box .consult-right h2 {
-  font-size: 30px;
-  line-height: 46px;
-  text-align: left;
-  margin-top: 0;
-  white-space: normal;
-  width: 100%;
-}
+  .consult-box .consult-right h2 {
+    font-size: 30px;
+    line-height: 46px;
+    text-align: left;
+    margin-top: 0;
+    white-space: normal;
+    width: 100%;
+  }
 
-.consult-box .consult-right h2 br {
-  display: none;
-}
+  .consult-box .consult-right h2 br {
+    display: none;
+  }
 
   .consult-box .sub-heading {
     text-align: left;

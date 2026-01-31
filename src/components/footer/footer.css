@@ -48,6 +48,7 @@
   color: #47557b;
   margin-bottom: 20px;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .footer-col ul li:hover {
@@ -60,10 +61,17 @@
   margin-top: 10px;
 }
 
-.socials img {
-  width: 20px;
-  height: 20px;
+.socials svg {
+  width: 24px;
+  height: 24px;
+  color: #4685C4;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.socials svg:hover {
+  color: #4685c4;
+  transform: translateY(-2px);
 }
 
 .contact-item {
@@ -75,9 +83,12 @@
   color: #47557b;
 }
 
-.contact-item img {
+.contact-item svg {
   width: 18px;
-  margin-top: 2px;
+  height: 18px;
+  margin-top: 3px;
+  color: #273846;
+  flex-shrink: 0;
 }
 
 .footer-bottom {
@@ -126,7 +137,7 @@
 
   .contact-item {
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 30px !important;
     gap: 12px;
   }
 

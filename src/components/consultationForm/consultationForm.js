@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
+import axios from "axios";
 import "react-phone-input-2/lib/style.css";
 import "./consultationForm.css";
 
@@ -31,7 +32,6 @@ function ConsultationForm({ onClose }) {
   const [phone, setPhone] = useState("");
   const [countryData, setCountryData] = useState({ countryCode: "in", dialCode: "91" });
   const [errors, setErrors] = useState({});
-  
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
   const scrollYRef = useRef(0);
   const navigate = useNavigate();
@@ -146,12 +146,24 @@ function ConsultationForm({ onClose }) {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      navigate("/thanks", { state: { fullName: name } });
-      if (onClose) onClose();
+      try {
+        const response = await axios.post("http://localhost:5000/api/save-consultation", {
+          name: name,
+          email: email,
+          phone: phone
+        });
+
+        if (response.status === 200) {
+          navigate("/thanks", { state: { fullName: name } });
+          if (onClose) onClose();
+        }
+      } catch (error) {
+        alert("Server error: data save nahi ho paya");
+      }
     }
   };
 

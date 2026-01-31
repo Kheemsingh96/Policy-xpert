@@ -1,9 +1,8 @@
-/* Default: Desktop par Hide rahega */
+
 .sticky-footer-container {
   display: none !important;
 }
 
-/* Mobile View: Show karega */
 @media screen and (max-width: 768px) {
   .sticky-footer-container {
     display: flex !important; /* Force Show */
@@ -15,7 +14,7 @@
     background-color: #ffffff !important;
     box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.15) !important;
     
-    /* Maximum Z-Index to stay on top of everything */
+   
     z-index: 2147483647 !important;
     
     justify-content: center;

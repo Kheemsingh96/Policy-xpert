@@ -14,8 +14,7 @@ function Hero({ openForm }) {
           <h1>
             Welcome to <span className="highlight-red">Policy</span><span className="highlight-blue">Xpert</span> <sup>&reg;</sup><br />
             <span className="hero-subtitle">
-              India’s <span className="highlight-red">Insurance</span> Advisory <br />
-              Platform
+              India’s <span className="highlight-red">Insurance</span> Advisory Platform
             </span>
           </h1>
 
@@ -23,6 +22,21 @@ function Hero({ openForm }) {
             Unbiased insurance guidance to help you understand your options
             and make confident decisions — without pressure to buy.
           </p>
+
+          <div className="hero-features">
+  <div className="feature-item">
+    <img src={whyChooseIcon} alt="Check" />
+    <span>Honest advice, no pressure</span>
+  </div>
+  <div className="feature-item">
+    <img src={whyChooseIcon} alt="Check" />
+    <span>Simple and clear explanations</span>
+  </div>
+  <div className="feature-item">
+    <img src={whyChooseIcon} alt="Check" />
+    <span>Right plan for you</span>
+  </div>
+</div>
 
           <div className="hero-actions">
             <button className="primary-btn" onClick={openForm}>

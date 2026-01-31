@@ -108,7 +108,9 @@ function Layout() {
 
           <Route path="/thanks" element={<Thanks />} />
 
+          {/* Life Insurance Routes */}
           <Route path="/life" element={<Life />} />
+          <Route path="/life-insurance" element={<Life />} /> {/* Added for Footer Link */}
           <Route path="/life/step-2" element={<LifeStep2 />} />
           <Route path="/life/step-3" element={<LifeStep3 />} />
           <Route path="/life/step-4" element={<LifeStep4 />} />
@@ -122,7 +124,9 @@ function Layout() {
           <Route path="/life/step-12" element={<LifeStep12 />} />
           <Route path="/life/report" element={<Lifereport openForm={openForm} />} />
 
+          {/* Health Insurance Routes */}
           <Route path="/health" element={<Health />} />
+          <Route path="/health-insurance" element={<Health />} /> {/* Added for Footer Link */}
           <Route path="/health/step-2" element={<HealthStep2 />} />
           <Route path="/health/step-3" element={<HealthStep3 />} />
           <Route path="/health/step-4" element={<HealthStep4 />} />
@@ -141,7 +145,9 @@ function Layout() {
             element={<HealthReport openForm={openForm} />}
           />
 
+          {/* Auto/Car Insurance Routes */}
           <Route path="/auto" element={<Auto />} />
+          <Route path="/car-insurance" element={<Auto />} /> {/* Added for Footer Link */}
           <Route path="/auto2" element={<Auto2 />} />
           <Route path="/carbrand" element={<CarBrand />} />
           <Route path="/auto/step-2" element={<CarModel />} />
@@ -150,6 +156,8 @@ function Layout() {
           <Route path="/auto/step-4" element={<Review />} />
           <Route path="/auto/step-5" element={<PersonalDetails />} />
           <Route path="/auto/thank-you" element={<ThankYou />} />
+
+          
         </Routes>
 
         <Footer />

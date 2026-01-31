@@ -9,7 +9,6 @@ function HealthStep14() {
   const navigate = useNavigate();
   const location = useLocation();
   const memberDetails = location.state?.memberDetails || [];
-  // Get policy count from previous step, default to 1 if not found
   const policyCount = location.state?.existingPolicy?.count || 1;
 
   const steps = [
@@ -23,13 +22,13 @@ function HealthStep14() {
   const progressPercent = (currentStep / steps.length) * 100;
 
   const [policies, setPolicies] = useState([]);
-  const [expandedPolicy, setExpandedPolicy] = useState(0); // Index of currently expanded policy
+  const [expandedPolicy, setExpandedPolicy] = useState(0); 
   const [error, setError] = useState("");
 
   // Mock options for dropdowns
   const planOptions = ["HDFC Ergo", "Star Health", "Niva Bupa", "ICICI Lombard", "Care Health", "Other"];
   
-  // Create list of member names for the dropdown
+ 
   const memberOptions = memberDetails.map(m => m.fullName || m.label || m.id);
 
   useEffect(() => {
@@ -40,8 +39,8 @@ function HealthStep14() {
       coverAmount: "",
       otherPlanName: "",
       renewalDate: "",
-      policyType: "", // 'Individual' or 'Floater'
-      membersCovered: "" // Could be array if multi-select allowed
+      policyType: "", 
+      membersCovered: "" 
     }));
     setPolicies(initialPolicies);
   }, [policyCount]);
@@ -58,7 +57,6 @@ function HealthStep14() {
   };
 
   const handleNext = () => {
-    // Basic validation: Check if mandatory fields (Plan Name, Cover Amount) are filled for all
     const isValid = policies.every(p => p.planName && p.coverAmount && p.policyType);
     
     if (!isValid) {
@@ -103,7 +101,7 @@ function HealthStep14() {
           {policies.map((policy, index) => (
             <div key={index} className={`health14-policy-card ${expandedPolicy === index ? "expanded" : ""}`}>
               
-              {/* Accordion Header */}
+              
               <div 
                 className="health14-policy-header" 
                 onClick={() => toggleAccordion(index)}
@@ -112,12 +110,12 @@ function HealthStep14() {
                 <span className={`accordion-arrow ${expandedPolicy === index ? "open" : ""}`}>▼</span>
               </div>
 
-              {/* Accordion Body (Form) */}
+              
               {expandedPolicy === index && (
                 <div className="health14-policy-body">
                   <div className="health14-form-grid">
                     
-                    {/* Name of Insurance Plan */}
+                   
                     <div className="health14-input-group">
                       <label>Name of insurance plan</label>
                       <select 
@@ -142,7 +140,7 @@ function HealthStep14() {
                       />
                     </div>
 
-                    {/* Other Plan Name */}
+                   
                     <div className="health14-input-group">
                       <label>Other Plan Name</label>
                       <input 
@@ -154,11 +152,11 @@ function HealthStep14() {
                       />
                     </div>
 
-                    {/* Policy Renewal Date */}
+                   
                     <div className="health14-input-group">
                       <label>Policy Renewal Date</label>
                       <input 
-                        type="text" // Change to type="date" if you prefer native picker
+                        type="text" 
                         placeholder="Policy Renewal Date"
                         onFocus={(e) => (e.target.type = "date")}
                         onBlur={(e) => (e.target.type = "text")}
@@ -186,7 +184,7 @@ function HealthStep14() {
                       </div>
                     </div>
 
-                    {/* Members Covered */}
+                   
                     <div className="health14-input-group">
                       <label>Members covered</label>
                       <select 

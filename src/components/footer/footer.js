@@ -1,15 +1,14 @@
 import "./footer.css";
+import { 
+  FaFacebook, 
+  FaLinkedin, 
+  FaEnvelope, 
+  FaPhoneAlt, 
+  FaMapMarkerAlt 
+} from "react-icons/fa";
+import { FaSquareXTwitter, FaSquareInstagram } from "react-icons/fa6";
 
 import Logo from "../../assets/images/logo.png";
-import Facebook from "../../assets/images/Facebook.png";
-import Twitter from "../../assets/images/Twitter.png";
-import Instagram from "../../assets/images/Instagram.png";
-import Linkedin from "../../assets/images/LinkedIn.png";
-
-import Mail from "../../assets/images/Email.png";
-import Phone from "../../assets/images/Phone.png";
-import Location from "../../assets/images/Location.png";
-
 
 const FOOTER_SECTION_TITLES = [
   "Quick Links",
@@ -29,10 +28,18 @@ const Footer = () => {
           </p>
 
           <div className="socials">
-            <img src={Facebook} alt="Facebook" />
-            <img src={Twitter} alt="Twitter" />
-            <img src={Instagram} alt="Instagram" />
-            <img src={Linkedin} alt="LinkedIn" />
+            <a href="https://www.facebook.com/share/1DRcEMiwoQ/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}>
+              <FaFacebook size={24} />
+            </a>
+            <a href="https://x.com/PolicyXpert" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}>
+              <FaSquareXTwitter size={24} />
+            </a>
+            <a href="https://www.instagram.com/policyxpert?utm_source=qr&igsh=ZjhxanpxbTFoMGR4" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}>
+              <FaSquareInstagram size={24} />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}>
+              <FaLinkedin size={24} />
+            </a>
           </div>
         </div>
 
@@ -40,12 +47,12 @@ const Footer = () => {
         <div className="footer-col">
           <h4>{FOOTER_SECTION_TITLES[0]}</h4>
           <ul>
-            <li>About Us</li>
-            <li>Blogs</li>
-            <li>Renew your policy</li>
-            <li>IRDAI Complaint Portal Link</li>
-            <li>Claims Helpline</li>
-            <li>Companies claim settlement ratio</li>
+            <li><a href="/about-us" style={{ color: 'inherit', textDecoration: 'none' }}>About Us</a></li>
+            <li><a href="/blogs" style={{ color: 'inherit', textDecoration: 'none' }}>Blogs</a></li>
+            <li><a href="/renew-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Renew your policy</a></li>
+            <li><a href="https://bimabharosa.irdai.gov.in/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>IRDAI Complaint Portal Link</a></li>
+            <li><a href="/claims-helpline" style={{ color: 'inherit', textDecoration: 'none' }}>Claims Helpline</a></li>
+            <li><a href="/claim-settlement-ratio" style={{ color: 'inherit', textDecoration: 'none' }}>Companies claim settlement ratio</a></li>
           </ul>
         </div>
 
@@ -53,10 +60,10 @@ const Footer = () => {
         <div className="footer-col">
           <h4>{FOOTER_SECTION_TITLES[1]}</h4>
           <ul>
-            <li>Life Insurance</li>
-            <li>Health Insurance</li>
-            <li>Car Insurance</li>
-            <li>Travel Insurance</li>
+            <li><a href="/life-insurance" style={{ color: 'inherit', textDecoration: 'none' }}>Life Insurance</a></li>
+            <li><a href="/health-insurance" style={{ color: 'inherit', textDecoration: 'none' }}>Health Insurance</a></li>
+            <li><a href="/car-insurance" style={{ color: 'inherit', textDecoration: 'none' }}>Car Insurance</a></li>
+            <li><a href="/travel-insurance" style={{ color: 'inherit', textDecoration: 'none' }}>Travel Insurance</a></li>
           </ul>
         </div>
 
@@ -65,18 +72,20 @@ const Footer = () => {
           <h4>{FOOTER_SECTION_TITLES[2]}</h4>
 
           <div className="contact-item">
-            <img src={Mail} alt="Email" />
-            <span>contact@company.com</span>
+            <FaEnvelope size={20} color="#4685C4" />
+            <a href="mailto:policyxpert@inivesh.com" style={{ color: 'inherit', textDecoration: 'none' }}>policyxpert@inivesh.com</a>
           </div>
 
           <div className="contact-item">
-            <img src={Phone} alt="Phone" />
-            <span>(414) 687 - 5892</span>
+            <FaPhoneAlt size={20} color="#4685C4" />
+            <a href="tel:+918080854433" style={{ color: 'inherit', textDecoration: 'none' }}>+91 8080854433</a>
           </div>
 
           <div className="contact-item">
-            <img src={Location} alt="Location" />
-            <span>794 Mccallister St San Francisco, 94102</span>
+            <FaMapMarkerAlt size={20} color="#4685C4" style={{ marginTop: "4px", minWidth: "20px" }} />
+            <span style={{ lineHeight: "1.6", display: "inline-block" }}>
+              B 318, Eastern Business District, LBS Road, Kanjurmarg West, Mumbai, Maharashtra - 400078
+            </span>
           </div>
         </div>
       </div>
