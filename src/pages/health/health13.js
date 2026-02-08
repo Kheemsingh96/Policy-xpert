@@ -7,7 +7,9 @@ import arrowLeft from "../../assets/images/arrow-left.png";
 function HealthStep13() {
   const navigate = useNavigate();
   const location = useLocation();
-  const memberDetails = location.state?.memberDetails || [];
+  
+  const prevData = location.state || {};
+  const memberDetails = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -51,8 +53,7 @@ function HealthStep13() {
     }
 
     const updatedData = {
-      ...location.state,
-      memberDetails: memberDetails,
+      ...prevData,
       existingPolicy: {
         hasPolicy: hasPolicy,
         count: policyCount

@@ -7,7 +7,9 @@ import arrowLeft from "../../assets/images/arrow-left.png";
 function HealthStep4() {
   const navigate = useNavigate();
   const location = useLocation();
-  const memberDetails = location.state?.memberDetails || [];
+
+  const prevData = location.state || {};
+  const memberDetails = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -29,7 +31,7 @@ function HealthStep4() {
     if (memberDetails.length > 0) {
       const initializedMembers = memberDetails.map(m => ({
         ...m,
-        healthStatus: "" 
+        healthStatus: m.healthStatus || "" 
       }));
       setMembers(initializedMembers);
     }
@@ -49,7 +51,12 @@ function HealthStep4() {
       return;
     }
     
-    navigate("/health/step-5", { state: { memberDetails: members } });
+    navigate("/health/step-5", { 
+        state: { 
+            ...prevData, 
+            memberDetails: members 
+        } 
+    });
   };
 
   const handleBack = () => {

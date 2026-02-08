@@ -14,7 +14,9 @@ import motherIcon from "../../assets/images/mother.png";
 function HealthStep5() {
   const navigate = useNavigate();
   const location = useLocation();
-  const memberDetails = location.state?.memberDetails || [];
+
+  const prevData = location.state || {};
+  const memberDetails = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -94,9 +96,21 @@ function HealthStep5() {
         setError("Please select which members consume alcohol.");
         return;
       }
-      navigate("/health/step-6", { state: { memberDetails: updatedData } });
+      
+      navigate("/health/step-6", { 
+          state: { 
+              ...prevData, 
+              memberDetails: updatedData 
+          } 
+      });
     } else {
-      navigate("/health/step-7", { state: { memberDetails: updatedData } });
+      
+      navigate("/health/step-7", { 
+          state: { 
+              ...prevData, 
+              memberDetails: updatedData 
+          } 
+      });
     }
   };
 

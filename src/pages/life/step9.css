@@ -86,7 +86,7 @@
 
 .step-title {
   text-align: center;
-  font-size: 24px; /* Font size thoda adjust kiya long title ke liye */
+  font-size: 24px; 
   font-weight: 600;
   color: #263746;
   margin-bottom: 40px;
@@ -94,11 +94,11 @@
   padding: 0 20px;
 }
 
-/* --- Vertical Options Layout --- */
+
 .options-vertical {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Buttons ke beech ka gap */
+  gap: 15px; 
   margin-bottom: 50px;
 }
 
@@ -110,23 +110,23 @@
   background: #ffffff;
   font-size: 15px;
   font-weight: 500;
-  color: #586877; /* Thoda greyish text image jaisa */
+  color: #586877; 
   cursor: pointer;
-  text-align: left; /* Text left side me */
+  text-align: left; 
   
-  /* Animation Removed */
+  
   transition: none !important;
 }
 
-/* Hover effect only for non-active items */
+
 .option-btn:not(.active):hover {
   border-color: #4685C4;
   background: #eef6ff;
 }
 
-/* Active (Selected) State */
+
 .option-btn.active {
-  background: #4685C4; /* Dark Blue */
+  background: #4685C4; 
   color: #ffffff;
   border-color: #4685C4;
   box-shadow: 0 8px 20px rgba(70, 133, 196, 0.15);

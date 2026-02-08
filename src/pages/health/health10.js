@@ -14,7 +14,9 @@ import motherIcon from "../../assets/images/mother.png";
 function HealthStep10() {
   const navigate = useNavigate();
   const location = useLocation();
-  const allMembers = location.state?.memberDetails || [];
+  
+  const prevData = location.state || {};
+  const allMembers = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -29,7 +31,6 @@ function HealthStep10() {
   const [affectedMembers, setAffectedMembers] = useState([]);
   const [error, setError] = useState("");
   
- 
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const dropdownRef = useRef(null);
 
@@ -80,7 +81,6 @@ function HealthStep10() {
 
     setAffectedMembers(processed);
 
-   
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpenDropdownIndex(null);
@@ -100,10 +100,8 @@ function HealthStep10() {
     const currentList = updated[memberIndex].abnormalDetails;
 
     if (currentList.includes(option)) {
-      // Remove if already exists
       updated[memberIndex].abnormalDetails = currentList.filter(item => item !== option);
     } else {
-      // Add if new
       updated[memberIndex].abnormalDetails = [...currentList, option];
     }
     setAffectedMembers(updated);
@@ -126,14 +124,17 @@ function HealthStep10() {
     const finalMembersList = allMembers.map(m => {
       const affected = affectedMembers.find(a => a.id === m.id);
       if (affected) {
-
         return { ...m, abnormalDetails: affected.abnormalDetails }; 
       }
       return m;
     });
 
-    console.log("Step 10 Data:", finalMembersList);
-    navigate("/health/step-11", { state: { memberDetails: finalMembersList } });
+    navigate("/health/step-11", { 
+        state: { 
+            ...prevData, 
+            memberDetails: finalMembersList 
+        } 
+    });
   };
 
   const handleBack = () => {
@@ -169,7 +170,6 @@ function HealthStep10() {
                 </div>
                 <span className="health10-label">{member.displayLabel}</span>
               </div>
-
             
               <div className="health10-multiselect-wrapper" ref={openDropdownIndex === index ? dropdownRef : null}>
                 <div 

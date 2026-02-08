@@ -25,7 +25,6 @@ function HealthStep3() {
   ];
 
   const totalSteps = steps.length;
-  const currentStep = 1; 
   const progressPercent = 20;
 
   const [memberForms, setMemberForms] = useState([]);
@@ -48,7 +47,6 @@ function HealthStep3() {
     if (selectedMembers.father) generatedForms.push({ id: "father", label: "Father", icon: fatherIcon, defaultGender: "Male" });
     if (selectedMembers.mother) generatedForms.push({ id: "mother", label: "Mother", icon: motherIcon, defaultGender: "Female" });
 
-  
     const initializedData = generatedForms.map(m => ({
       ...m,
       fullName: "",
@@ -65,7 +63,6 @@ function HealthStep3() {
       if (index === 0 && field === "pincode") {
          return { ...member, pincode: value };
       }
-      
       
       if (i === index) {
         return { ...member, [field]: value };
@@ -84,7 +81,12 @@ function HealthStep3() {
       setError("Please fill all details for all members.");
       return;
     }
-    navigate("/health/step-4", { state: { memberDetails: memberForms } });
+    navigate("/health/step-4", { 
+        state: { 
+            ...location.state, 
+            memberDetails: memberForms 
+        } 
+    });
   };
 
   const handleBack = () => {

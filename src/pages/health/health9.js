@@ -14,7 +14,9 @@ import motherIcon from "../../assets/images/mother.png";
 function HealthStep9() {
   const navigate = useNavigate();
   const location = useLocation();
-  const memberDetails = location.state?.memberDetails || [];
+
+  const prevData = location.state || {};
+  const memberDetails = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -97,9 +99,19 @@ function HealthStep9() {
     }));
 
     if (hasAbnormalTests === true) {
-      navigate("/health/step-10", { state: { memberDetails: updatedData } });
+      navigate("/health/step-10", { 
+          state: { 
+              ...prevData, 
+              memberDetails: updatedData 
+          } 
+      });
     } else {
-      navigate("/health/step-11", { state: { memberDetails: updatedData } });
+      navigate("/health/step-11", { 
+          state: { 
+              ...prevData, 
+              memberDetails: updatedData 
+          } 
+      });
     }
   };
 

@@ -37,7 +37,7 @@ function LifeStep5() {
     );
     setIncomes(updatedIncomes);
     
-    // Step 2 ke logic ki tarah error remove karna
+    
     if (errors.form) {
       setErrors((prev) => {
         const newErrors = { ...prev };

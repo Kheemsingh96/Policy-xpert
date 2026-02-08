@@ -14,7 +14,9 @@ import motherIcon from "../../assets/images/mother.png";
 function HealthStep7() {
   const navigate = useNavigate();
   const location = useLocation();
-  const memberDetails = location.state?.memberDetails || [];
+
+  const prevData = location.state || {};
+  const memberDetails = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -97,9 +99,19 @@ function HealthStep7() {
     }));
 
     if (hasTobacco === true) {
-      navigate("/health/step-8", { state: { memberDetails: updatedData } });
+      navigate("/health/step-8", { 
+          state: { 
+              ...prevData, 
+              memberDetails: updatedData 
+          } 
+      });
     } else {
-      navigate("/health/step-9", { state: { memberDetails: updatedData } });
+      navigate("/health/step-9", { 
+          state: { 
+              ...prevData, 
+              memberDetails: updatedData 
+          } 
+      });
     }
   };
 

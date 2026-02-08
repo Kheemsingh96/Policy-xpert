@@ -14,7 +14,9 @@ import motherIcon from "../../assets/images/mother.png";
 function HealthStep8() {
   const navigate = useNavigate();
   const location = useLocation();
-  const allMembers = location.state?.memberDetails || [];
+  
+  const prevData = location.state || {};
+  const allMembers = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -33,7 +35,6 @@ function HealthStep8() {
   const frequencyOptions = ["Under 5 uses per day", "6-10 uses per day", "More than 10 uses/day"];
 
   useEffect(() => {
-    // Filter only members who use tobacco
     const users = allMembers.filter(m => m.usesTobacco);
     
     const processed = users.map(m => {
@@ -44,7 +45,7 @@ function HealthStep8() {
       else if (m.id.includes("father")) icon = fatherIcon;
       else if (m.id.includes("mother")) icon = motherIcon;
 
-      // Calculate Age or use label
+    
       let displayLabel = m.fullName || m.label;
       if (m.dob) {
         const birthDate = new Date(m.dob);
@@ -79,7 +80,6 @@ function HealthStep8() {
       return;
     }
 
-    // Merge back into main list
     const finalMembersList = allMembers.map(m => {
       const userInfo = tobaccoUsers.find(u => u.id === m.id);
       if (userInfo) {
@@ -88,7 +88,12 @@ function HealthStep8() {
       return m;
     });
 
-    navigate("/health/step-9", { state: { memberDetails: finalMembersList } });
+    navigate("/health/step-9", { 
+        state: { 
+            ...prevData, 
+            memberDetails: finalMembersList 
+        } 
+    });
   };
 
   const handleBack = () => {

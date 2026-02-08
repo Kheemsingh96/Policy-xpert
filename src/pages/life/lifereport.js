@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./lifereport.css";
 
 function LifeReport({ openForm }) {
@@ -6,13 +7,17 @@ function LifeReport({ openForm }) {
   const navigate = useNavigate();
   
   const userData = location.state || {};
-  console.log("Final Summary Data:", userData);
-
-  const handleGenerateClick = () => {
-    if (openForm) {
-      openForm();
-    } else {
+  
+  const handleGenerateClick = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/save-life", userData);
       
+      if (response.status === 200) {
+        navigate("/thanks", { state: { fullName: userData.firstName } });
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Server Connection Error. Please ensure Node server is running on Port 5000.");
     }
   };
 
@@ -30,6 +35,8 @@ function LifeReport({ openForm }) {
             </div>
             <div className="section-items">
               <Row label="Name" value={`${userData.firstName || ""} ${userData.lastName || ""}`.trim() || "Please fill name"} />
+              <Row label="Mobile Number" value={userData.mobile || "Please fill"} />
+              <Row label="Email Address" value={userData.email || "Please fill"} />
               <Row label="Date Of Birth" value={userData.dob || "Please fill DOB"} />
               <Row label="Gender" value={userData.gender || "Please select"} />
               <Row label="Highest Education" value={userData.education || "Please select"} />
@@ -38,7 +45,7 @@ function LifeReport({ openForm }) {
             </div>
           </div>
 
-       
+        
           <div className="report-section">
             <div className="section-header">
               <div className="lifereport-section-title">2. Income</div>
@@ -64,7 +71,7 @@ function LifeReport({ openForm }) {
             </div>
           </div>
 
-         
+          
           <div className="report-section">
             <div className="section-header">
               <div className="lifereport-section-title">4. Assets & Liabilities</div>

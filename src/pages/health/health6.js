@@ -14,7 +14,9 @@ import motherIcon from "../../assets/images/mother.png";
 function HealthStep6() {
   const navigate = useNavigate();
   const location = useLocation();
-  const allMembers = location.state?.memberDetails || [];
+
+  const prevData = location.state || {};
+  const allMembers = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -85,7 +87,12 @@ function HealthStep6() {
       return m;
     });
 
-    navigate("/health/step-7", { state: { memberDetails: finalMembersList } });
+    navigate("/health/step-7", { 
+        state: { 
+            ...prevData, 
+            memberDetails: finalMembersList 
+        } 
+    });
   };
 
   const handleBack = () => {

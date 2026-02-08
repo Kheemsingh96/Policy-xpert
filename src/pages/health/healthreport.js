@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "axios";
 import "./healthreport.css";
 import arrowRight from "../../assets/images/arrow2.png";
 
@@ -14,7 +15,7 @@ function HealthReport({ openForm }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [data]);
 
   const formatDate = (dateString) => {
     if (!dateString) return "-";
@@ -31,12 +32,41 @@ function HealthReport({ openForm }) {
     navigate(path, { state: data });
   };
 
-  const handleSubmit = () => {
-    console.log("Final Submission Data:", data);
-    if (openForm) {
-      openForm(); 
-    } else {
-      alert("Application Submitted Successfully!");
+  const handleSubmit = async () => {
+    try {
+      let finalName = "Unknown";
+      let finalMobile = data.mobile || "Unknown";
+      let finalPincode = data.pincode || "Unknown";
+      let finalDob = "Unknown";
+
+      if (memberDetails.length > 0) {
+          const primary = memberDetails[0];
+          finalName = primary.fullName || primary.label || "Unknown";
+          finalDob = primary.dob || "Unknown";
+          
+          if (finalMobile === "Unknown" && primary.mobile) finalMobile = primary.mobile;
+          if (finalPincode === "Unknown" && primary.pincode) finalPincode = primary.pincode;
+      } else if (data.firstName) {
+          finalName = `${data.firstName} ${data.lastName || ''}`.trim();
+      }
+
+      const payload = {
+          ...data,
+          firstName: finalName,
+          mobile: finalMobile,
+          pincode: finalPincode,
+          dob: finalDob,
+          memberDetails: memberDetails
+      };
+
+      const response = await axios.post("http://localhost:5000/api/save-health", payload);
+      
+      if (response.status === 200) {
+        navigate("/thanks", { state: { fullName: finalName } });
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Server Connection Error. Please ensure Node server is running on Port 5000.");
     }
   };
 

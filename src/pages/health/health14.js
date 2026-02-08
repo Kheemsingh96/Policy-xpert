@@ -3,13 +3,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./health14.css";
 import arrowRight from "../../assets/images/arrow2.png";
 import arrowLeft from "../../assets/images/arrow-left.png";
-import dropdownArrow from "../../assets/images/arrow.png"; 
 
 function HealthStep14() {
   const navigate = useNavigate();
   const location = useLocation();
-  const memberDetails = location.state?.memberDetails || [];
-  const policyCount = location.state?.existingPolicy?.count || 1;
+  
+  const prevData = location.state || {};
+  const memberDetails = prevData.memberDetails || [];
+  const policyCount = prevData.existingPolicy?.count || 1;
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -25,14 +26,11 @@ function HealthStep14() {
   const [expandedPolicy, setExpandedPolicy] = useState(0); 
   const [error, setError] = useState("");
 
-  // Mock options for dropdowns
   const planOptions = ["HDFC Ergo", "Star Health", "Niva Bupa", "ICICI Lombard", "Care Health", "Other"];
   
- 
   const memberOptions = memberDetails.map(m => m.fullName || m.label || m.id);
 
   useEffect(() => {
-    // Initialize policy objects based on count
     const initialPolicies = Array.from({ length: policyCount }, (_, i) => ({
       id: i,
       planName: "",
@@ -65,11 +63,10 @@ function HealthStep14() {
     }
 
     const finalData = {
-      ...location.state,
+      ...prevData,
       policyDetails: policies
     };
 
-    console.log("Final Health Data:", finalData);
     navigate("/health/report", { state: finalData });
   };
 
@@ -101,7 +98,6 @@ function HealthStep14() {
           {policies.map((policy, index) => (
             <div key={index} className={`health14-policy-card ${expandedPolicy === index ? "expanded" : ""}`}>
               
-              
               <div 
                 className="health14-policy-header" 
                 onClick={() => toggleAccordion(index)}
@@ -110,12 +106,10 @@ function HealthStep14() {
                 <span className={`accordion-arrow ${expandedPolicy === index ? "open" : ""}`}>▼</span>
               </div>
 
-              
               {expandedPolicy === index && (
                 <div className="health14-policy-body">
                   <div className="health14-form-grid">
                     
-                   
                     <div className="health14-input-group">
                       <label>Name of insurance plan</label>
                       <select 
@@ -129,7 +123,6 @@ function HealthStep14() {
                       </select>
                     </div>
 
-                    {/* Cover Amount */}
                     <div className="health14-input-group">
                       <label>Cover amount</label>
                       <input 
@@ -140,7 +133,6 @@ function HealthStep14() {
                       />
                     </div>
 
-                   
                     <div className="health14-input-group">
                       <label>Other Plan Name</label>
                       <input 
@@ -152,7 +144,6 @@ function HealthStep14() {
                       />
                     </div>
 
-                   
                     <div className="health14-input-group">
                       <label>Policy Renewal Date</label>
                       <input 
@@ -165,7 +156,6 @@ function HealthStep14() {
                       />
                     </div>
 
-                    {/* Type of Policy */}
                     <div className="health14-input-group">
                       <label>Type of Policy</label>
                       <div className="policy-type-buttons">
@@ -184,7 +174,6 @@ function HealthStep14() {
                       </div>
                     </div>
 
-                   
                     <div className="health14-input-group">
                       <label>Members covered</label>
                       <select 

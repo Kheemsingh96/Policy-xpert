@@ -93,7 +93,7 @@
   line-height: 1.4;
 }
 
-/* --- Cover Options Buttons --- */
+
 .cover-options {
   display: flex;
   justify-content: center;
@@ -111,7 +111,7 @@
   font-weight: 500;
   color: #334155;
   cursor: pointer;
-  transition: none !important; /* Animation Removed */
+  transition: none !important; 
 }
 
 .cover-options button:not(.active):hover {

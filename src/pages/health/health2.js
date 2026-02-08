@@ -14,7 +14,6 @@ function HealthStep2() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Pincode received from Step 1
   const incomingPincode = location.state?.pincode || "";
 
   const steps = [
@@ -25,7 +24,6 @@ function HealthStep2() {
   ];
 
   const totalSteps = steps.length;
-  const currentStep = 1; 
   const progressPercent = 10;
 
   const [members, setMembers] = useState({
@@ -74,11 +72,10 @@ function HealthStep2() {
       return;
     }
 
-    // Passing Pincode forward to Step 3
     navigate("/health/step-3", { 
       state: { 
-        members: members,
-        pincode: incomingPincode 
+        ...location.state,
+        members: members
       } 
     });
   };

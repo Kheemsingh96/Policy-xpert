@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import "./review.css";
 
 import arrowLeft from "../../assets/images/arrow-left.png"; 
@@ -10,20 +11,22 @@ import editIcon from "../../assets/images/edit.png";
 function Review() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const brandName = location.state?.brandName || "Mahindra";
-  const modelName = location.state?.modelName || "XUV 700";
-  const fuelType = location.state?.fuelType || "Petrol";
-  const variantName = location.state?.variantName || "2.0 AX7 At Luxury Pack";
   
-  const regYear = location.state?.registrationYear || new Date().getFullYear();
+  const prevData = location.state || {};
+
+  const brandName = prevData.brandName || prevData.carBrand || "Mahindra";
+  const modelName = prevData.modelName || prevData.carModel || "XUV 700";
+  const fuelType = prevData.fuelType || "Petrol"; 
+  const variantName = prevData.variantName || prevData.carVariant || "2.0 AX7 At Luxury Pack";
+  const regYear = prevData.regYear || prevData.registrationYear || new Date().getFullYear();
 
   const [formData, setFormData] = useState({
     pincode: "",
-    mobile: location.state?.mobile || ""
+    mobile: prevData.mobile || ""
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const steps = [
     { id: 1, label: "Car Details" },
@@ -52,19 +55,40 @@ function Review() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (validate()) {
-      navigate("/auto/step-5", {
-        state: {
-          brandName,
-          modelName,
-          fuelType,
-          variantName,
-          regYear,
-          pincode: formData.pincode,
-          mobile: formData.mobile
-        }
-      });
+      setLoading(true);
+
+      const updatedData = {
+        ...prevData,
+        pincode: formData.pincode,
+        mobile: formData.mobile,
+        carBrand: brandName,
+        carModel: modelName,
+        carVariant: variantName,
+        regYear: regYear
+      };
+
+      const payload = {
+        regNo: prevData.regNumber || prevData.regNo || "NEW",
+        mobile: formData.mobile,
+        carBrand: brandName,
+        carModel: modelName,
+        carVariant: variantName,
+        fullName: "Unknown", 
+        email: "Unknown",
+        pincode: formData.pincode,
+        gstNo: "N/A"
+      };
+
+      try {
+        await axios.post("http://localhost:5000/api/save-auto", payload);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+        navigate("/auto/step-5", { state: updatedData });
+      }
     }
   };
 
@@ -157,12 +181,12 @@ function Review() {
           </div>
 
           <div className="review-footer">
-            <button className="review-prev-btn" onClick={handlePrevious}>
+            <button className="review-prev-btn" onClick={handlePrevious} disabled={loading}>
               <img src={arrowLeft} alt="prev" className="prev-icon" /> Previous
             </button>
             
-            <button className="review-next-btn" onClick={handleNext}>
-              Next <img src={arrowRight} alt="next" />
+            <button className="review-next-btn" onClick={handleNext} disabled={loading}>
+              {loading ? "Processing..." : "Next"} <img src={arrowRight} alt="next" style={{display: loading ? "none" : "inline"}} />
             </button>
           </div>
 

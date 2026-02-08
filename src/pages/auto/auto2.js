@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./auto2.css";
 
 import carHeroImg from "../../assets/images/auto-image.png";
@@ -8,6 +9,7 @@ function Auto2() {
   const navigate = useNavigate();
   const [mobile, setMobile] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const validate = () => {
     const mobilePattern = /^[6-9]\d{9}$/;
@@ -22,9 +24,30 @@ function Auto2() {
     return true;
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (validate()) {
-      navigate("/carbrand");
+      setLoading(true);
+
+      const payload = {
+        mobile: mobile,
+        regNo: "NEW",
+        fullName: "Unknown (Auto2)",
+        email: "Unknown",
+        carBrand: "Unknown",
+        carModel: "Unknown",
+        carVariant: "Unknown",
+        pincode: "Unknown",
+        gstNo: "N/A"
+      };
+
+      try {
+        await axios.post("http://localhost:5000/api/save-auto", payload);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+        navigate("/carbrand", { state: { regNumber: "NEW", mobile } });
+      }
     }
   };
 
@@ -84,8 +107,8 @@ function Auto2() {
                 {error && <span className="auto-error-text">{error}</span>}
               </div>
 
-              <button className="view-prices-btn" onClick={handleContinue}>
-                Continue
+              <button className="view-prices-btn" onClick={handleContinue} disabled={loading}>
+                {loading ? "Processing..." : "Continue"}
               </button>
               
               <button 

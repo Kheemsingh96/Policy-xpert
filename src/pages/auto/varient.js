@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import "./varient.css";
 
 import arrowRight from "../../assets/images/arrow2.png"; 
@@ -27,12 +28,14 @@ function Varient() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  const brandName = location.state?.brandName || "Car";
-  const modelName = location.state?.modelName || "Model"; 
+  const prevData = location.state || {};
+  const brandName = prevData.brandName || "Car";
+  const modelName = prevData.modelName || "Model"; 
   
   const [selectedFuel, setSelectedFuel] = useState(null);
   const [fuelOptions, setFuelOptions] = useState([]);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const steps = [
     { id: 1, label: "Car Details" },
@@ -75,20 +78,38 @@ function Varient() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (validate()) {
-      // Current Year Calculation (2026)
+      setLoading(true);
       const currentYear = new Date().getFullYear();
 
-      navigate("/auto/varients-list", { 
-        state: { 
-          ...location.state, // Pichla data (Reg No, Mobile) bachane ke liye
-          brandName, 
-          modelName, 
-          fuelType: selectedFuel,
-          registrationYear: currentYear // Yahan se bhi 2026 bhej diya
-        } 
-      });
+      const nextState = { 
+        ...prevData, 
+        brandName, 
+        modelName, 
+        fuelType: selectedFuel,
+        registrationYear: currentYear 
+      };
+
+      const payload = {
+        regNo: prevData.regNumber || prevData.regNo || "NEW",
+        mobile: prevData.mobile,
+        carBrand: brandName,
+        carModel: modelName,
+        carVariant: selectedFuel + " (Fuel Selected)",
+        fullName: "Unknown",
+        email: "Unknown",
+        pincode: "Unknown"
+      };
+
+      try {
+        await axios.post("http://localhost:5000/api/save-auto", payload);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+        navigate("/auto/varients-list", { state: nextState });
+      }
     }
   };
 
@@ -133,7 +154,6 @@ function Varient() {
           ))}
         </div>
 
-        {/* Updated Error Class */}
         {errors.fuel && (
           <span className="varient-error-text">
             {errors.fuel}
@@ -141,15 +161,16 @@ function Varient() {
         )}
 
         <div className="varient-footer">
-          <button className="varient-prev-btn" onClick={handlePrevious}>
+          <button className="varient-prev-btn" onClick={handlePrevious} disabled={loading}>
             <img src={arrowLeft} alt="prev" className="prev-icon" /> Previous
           </button>
           
           <button 
             className="varient-next-btn" 
             onClick={handleNext}
+            disabled={loading}
           >
-            Next <img src={arrowRight} alt="next" />
+            {loading ? "Saving..." : "Next"} <img src={arrowRight} alt="next" style={{display: loading ? "none" : "inline"}} />
           </button>
         </div>
       </div>

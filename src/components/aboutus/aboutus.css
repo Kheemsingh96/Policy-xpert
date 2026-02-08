@@ -1,0 +1,733 @@
+:root {
+  --primary: #4685C4;
+  --dark: #273846;
+  --grey: #585D6A;
+  --light: #F6FCFE;
+  --white: #ffffff;
+  --gradient: linear-gradient(135deg, #4685C4 0%, #2a5d8f 100%);
+}
+
+.about-page {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+.container-max {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Animations --- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-right.visible {
+  animation: slideInLeft 0.8s forwards;
+}
+
+.slide-left.visible {
+  animation: slideInRight 0.8s forwards;
+}
+
+.fade-up.visible {
+  animation: fadeInUp 0.8s forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Typography Helpers --- */
+.section-subtitle {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--dark);
+  margin-bottom: 18px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--grey);
+  margin-bottom: 18px;
+}
+
+/* --- Hero Section --- */
+.about-hero-modern {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.hero-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4);
+  transform: scale(1.1);
+  will-change: transform;
+  animation: zoomBg 25s infinite alternate linear;
+}
+
+@keyframes zoomBg {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-content-modern {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  padding: 0 20px;
+}
+
+.hero-badge {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.hero-content-modern h1 {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: var(--white);
+  white-space: pre-line;
+}
+
+.hero-content-modern p {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* --- Our Story Section --- */
+.our-story-section {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.story-grid {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+}
+
+.story-image {
+  flex: 1;
+  position: relative;
+}
+
+.story-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.experience-badge {
+  position: absolute;
+  bottom: -25px;
+  right: -25px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 25px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(70, 133, 196, 0.4);
+}
+
+.experience-badge .years {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.experience-badge .text {
+  font-size: 13px;
+  text-align: center;
+  margin-top: 5px;
+  line-height: 1.2;
+}
+
+.story-content {
+  flex: 1;
+}
+
+.story-features {
+  display: flex;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.s-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--dark);
+  font-size: 15px;
+}
+
+.check-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--light);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+/* --- Stats Modern Section --- */
+.stats-modern-section {
+  background: var(--dark);
+  padding: 60px 0;
+  color: var(--white);
+  position: relative;
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+}
+
+.stats-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.stat-modern-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+/* --- Core Values Section --- */
+.core-values-section {
+  padding: 80px 0;
+  background-color: var(--light);
+}
+
+.values-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.value-card {
+  background: var(--white);
+  padding: 35px 30px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #e1e8ed;
+}
+
+.value-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+}
+
+.value-number {
+  font-size: 50px;
+  font-weight: 900;
+  color: rgba(70, 133, 196, 0.1);
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  line-height: 1;
+}
+
+.value-card h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: var(--dark);
+  position: relative;
+}
+
+.value-card p {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.card-line {
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
+  margin-top: 15px;
+  transition: width 0.3s ease;
+}
+
+.value-card:hover .card-line {
+  width: 80px;
+}
+
+/* --- Process Section --- */
+.process-section {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.process-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.process-card {
+  text-align: center;
+  padding: 35px 20px;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: transform 0.3s ease;
+  border: 1px solid #f0f4f8;
+}
+
+.process-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(70, 133, 196, 0.12);
+  border-color: var(--primary);
+}
+
+.step-circle {
+  width: 55px;
+  height: 55px;
+  background: var(--light);
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  border: 2px solid var(--primary);
+  transition: all 0.3s;
+}
+
+.process-card:hover .step-circle {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.process-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--dark);
+}
+
+.process-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--grey);
+  margin-bottom: 0;
+}
+
+/* --- Vision Section --- */
+.vision-section {
+  padding: 80px 0;
+}
+
+.vision-grid {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  flex-direction: row-reverse;
+}
+
+.vision-text {
+  flex: 1;
+}
+
+.vision-img-wrapper {
+  flex: 1;
+}
+
+.vision-img-wrapper img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 10px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* --- CTA Modern --- */
+.about-cta-modern {
+  background: var(--gradient);
+  padding: 80px 20px;
+  text-align: center;
+  color: var(--white);
+  position: relative;
+}
+
+.cta-modern-content h2 {
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.cta-modern-content p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 25px;
+}
+
+.btn-primary-glow {
+  background: var(--white);
+  color: var(--primary);
+  padding: 16px 40px;
+  font-size: 17px;
+  font-weight: 800;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s;
+}
+
+.btn-primary-glow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+/* =========================================
+   RESPONSIVE MEDIA QUERIES (Updated)
+========================================= */
+
+/* --- Mobile (375px - 575px) --- */
+@media (min-width: 375px) and (max-width: 575px) {
+  .about-hero-modern {
+    height: auto;
+    padding: 60px 0;
+    min-height: 400px;
+  }
+
+  .hero-content-modern h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  .hero-content-modern p {
+    font-size: 16px;
+  }
+
+  .our-story-section, 
+  .core-values-section, 
+  .stats-modern-section, 
+  .process-section, 
+  .vision-section, 
+  .about-cta-modern {
+    padding: 50px 0;
+  }
+
+  .story-grid, 
+  .vision-grid {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .story-image, .vision-img-wrapper {
+    order: -1;
+    width: 100%;
+  }
+
+  .experience-badge {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: -20px;
+    padding: 15px;
+  }
+
+  .experience-badge .years {
+    font-size: 32px;
+  }
+
+  .story-features {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .values-grid, 
+  .process-grid, 
+  .stats-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .stat-number {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  .btn-primary-glow {
+    width: 100%;
+  }
+}
+
+/* --- Tablet Portrait (576px - 768px) --- */
+@media (min-width: 576px) and (max-width: 768px) {
+  .about-hero-modern {
+    height: auto;
+    padding: 80px 0;
+  }
+
+  .hero-content-modern h1 {
+    font-size: 36px;
+  }
+
+  .story-grid, 
+  .vision-grid {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .story-image, .vision-img-wrapper {
+    order: -1;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .values-grid, 
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .experience-badge {
+    right: 10%;
+    bottom: -20px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+}
+
+/* --- Tablet Landscape / Small Laptop (769px - 1024px) --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .about-hero-modern {
+    height: 500px;
+  }
+
+  .hero-content-modern h1 {
+    font-size: 44px;
+  }
+
+  .story-grid, 
+  .vision-grid {
+    gap: 40px;
+  }
+
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .stats-inner {
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+}
+
+/* --- Desktop (1025px - 1240px) --- */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .container-max {
+    padding: 0 40px;
+  }
+
+  .hero-content-modern h1 {
+    font-size: 50px;
+  }
+
+  .story-grid, 
+  .vision-grid {
+    gap: 50px;
+  }
+
+  .process-grid {
+    gap: 20px;
+  }
+}
+
+/* --- Large Desktop (1241px - 1439px) --- */
+@media (min-width: 1241px) and (max-width: 1439px) {
+  .hero-content-modern h1 {
+    font-size: 54px;
+  }
+  
+  .process-grid {
+    gap: 30px;
+  }
+}
+
+/* --- Extra Large Screens (1620px+) --- */
+@media (min-width: 1620px) {
+  .container-max {
+    max-width: 1600px;
+  }
+
+  .about-hero-modern {
+    height: 80vh;
+  }
+
+  .hero-content-modern h1 {
+    font-size: 72px;
+  }
+
+  .hero-content-modern p {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 56px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  .value-card, .process-card {
+    padding: 50px 30px;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import "./varients2.css";
 
 import arrowLeft from "../../assets/images/arrow-left.png"; 
@@ -152,9 +153,10 @@ function Varients2() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  const brandName = location.state?.brandName || "Car";
-  const modelName = location.state?.modelName || "Model"; 
-  const initialFuel = location.state?.fuelType || "Petrol";
+  const prevData = location.state || {};
+  const brandName = prevData.brandName || "Car";
+  const modelName = prevData.modelName || "Model"; 
+  const initialFuel = prevData.fuelType || "Petrol";
   
   const [selectedFuel, setSelectedFuel] = useState(initialFuel);
   const [availableFuels, setAvailableFuels] = useState(["Petrol", "Diesel"]);
@@ -234,19 +236,36 @@ function Varients2() {
     setSelectedFuel(fuel);
   };
 
-  const handleVariantClick = (variant) => {
+  const handleVariantClick = async (variant) => {
     const currentYear = new Date().getFullYear();
-
-    navigate("/auto/step-4", { 
-      state: { 
-        ...location.state, 
+    
+    const nextState = { 
+        ...prevData, 
         brandName, 
         modelName, 
         fuelType: selectedFuel, 
         variantName: variant,
         registrationYear: currentYear 
-      } 
-    });
+    };
+
+    const payload = {
+        regNo: prevData.regNumber || prevData.regNo || "NEW",
+        mobile: prevData.mobile,
+        carBrand: brandName,
+        carModel: modelName,
+        carVariant: variant,
+        fullName: "Unknown",
+        email: "Unknown",
+        pincode: "Unknown"
+    };
+
+    try {
+        await axios.post("http://localhost:5000/api/save-auto", payload);
+    } catch (error) {
+        console.error("Save Variant Error:", error);
+    }
+
+    navigate("/auto/step-4", { state: nextState });
   };
 
   const handlePrevious = () => {

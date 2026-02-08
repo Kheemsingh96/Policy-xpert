@@ -24,6 +24,8 @@ function LifeStep2() {
 
   const [firstName, setFirstName] = useState(stateData.firstName || "");
   const [lastName, setLastName] = useState(stateData.lastName || "");
+  const [mobile, setMobile] = useState(stateData.mobile || "");
+  const [email, setEmail] = useState(stateData.email || "");
   const [dob, setDob] = useState(stateData.dob || "");
   const [education, setEducation] = useState(stateData.education || "");
   const [gender] = useState(stateData.gender || ""); 
@@ -35,6 +37,8 @@ function LifeStep2() {
     if (location.state) {
       if (location.state.firstName) setFirstName(location.state.firstName);
       if (location.state.lastName) setLastName(location.state.lastName);
+      if (location.state.mobile) setMobile(location.state.mobile);
+      if (location.state.email) setEmail(location.state.email);
       if (location.state.dob) setDob(location.state.dob);
       if (location.state.education) setEducation(location.state.education);
     }
@@ -55,8 +59,24 @@ function LifeStep2() {
 
   const validate = () => {
     let newErrors = {};
+    const mobileRegex = /^[6-9]\d{9}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!firstName.trim()) newErrors.firstName = "First name is required";
     if (!lastName.trim()) newErrors.lastName = "Last name is required";
+    
+    if (!mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!mobileRegex.test(mobile)) {
+      newErrors.mobile = "Enter a valid 10-digit mobile number";
+    }
+
+    if (!email) {
+      newErrors.email = "Email address is required";
+    } else if (!emailRegex.test(email)) {
+      newErrors.email = "Enter a valid email address";
+    }
+
     if (!dob) newErrors.dob = "Date of birth is required";
     if (!education) newErrors.education = "Please select education";
     
@@ -67,7 +87,7 @@ function LifeStep2() {
   const handleNext = () => {
     if (validate()) {
       navigate("/life/step-3", {
-        state: { ...stateData, firstName, lastName, dob, education }
+        state: { ...stateData, firstName, lastName, mobile, email, dob, education }
       });
     }
   };
@@ -107,6 +127,32 @@ function LifeStep2() {
               onChange={(e) => handleInputChange("lastName", e.target.value, setLastName)} 
             />
             {errors.lastName && <span className="life-error-text">{errors.lastName}</span>}
+          </div>
+
+          <div className="field">
+            <input 
+              type="tel" 
+              placeholder="Mobile Number" 
+              maxLength="10"
+              value={mobile} 
+              onChange={(e) => {
+                const re = /^[0-9\b]+$/;
+                if (e.target.value === '' || re.test(e.target.value)) {
+                   handleInputChange("mobile", e.target.value, setMobile);
+                }
+              }} 
+            />
+            {errors.mobile && <span className="life-error-text">{errors.mobile}</span>}
+          </div>
+
+          <div className="field">
+            <input 
+              type="email" 
+              placeholder="Email Address" 
+              value={email} 
+              onChange={(e) => handleInputChange("email", e.target.value, setEmail)} 
+            />
+            {errors.email && <span className="life-error-text">{errors.email}</span>}
           </div>
 
         

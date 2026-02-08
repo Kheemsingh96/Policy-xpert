@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./carbrand.css";
 
 import searchIcon from "../../assets/images/search.png";
 
-// Logos
 import marutiLogo from "../../assets/images/suzuki-logo.png";
 import hyundaiLogo from "../../assets/images/hyundai-logo.png";
 import tataLogo from "../../assets/images/tata-logo.png";
@@ -35,7 +34,7 @@ const carBrandsList = [
   { id: 1, name: "Maruti Suzuki", logo: marutiLogo },
   { id: 2, name: "Hyundai", logo: hyundaiLogo },
   { id: 3, name: "Tata Motors", logo: tataLogo },
-  { id: 4, name: "Mahindra", logo: mahindraLogo }, // Matches your other files now
+  { id: 4, name: "Mahindra", logo: mahindraLogo },
   { id: 5, name: "Toyota", logo: toyotaLogo },
   { id: 6, name: "Kia", logo: kiaLogo },
   { id: 7, name: "Honda", logo: hondaLogo },
@@ -61,7 +60,10 @@ const carBrandsList = [
 
 function CarBrand() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
+
+  const prevData = location.state || {};
 
   const steps = [
     { id: 1, label: "Car Details" },
@@ -76,8 +78,12 @@ function CarBrand() {
   );
 
   const handleBrandClick = (brandName) => {
-    // Passes the brand name to the next step
-    navigate("/auto/step-2", { state: { brandName: brandName } });
+    navigate("/auto/step-2", { 
+      state: { 
+        ...prevData,
+        brandName: brandName 
+      } 
+    });
   };
 
   return (

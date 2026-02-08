@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./auto.css";
 
 import carHeroImg from "../../assets/images/auto-image.png";
@@ -9,6 +10,7 @@ function Auto() {
   const [regNumber, setRegNumber] = useState("");
   const [mobile, setMobile] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const validate = () => {
     let tempErrors = {};
@@ -38,10 +40,29 @@ function Auto() {
     return isValid;
   };
 
-  const handleViewPrices = () => {
+  const handleViewPrices = async () => {
     if (validate()) {
-      // Validation pass hone par hi navigate hoga
-      navigate("/carbrand", { state: { regNumber, mobile } });
+      setLoading(true);
+      
+      const payload = {
+        regNo: regNumber,
+        mobile: mobile,
+        fullName: "Unknown (Step 1)", 
+        email: "Unknown",
+        carBrand: "Unknown",
+        carModel: "Unknown",
+        carVariant: "Unknown",
+        pincode: "Unknown"
+      };
+
+      try {
+        await axios.post("http://localhost:5000/api/save-auto", payload);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+        navigate("/carbrand", { state: { regNumber, mobile } });
+      }
     }
   };
 
@@ -97,9 +118,8 @@ function Auto() {
                 {errors.mobile && <span className="auto-error-text">{errors.mobile}</span>}
               </div>
 
-              {/* Fix: Direct navigate hatakar function call lagaya */}
-              <button className="view-prices-btn" onClick={handleViewPrices}>
-                Get Started
+              <button className="view-prices-btn" onClick={handleViewPrices} disabled={loading}>
+                {loading ? "Processing..." : "Get Started"}
               </button>
               
               <button 

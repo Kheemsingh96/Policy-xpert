@@ -15,6 +15,10 @@ import ConsultationForm from "./components/consultationForm/consultationForm";
 import StickyFooter from "./components/stickyfooter/stickyfooter";
 import Thanks from "./components/thanks/thanks";
 
+import Blog from "./components/blog/blog";
+import Blog2 from "./components/blog2/blog2";
+import AboutUs from "./components/aboutus/aboutus";
+
 import Life from "./pages/life/life";
 import LifeStep2 from "./pages/life/step2";
 import LifeStep3 from "./pages/life/step3";
@@ -55,10 +59,19 @@ import Review from "./pages/auto/review";
 import PersonalDetails from "./pages/auto/personaldetails";
 import ThankYou from "./pages/auto/thankyou";
 
+import Login from "./pages/adminpanel/login";
+import Admin from "./pages/adminpanel/admin";
+import Consultation from "./pages/adminpanel/consultation";
+import HealthLeads from "./pages/adminpanel/healthleads";
+import LifeLeads from "./pages/adminpanel/lifeleads";
+import CarLeads from "./pages/adminpanel/carleads";
+
 function Layout() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   const openForm = () => setIsFormOpen(true);
   const closeForm = () => setIsFormOpen(false);
@@ -67,6 +80,19 @@ function Layout() {
     setIsFormOpen(false);
     setIsMenuOpen(false);
   }, [location.pathname]);
+
+  if (isAdminRoute) {
+    return (
+      <Routes>
+        <Route path="/admin" element={<Login />} />
+        <Route path="/admin/dashboard" element={<Admin />} />
+        <Route path="/admin/consultation" element={<Consultation />} />
+        <Route path="/admin/health" element={<HealthLeads />} />
+        <Route path="/admin/life" element={<LifeLeads />} />
+        <Route path="/admin/car" element={<CarLeads />} />
+      </Routes>
+    );
+  }
 
   const mainLayoutStyle = {
     display: "flex",
@@ -108,9 +134,13 @@ function Layout() {
 
           <Route path="/thanks" element={<Thanks />} />
 
-          {/* Life Insurance Routes */}
+          <Route path="/about-us" element={<AboutUs openForm={openForm} />} />
+          
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<Blog2 openForm={openForm} />} />
+
           <Route path="/life" element={<Life />} />
-          <Route path="/life-insurance" element={<Life />} /> {/* Added for Footer Link */}
+          <Route path="/life-insurance" element={<Life />} />
           <Route path="/life/step-2" element={<LifeStep2 />} />
           <Route path="/life/step-3" element={<LifeStep3 />} />
           <Route path="/life/step-4" element={<LifeStep4 />} />
@@ -124,9 +154,8 @@ function Layout() {
           <Route path="/life/step-12" element={<LifeStep12 />} />
           <Route path="/life/report" element={<Lifereport openForm={openForm} />} />
 
-          {/* Health Insurance Routes */}
           <Route path="/health" element={<Health />} />
-          <Route path="/health-insurance" element={<Health />} /> {/* Added for Footer Link */}
+          <Route path="/health-insurance" element={<Health />} />
           <Route path="/health/step-2" element={<HealthStep2 />} />
           <Route path="/health/step-3" element={<HealthStep3 />} />
           <Route path="/health/step-4" element={<HealthStep4 />} />
@@ -140,14 +169,10 @@ function Layout() {
           <Route path="/health/step-12" element={<HealthStep12 />} />
           <Route path="/health/step-13" element={<HealthStep13 />} />
           <Route path="/health/step-14" element={<HealthStep14 />} />
-          <Route
-            path="/health/report"
-            element={<HealthReport openForm={openForm} />}
-          />
+          <Route path="/health/report" element={<HealthReport openForm={openForm} />} />
 
-          {/* Auto/Car Insurance Routes */}
           <Route path="/auto" element={<Auto />} />
-          <Route path="/car-insurance" element={<Auto />} /> {/* Added for Footer Link */}
+          <Route path="/car-insurance" element={<Auto />} />
           <Route path="/auto2" element={<Auto2 />} />
           <Route path="/carbrand" element={<CarBrand />} />
           <Route path="/auto/step-2" element={<CarModel />} />
@@ -156,8 +181,6 @@ function Layout() {
           <Route path="/auto/step-4" element={<Review />} />
           <Route path="/auto/step-5" element={<PersonalDetails />} />
           <Route path="/auto/thank-you" element={<ThankYou />} />
-
-          
         </Routes>
 
         <Footer />

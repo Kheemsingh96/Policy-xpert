@@ -50,7 +50,7 @@
 
 .life-step-box {
   width: 100%;
-  max-width: 750px; /* Thoda wider kiya subtitle ke liye */
+  max-width: 750px; 
   background: #ffffff;
   border-radius: 22px;
   padding: 40px 48px 48px;
@@ -95,13 +95,13 @@
 .step-subtitle {
   text-align: center;
   font-size: 15px;
-  color: #64748b; /* Grey color for subtitle */
+  color: #64748b; 
   line-height: 1.6;
   max-width: 600px;
   margin: 0 auto 40px auto;
 }
 
-/* --- Expense Options Buttons --- */
+
 .expense-options {
   display: flex;
   justify-content: center;

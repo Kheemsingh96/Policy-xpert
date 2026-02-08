@@ -14,7 +14,9 @@ import motherIcon from "../../assets/images/mother.png";
 function HealthStep11() {
   const navigate = useNavigate();
   const location = useLocation();
-  const memberDetails = location.state?.memberDetails || [];
+  
+  const prevData = location.state || {};
+  const memberDetails = prevData.memberDetails || [];
 
   const steps = [
     { id: 1, label: "Personal" },
@@ -97,9 +99,19 @@ function HealthStep11() {
     }));
 
     if (hasHospitalized === true) {
-      navigate("/health/step-12", { state: { memberDetails: updatedData } });
+      navigate("/health/step-12", { 
+          state: { 
+              ...prevData, 
+              memberDetails: updatedData 
+          } 
+      });
     } else {
-      navigate("/health/step-13", { state: { memberDetails: updatedData } });
+      navigate("/health/step-13", { 
+          state: { 
+              ...prevData, 
+              memberDetails: updatedData 
+          } 
+      });
     }
   };
 

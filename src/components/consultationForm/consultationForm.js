@@ -162,7 +162,7 @@ function ConsultationForm({ onClose }) {
           if (onClose) onClose();
         }
       } catch (error) {
-        alert("Server error: data save nahi ho paya");
+        alert("Server error: data not Save");
       }
     }
   };

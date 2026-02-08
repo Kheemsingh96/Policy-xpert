@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import "./personaldetails.css";
 
 import arrowLeft from "../../assets/images/arrow-left.png"; 
@@ -8,6 +9,8 @@ import arrowRight from "../../assets/images/arrow2.png";
 function PersonalDetails() {
   const navigate = useNavigate();
   const location = useLocation();
+  
+  const prevData = location.state || {};
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -17,12 +20,13 @@ function PersonalDetails() {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (location.state?.mobile) {
-      setFormData(prev => ({ ...prev, mobile: location.state.mobile }));
+    if (prevData.mobile) {
+      setFormData(prev => ({ ...prev, mobile: prevData.mobile }));
     }
-  }, [location.state]);
+  }, [prevData]);
 
   const steps = [
     { id: 1, label: "Car Details" },
@@ -62,15 +66,38 @@ function PersonalDetails() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (validate()) {
-      // Navigate to /auto/thank-you with all data
-      navigate("/auto/thank-you", { 
-        state: { 
-          ...location.state, 
-          ...formData 
-        } 
-      }); 
+      setLoading(true);
+
+      const payload = {
+        regNo: prevData.regNumber || prevData.regNo || "NEW",
+        mobile: formData.mobile,
+        carBrand: prevData.brandName || prevData.carBrand || "Unknown",
+        carModel: prevData.modelName || prevData.carModel || "Unknown",
+        carVariant: prevData.variantName || prevData.carVariant || "Unknown",
+        fullName: formData.fullName,
+        email: formData.email,
+        pincode: prevData.pincode || "N/A",
+        gstNo: formData.gst
+      };
+
+      try {
+        const response = await axios.post("http://localhost:5000/api/save-auto", payload);
+
+        if (response.status === 200) {
+          navigate("/auto/thank-you", { 
+            state: { 
+              ...prevData, 
+              ...formData 
+            } 
+          }); 
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -154,12 +181,12 @@ function PersonalDetails() {
           </div>
 
           <div className="personaldetails-footer">
-            <button className="personaldetails-prev-btn" onClick={handlePrevious}>
+            <button className="personaldetails-prev-btn" onClick={handlePrevious} disabled={loading}>
               <img src={arrowLeft} alt="prev" className="prev-icon" /> Previous
             </button>
             
-            <button className="personaldetails-next-btn" onClick={handleNext}>
-              Next <img src={arrowRight} alt="next" />
+            <button className="personaldetails-next-btn" onClick={handleNext} disabled={loading}>
+              {loading ? "Submitting..." : "Next"} <img src={arrowRight} alt="next" style={{display: loading ? "none" : "inline"}} />
             </button>
           </div>
 

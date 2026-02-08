@@ -5,10 +5,12 @@ import "./health.css";
 import plusIcon from "../../assets/images/plus.png";
 import chatIcon from "../../assets/images/health4.png";
 import arrowIcon from "../../assets/images/arrow.png"; 
+
 function Health() {
   const navigate = useNavigate();
 
   const [selectedMember, setSelectedMember] = useState("");
+  const [mobile, setMobile] = useState("");
   const [pincode, setPincode] = useState("");
   const [error, setError] = useState("");
   const [activeIndex, setActiveIndex] = useState(null); 
@@ -16,6 +18,11 @@ function Health() {
   const handleSubmit = () => {
     if (!selectedMember) {
       setError("Please select who you want to cover");
+      return;
+    }
+
+    if (!mobile || mobile.length !== 10) {
+      setError("Enter valid 10-digit mobile number");
       return;
     }
 
@@ -28,6 +35,7 @@ function Health() {
     navigate("/health/step-2", {
       state: {
         member: selectedMember,
+        mobile: mobile,
         pincode: pincode,
       },
     });
@@ -98,10 +106,25 @@ function Health() {
           </div>
 
           <div className="health-field">
-            <label>What's your Pincode?</label>
+            <label>Mobile Number</label>
+            <input
+              type="tel"
+              placeholder="Mobile No."
+              value={mobile}
+              maxLength={10}
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, "");
+                setMobile(val);
+                setError("");
+              }}
+            />
+          </div>
+
+          <div className="health-field">
+            <label>Pincode</label>
             <input
               type="text"
-              placeholder="Enter your pincode"
+              placeholder="Pincode"
               value={pincode}
               maxLength={6}
               onChange={(e) => {

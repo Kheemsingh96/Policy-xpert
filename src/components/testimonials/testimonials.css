@@ -81,9 +81,17 @@
 .testimonials .testimonial-card.center {
   order: 2;
   background: #4685c4;
-  color: #ffffff;
   opacity: 1;
   transform: scale(1);
+}
+
+.testimonials .testimonial-card.center h3 {
+  color: #ffffff; 
+}
+
+.testimonials .testimonial-card.center p {
+  color: #ffffff;
+  opacity: 0.9;
 }
 
 .testimonials .testimonial-card.center::after {
@@ -104,6 +112,7 @@
 .testimonials .testimonial-card h3 {
   font-size: 22px;
   margin-bottom: 16px;
+  color: #273846;
 }
 
 .testimonials .stars {
@@ -122,6 +131,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 30px;
+  color: #585D6A;
 }
 
 .testimonials .nav {
@@ -177,8 +187,6 @@
   }
 }
 
-
-
 @media (max-width: 1024px) {
   .testimonials {
     padding: 30px 0;
@@ -229,7 +237,6 @@
 }
 
 @media (min-width: 375px) and (max-width: 575px) {
-
   .testimonials .subtitle {
     font-size: 14px;
     line-height: 1.4;
@@ -247,9 +254,7 @@
   }
 }
 
-
 @media (min-width: 576px) and (max-width: 768px) {
-
   .testimonials .subtitle {
     font-size: 15px;
     line-height: 1.4;
@@ -267,9 +272,7 @@
   }
 }
 
-
 @media (min-width: 769px) and (max-width: 1024px) {
-
   .testimonials .subtitle {
     font-size: 15px;
     line-height: 1.4;
@@ -287,9 +290,7 @@
   }
 }
 
-
 @media (min-width: 1025px) and (max-width: 1240px) {
-
   .testimonials .subtitle {
     font-size: 16px;
   }
@@ -307,7 +308,6 @@
 }
 
 @media (min-width: 1241px) and (max-width: 1439px) {
-
   .testimonials .subtitle {
     font-size: 16px;
   }
@@ -316,7 +316,6 @@
     font-size: 38px;
     font-weight: 600;
     line-height: 70px;
-    
   }
 
   .testimonials .testimonial-card p {
@@ -325,9 +324,7 @@
   }
 }
 
-
 @media (min-width: 1620px) and (max-width: 1920px) {
-
   .testimonials .subtitle {
     font-size: 18px;
   }
