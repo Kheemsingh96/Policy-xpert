@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import Scrolltotop from "./components/Scrolltotop/Scrolltotop";
-
 import Header from "./components/header/header";
 import Hero from "./components/hero/hero";
 import Secondsection from "./components/secondsection/secondsection";
@@ -14,10 +13,12 @@ import Footer from "./components/footer/footer";
 import ConsultationForm from "./components/consultationForm/consultationForm";
 import StickyFooter from "./components/stickyfooter/stickyfooter";
 import Thanks from "./components/thanks/thanks";
+import ChatWidget from "./components/ChatWidget/ChatWidget";
 
 import Blog from "./components/blog/blog";
 import Blog2 from "./components/blog2/blog2";
 import AboutUs from "./components/aboutus/aboutus";
+import Claims from "./pages/claims/claims";
 
 import Life from "./pages/life/life";
 import LifeStep2 from "./pages/life/step2";
@@ -136,6 +137,8 @@ function Layout() {
 
           <Route path="/about-us" element={<AboutUs openForm={openForm} />} />
           
+          <Route path="/claims" element={<Claims />} />
+
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<Blog2 openForm={openForm} />} />
 
@@ -188,6 +191,8 @@ function Layout() {
       </div>
 
       <StickyFooter isFormOpen={isFormOpen} isMenuOpen={isMenuOpen} />
+      
+      <ChatWidget />
 
       {isFormOpen && <ConsultationForm onClose={closeForm} />}
     </div>

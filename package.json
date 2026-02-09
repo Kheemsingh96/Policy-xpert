@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.13.4",
     "react": "^18.2.0",
+    "react-chatbotify": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
     "react-phone-input-2": "^2.15.1",

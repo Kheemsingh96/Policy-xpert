@@ -1,16 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, memo } from 'react';
 import './aboutus.css';
 
-// ==========================================
-// ⚡ CONFIGURATION AREA (Edit Content Here)
-// ==========================================
 const pageContent = {
   hero: {
     title: "We Don't Just Sell Policies.\nWe Build Safety Nets.",
     subtitle: "REDEFINING INSURANCE",
     desc: "PolicyXpert is India's most trusted insurance advisory, blending human expertise with digital simplicity to secure your future.",
-    // Optimized Image (Medium Quality for Speed)
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1500&q=60" 
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=60" 
   },
   story: {
     title: "From a Small Office to \nProtecting Thousands",
@@ -19,7 +15,7 @@ const pageContent = {
     para2: "What began as a small team of three certified experts has now grown into a family of dedicated professionals. We realized that people didn't need more policies; they needed better advice.",
     features: ["IRDAI Certified Experts", "24/7 Claim Assistance"],
     experienceYears: "12+",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=60"
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=60"
   },
   values: [
     { title: "Integrity First", desc: "We believe in 100% transparency. No hidden clauses, no jargon, just honest advice." },
@@ -42,7 +38,7 @@ const pageContent = {
     title: "A Future Where Every Indian is Financially Secure",
     subtitle: "OUR VISION",
     desc: "We envision a world where insurance is not seen as an expense, but as an essential pillar of financial freedom. Our goal is to empower every individual with the knowledge and the right tools.",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60"
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=60"
   },
   cta: {
     title: "Stop Guessing. Start Securing.",
@@ -50,72 +46,71 @@ const pageContent = {
   }
 };
 
-// --- Counter Component (Performance Optimized) ---
-const Counter = ({ end, duration }) => {
-  const [count, setCount] = useState(0);
-  const countRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+const Counter = memo(({ end, duration = 2000 }) => {
+  const [count, setCount] = useState("0");
+  const nodeRef = useRef(null);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-    if (countRef.current) observer.observe(countRef.current);
-    return () => observer.disconnect();
-  }, []);
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !hasAnimated.current) {
+        hasAnimated.current = true;
+        let startTimestamp = null;
+        const numericEnd = parseInt(end.replace(/\D/g, '')) || 0;
+        const suffix = end.replace(/[0-9]/g, '');
 
-  useEffect(() => {
-    if (!isVisible) return;
-    const endNum = parseInt(end.replace(/\D/g, '')) || 0;
-    if (endNum === 0) { setCount(end); return; }
-
-    let start = 0;
-    const timer = setInterval(() => {
-      start += Math.ceil(endNum / 50);
-      if (start >= endNum) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(start + (end.includes('K') ? 'K' : end.includes('%') ? '%' : '+'));
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          setCount(Math.floor(progress * numericEnd) + suffix);
+          
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
       }
-    }, 40);
+    }, { threshold: 0.1 });
 
-    return () => clearInterval(timer);
-  }, [isVisible, end, duration]);
+    if (nodeRef.current) observer.observe(nodeRef.current);
+    return () => observer.disconnect();
+  }, [end, duration]);
 
-  return <span ref={countRef}>{count === 0 ? '0' : count}</span>;
-};
+  return <span ref={nodeRef}>{count}</span>;
+});
 
 const AboutUs = ({ openForm }) => {
-  
-  // Animation Observer
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 }); // Reduced threshold for faster triggering
+    }, { threshold: 0.1 });
 
     const elements = document.querySelectorAll('.reveal-on-scroll');
     elements.forEach(el => observer.observe(el));
 
-    return () => elements.forEach(el => observer.unobserve(el));
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div className="about-page">
-      
-      {/* Hero Section */}
       <section className="about-hero-modern">
-        <div className="hero-bg-overlay" style={{ backgroundImage: `url(${pageContent.hero.image})` }}></div>
+        <div className="hero-bg-wrapper">
+            <img 
+              src={pageContent.hero.image} 
+              alt="Insurance Background" 
+              className="hero-bg-img" 
+              fetchPriority="high"
+              width="1200"
+              height="800"
+              decoding="async"
+            />
+            <div className="hero-overlay"></div>
+        </div>
         <div className="hero-content-modern reveal-on-scroll fade-up">
           <span className="hero-badge">{pageContent.hero.subtitle}</span>
           <h1>{pageContent.hero.title}</h1>
@@ -123,16 +118,23 @@ const AboutUs = ({ openForm }) => {
         </div>
       </section>
 
-      {/* Story Section */}
       <section className="our-story-section">
         <div className="container-max">
           <div className="story-grid">
             <div className="story-image reveal-on-scroll slide-right">
-              {/* Added loading="lazy" for speed */}
-              <img src={pageContent.story.image} alt="Our Journey" loading="lazy" />
-              <div className="experience-badge">
-                <span className="years">{pageContent.story.experienceYears}</span>
-                <span className="text">Years of<br/>Excellence</span>
+              <div className="img-frame">
+                <img 
+                  src={pageContent.story.image} 
+                  alt="Our Journey" 
+                  loading="lazy" 
+                  decoding="async"
+                  width="600"
+                  height="400"
+                />
+                <div className="experience-badge">
+                  <span className="years">{pageContent.story.experienceYears}</span>
+                  <span className="text">Years of<br/>Excellence</span>
+                </div>
               </div>
             </div>
             <div className="story-content reveal-on-scroll slide-left">
@@ -154,7 +156,6 @@ const AboutUs = ({ openForm }) => {
         </div>
       </section>
 
-      {/* Core Values Section */}
       <section className="core-values-section">
         <div className="container-max">
           <div className="values-header reveal-on-scroll fade-up">
@@ -163,46 +164,50 @@ const AboutUs = ({ openForm }) => {
           </div>
           <div className="values-grid">
             {pageContent.values.map((val, index) => (
-              <div className="value-card reveal-on-scroll fade-up" key={index} style={{ transitionDelay: `${index * 100}ms` }}>
+              <div className="value-card reveal-on-scroll fade-up" key={index} style={{ transitionDelay: `${index * 50}ms` }}>
                 <div className="value-number">0{index + 1}</div>
                 <h3>{val.title}</h3>
                 <p>{val.desc}</p>
-                <div className="card-line"></div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Modern Stats Section */}
       <section className="stats-modern-section reveal-on-scroll">
-        <div className="stats-overlay"></div>
         <div className="container-max stats-inner">
           {pageContent.stats.map((stat, index) => (
             <div className="stat-modern-item" key={index}>
-              <h3 className="stat-number"><Counter end={stat.number} duration={2.5} /></h3>
+              <h3 className="stat-number"><Counter end={stat.number} /></h3>
               <p className="stat-label">{stat.label}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Vision Section */}
       <section className="vision-section">
         <div className="container-max vision-grid">
           <div className="vision-text reveal-on-scroll slide-right">
             <h4 className="section-subtitle">{pageContent.vision.subtitle}</h4>
             <h2>{pageContent.vision.title}</h2>
             <p>{pageContent.vision.desc}</p>
-            <button className="btn-secondary" onClick={openForm}>Our Services →</button>
+            <button className="btn-secondary" onClick={openForm}>Our Services &rarr;</button>
           </div>
           <div className="vision-img-wrapper reveal-on-scroll slide-left">
-            <img src={pageContent.vision.image} alt="Our Vision" loading="lazy" />
+            <div className="img-frame">
+              <img 
+                src={pageContent.vision.image} 
+                alt="Our Vision" 
+                loading="lazy" 
+                decoding="async"
+                width="600"
+                height="400"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
       <section className="process-section">
         <div className="container-max">
           <div className="process-header reveal-on-scroll fade-up">
@@ -212,7 +217,7 @@ const AboutUs = ({ openForm }) => {
           </div>
           <div className="process-grid">
             {pageContent.process.map((item, index) => (
-              <div className="process-card reveal-on-scroll fade-up" key={index} style={{ transitionDelay: `${index * 100}ms` }}>
+              <div className="process-card reveal-on-scroll fade-up" key={index} style={{ transitionDelay: `${index * 50}ms` }}>
                 <div className="step-circle">{item.step}</div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
@@ -222,16 +227,13 @@ const AboutUs = ({ openForm }) => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="about-cta-modern reveal-on-scroll">
         <div className="cta-modern-content">
           <h2>{pageContent.cta.title}</h2>
           <p>{pageContent.cta.desc}</p>
-          <div className="cta-buttons">
-            <button className="btn-primary-glow" onClick={openForm}>
-              Book Free Consultation
-            </button>
-          </div>
+          <button className="btn-primary-glow" onClick={openForm}>
+            Book Free Consultation
+          </button>
         </div>
       </section>
 
@@ -239,4 +241,4 @@ const AboutUs = ({ openForm }) => {
   );
 };
 
-export default AboutUs;
+export default memo(AboutUs);

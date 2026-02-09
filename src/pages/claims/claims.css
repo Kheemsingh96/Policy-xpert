@@ -1,0 +1,646 @@
+.cp-wrapper {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F8FBFF;
+  color: #273846;
+}
+
+.cp-wrapper * {
+  box-sizing: border-box;
+}
+
+.cp-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cp-hero {
+  background-color: #273846;
+  padding: 80px 0 140px; 
+  text-align: center;
+  color: #ffffff;
+}
+
+.cp-hero-text h1 {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.cp-hero-text p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.cp-emergency-wrapper {
+  margin-top: -60px;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 60px;
+}
+
+.cp-emergency-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.cp-emergency-card {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.cp-emergency-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(70, 133, 196, 0.15);
+  border-color: #4685C4;
+}
+
+.cp-icon-circle {
+  width: 50px;
+  height: 50px;
+  background: #F0F6FC;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cp-icon-circle img {
+  width: 24px;
+  height: 24px;
+}
+
+.cp-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-card-info span {
+  font-size: 14px;
+  color: #585D6A;
+  margin-bottom: 10px;
+}
+
+.cp-card-info strong {
+  font-size: 18px;
+  color: #273846;
+  font-weight: 600;
+}
+
+.cp-main-content {
+  padding: 40px 0 80px;
+}
+
+.cp-split-layout {
+  display: flex;
+  gap: 80px; 
+  align-items: flex-start;
+}
+
+.cp-left-panel {
+  flex: 1;
+  padding-top: 10px;
+}
+
+.cp-section-header h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #273846;
+}
+
+.cp-section-header p {
+  font-size: 18px;
+  color: #585D6A;
+  margin-bottom: 40px;
+}
+
+.cp-steps-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.cp-step-card {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  border: 1px solid #e1e4e8;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.cp-step-card:hover {
+  border-color: #4685C4;
+  box-shadow: 0 5px 20px rgba(70, 133, 196, 0.1);
+}
+
+.cp-step-badge {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 40px;
+  font-weight: 800;
+  color: rgba(70, 133, 196, 0.1);
+  line-height: 1;
+}
+
+.cp-step-card h3 {
+  font-size: 20px;
+  color: #273846;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.cp-step-card p {
+  font-size: 16px;
+  color: #585D6A;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.cp-right-panel {
+  flex: 0 0 480px;
+  max-width: 100%;
+}
+
+.cp-form-box {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e1e4e8;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cp-form-head {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.cp-form-head h3 {
+  font-size: 26px;
+  margin-bottom: 5px;
+  color: #273846;
+  font-weight: 600;
+}
+
+.cp-form-head p {
+  font-size: 15px;
+  color: #4685C4;
+  font-weight: 500;
+}
+
+.cp-input-row {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.cp-input-group label {
+  display: block;
+  font-size: 15px; 
+  color: #272727;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.cp-input-group input, 
+.cp-input-group select {
+  width: 100%;
+  padding: 14px; 
+  border: 1px solid #9BE0F3;
+  border-radius: 8px;
+  font-size: 16px; 
+  color: #272727 !important;
+  background-color: #F6FCFE;
+  outline: none;
+  transition: border 0.3s;
+  box-sizing: border-box; 
+  height: 50px; 
+}
+
+.cp-input-group input:focus, 
+.cp-input-group select:focus {
+  border-color: #4685C4;
+  background-color: #ffffff;
+}
+
+.cp-submit-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #4685C4;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.cp-submit-btn:hover {
+  background-color: #35699e;
+}
+
+.cp-docs-section {
+  padding: 60px 0 100px;
+  background-color: #ffffff;
+  border-top: 1px solid #f0f0f0;
+}
+
+.cp-docs-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.cp-docs-header h2 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #273846;
+  margin-bottom: 10px;
+}
+
+.cp-docs-header p {
+  font-size: 16px;
+  color: #585D6A;
+}
+
+.cp-tab-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.cp-tab {
+  padding: 12px 35px;
+  border: 1px solid #e1e4e8;
+  background: transparent;
+  border-radius: 50px;
+  font-size: 16px;
+  color: #585D6A;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.cp-tab.active {
+  background-color: #4685C4;
+  color: #ffffff;
+  border-color: #4685C4;
+  box-shadow: 0 5px 15px rgba(70, 133, 196, 0.2);
+}
+
+.cp-checklist-box {
+  background: #F8FBFF;
+  border: 1px solid #e1e4e8;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cp-checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cp-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.cp-check-icon {
+  width: 22px;
+  height: 22px;
+  background: #E6F7EB;
+  color: #28a745;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cp-check-item span {
+  font-size: 16px;
+  color: #273846;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .cp-hero {
+    padding: 60px 0 100px;
+  }
+  
+  .cp-container {
+    padding: 0 20px;
+  }
+
+  .cp-split-layout {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .cp-right-panel {
+    width: 100%;
+    flex: auto;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  
+  .cp-emergency-wrapper {
+    margin-top: -40px;
+  }
+
+  .cp-emergency-grid {
+    gap: 15px;
+  }
+
+  .cp-checklist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-hero-text h1 {
+    font-size: 38px;
+  }
+  
+  .cp-section-header h2,
+  .cp-docs-header h2 {
+    font-size: 34px; 
+  }
+  
+  .cp-form-head h3 {
+    font-size: 34px;
+  }
+  
+  .cp-hero-text p,
+  .cp-section-header p {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 575px) {
+  .cp-hero {
+    padding: 40px 0 80px;
+  }
+
+  .cp-emergency-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cp-emergency-card {
+    padding: 22px 35px;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .cp-card-info {
+    align-items: center;
+  }
+
+  .cp-split-layout {
+    gap: 32px;
+  }
+  
+  .cp-form-box {
+    padding: 25px;
+  }
+  
+  .cp-checklist-box {
+    padding: 25px;
+  }
+  
+  .cp-tab-container {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .cp-tab {
+    padding: 8px 20px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .cp-hero-text h1 {
+    font-size: 28px;
+  }
+  
+  .cp-section-header h2,
+  .cp-docs-header h2 {
+    font-size: 24px;
+  }
+  
+  .cp-form-head h3 {
+    font-size: 24px;
+  }
+  
+  .cp-step-card h3 {
+    font-size: 22px;
+  }
+
+  .cp-hero-text p,
+  .cp-section-header p,
+  .cp-step-card p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .cp-hero {
+    padding: 50px 0 90px;
+  }
+
+  .cp-emergency-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cp-emergency-card {
+    padding: 24px 32px;
+    flex-direction: row;
+    text-align: left;
+  }
+  
+  .cp-card-info {
+    align-items: flex-start;
+  }
+  
+  .cp-split-layout {
+    gap: 40px;
+  }
+
+  .cp-hero-text h1 {
+    font-size: 34px;
+  }
+  
+  .cp-section-header h2,
+  .cp-docs-header h2 {
+    font-size: 30px;
+  }
+  
+  .cp-form-head h3 {
+    font-size: 26px;
+  }
+  
+  .cp-step-card h3 {
+    font-size: 26px;
+  }
+  
+  .cp-hero-text p,
+  .cp-section-header p,
+  .cp-step-card p {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cp-emergency-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+  
+  .cp-emergency-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .cp-card-info {
+    align-items: center;
+  }
+
+  .cp-hero-text h1 {
+    font-size: 38px;
+  }
+  
+  .cp-section-header h2,
+  .cp-docs-header h2 {
+    font-size: 34px;
+  }
+  
+  .cp-form-head h3 {
+    font-size: 34px;
+  }
+  
+  .cp-step-card h3 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .cp-container {
+    max-width: 1200px;
+    padding: 0 40px;
+  }
+  
+  .cp-split-layout {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .cp-left-panel {
+    flex: 1;
+  }
+  
+  .cp-right-panel {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+
+  .cp-hero-text h1 {
+    font-size: 36px;
+  }
+  
+  .cp-section-header h2,
+  .cp-docs-header h2 {
+    font-size: 32px;
+  }
+  
+  .cp-form-head h3 {
+    font-size: 30px;
+  }
+
+  .cp-step-card h3 {
+    font-size: 21px;
+  }
+}
+
+@media (min-width: 1241px) and (max-width: 1439px) {
+  .cp-container {
+    max-width: 1320px;
+    padding: 0 40px;
+  }
+  
+  .cp-split-layout {
+    gap: 60px;
+  }
+
+  .cp-hero-text h1 {
+    font-size: 40px;
+  }
+  
+  .cp-section-header h2,
+  .cp-docs-header h2 {
+    font-size: 38px;
+  }
+  
+  .cp-step-card h3 {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1620px) and (max-width: 1920px) {
+  .cp-hero {
+    padding: 100px 0 160px;
+  }
+
+  .cp-container {
+    max-width: 1440px;
+    padding: 0 60px;
+  }
+  
+  .cp-split-layout {
+    gap: 80px;
+  }
+
+  .cp-hero-text h1 {
+    font-size: 52px;
+  }
+  
+  .cp-section-header h2,
+  .cp-docs-header h2 {
+    font-size: 50px;
+  }
+  
+  .cp-hero-text p,
+  .cp-section-header p {
+    font-size: 20px;
+    line-height: 1.7;
+  }
+  
+  .cp-step-card h3 {
+    font-size: 24px;
+  }
+}

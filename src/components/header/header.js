@@ -77,8 +77,19 @@ function Header({ openForm, setIsMenuOpen, isMenuOpen }) {
           <nav className="nav">
             <Link to="/" onClick={closeMenu}>Home</Link>
             <Link to="/about-us" onClick={closeMenu}>About us</Link>
-            <Link to="#" onClick={closeMenu}>Insurance & more</Link>
-            <a href="#" onClick={closeMenu}>Claims</a>
+            
+            <a 
+              href="https://bimabharosa.irdai.gov.in/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onClick={closeMenu}
+            >
+              Irdai Complaint 
+            </a>
+
+            {/* Updated Claims Link */}
+            <Link to="/claims" onClick={closeMenu}>Claims Helpline</Link>
+            
             <Link to="/blog" onClick={closeMenu}>Blog</Link>
           </nav>
 
