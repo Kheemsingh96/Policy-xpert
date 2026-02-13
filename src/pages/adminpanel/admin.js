@@ -2,25 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./admin.css";
-
+import { FiSearch, FiBell, FiX } from "react-icons/fi";
 import { 
-  FiSearch, FiBell, FiChevronDown, FiChevronRight, FiX, FiLogOut 
-} from "react-icons/fi";
-
-import { 
-  RiHome5Line, 
-  RiUserFollowLine, 
-  RiFileChartLine, 
-  RiGroupLine, 
-  RiStackLine, 
-  RiHeartPulseLine, 
-  RiShieldCrossLine, 
-  RiRoadsterLine 
+  RiStackLine, RiHeartPulseLine, RiShieldCrossLine, RiRoadsterLine 
 } from "react-icons/ri";
-
-import logoImg from "../../assets/images/logo.png"; 
 import adminImg from "../../assets/images/admin.png"; 
-
+import Sidebar from "./sidebar";
 import {
   PieChart, Pie, Cell,
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
@@ -107,28 +94,23 @@ const CustomYAxisTick = ({ x, y, payload }) => {
 
 function Admin() {
   const navigate = useNavigate();
-  
   const [activeTab, setActiveTab] = useState("Home");
-  const [isLeadsOpen, setIsLeadsOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
-  
   const [allLeads, setAllLeads] = useState([]); 
   const [filteredLeads, setFilteredLeads] = useState([]); 
   const [graphData, setGraphData] = useState([]);
-  
   const [searchQuery, setSearchQuery] = useState("");
   const [dateFilter, setDateFilter] = useState("Last 7 days");
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   const [stats, setStats] = useState({
     total: 0, life: 0, health: 0, auto: 0, consult: 0,
     trends: {
-        total: { val: "0.0%", dir: "up", msg: "from yesterday" },
-        life: { val: "0.0%", dir: "up", msg: "from yesterday" },
-        health: { val: "0.0%", dir: "up", msg: "from yesterday" },
-        auto: { val: "0.0%", dir: "up", msg: "from yesterday" }
+        total: { val: "0.0%", dir: "neutral", msg: "vs last 7 days" },
+        life: { val: "0.0%", dir: "neutral", msg: "vs last 7 days" },
+        health: { val: "0.0%", dir: "neutral", msg: "vs last 7 days" },
+        auto: { val: "0.0%", dir: "neutral", msg: "vs last 7 days" }
     }
   });
 
@@ -175,7 +157,6 @@ function Admin() {
       setAllLeads(combined);
       setFilteredLeads(combined);
       setGraphData(processChartData(combined));
-
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -183,7 +164,6 @@ function Admin() {
 
   const applyFilters = () => {
     let result = [...allLeads];
-
     if (searchQuery) {
       const lowerQuery = searchQuery.toLowerCase();
       result = result.filter(lead => 
@@ -199,7 +179,6 @@ function Admin() {
         const leadDate = new Date(lead.dateRaw);
         const diffTime = Math.abs(now - leadDate);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
         if (dateFilter === "Last 7 days") return diffDays <= 7;
         if (dateFilter === "Last 30 days") return diffDays <= 30;
         if (dateFilter === "Last 6 months") return diffDays <= 180;
@@ -211,7 +190,6 @@ function Admin() {
     setFilteredLeads(result);
     setCurrentPage(1); 
     calculateStats(result);
-    
     if (dateFilter === "Last 7 days" || dateFilter === "All Time") {
         setGraphData(processChartData(result));
     }
@@ -223,32 +201,42 @@ function Admin() {
     const carCount = data.filter(l => l.type === "Car").length;
     const consultCount = data.filter(l => l.type === "Consultation").length;
 
-    const getTrend = (subset) => {
-        const today = new Date();
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
+    const getTrend = (typeFilter) => {
+        const now = new Date();
         
-        const isSameDay = (d1, d2) => 
-            d1.getDate() === d2.getDate() && 
-            d1.getMonth() === d2.getMonth() && 
-            d1.getFullYear() === d2.getFullYear();
+        const last7DaysStart = new Date(now); 
+        last7DaysStart.setDate(now.getDate() - 6);
+        last7DaysStart.setHours(0,0,0,0);
 
-        const todayCount = subset.filter(i => isSameDay(new Date(i.dateRaw), today)).length;
-        const yesterdayCount = subset.filter(i => isSameDay(new Date(i.dateRaw), yesterday)).length;
+        const prev7DaysStart = new Date(now); 
+        prev7DaysStart.setDate(now.getDate() - 13);
+        prev7DaysStart.setHours(0,0,0,0);
 
-        if (yesterdayCount === 0) {
-            return { 
-                val: todayCount > 0 ? "100%" : "0.0%", 
-                dir: todayCount > 0 ? "up" : "neutral", 
-                msg: "from yesterday" 
-            };
+        const prev7DaysEnd = new Date(now); 
+        prev7DaysEnd.setDate(now.getDate() - 7);
+        prev7DaysEnd.setHours(23,59,59,999);
+
+        const sourceData = typeFilter === 'total' ? allLeads : allLeads.filter(l => l.type === typeFilter);
+
+        const currentWeekCount = sourceData.filter(l => {
+            const d = new Date(l.dateRaw);
+            return d >= last7DaysStart && d <= now;
+        }).length;
+
+        const prevWeekCount = sourceData.filter(l => {
+            const d = new Date(l.dateRaw);
+            return d >= prev7DaysStart && d <= prev7DaysEnd;
+        }).length;
+
+        if (prevWeekCount === 0) {
+             return { val: currentWeekCount > 0 ? "100%" : "0.0%", dir: "neutral", msg: "vs last 7 days" };
         }
-        
-        const diff = ((todayCount - yesterdayCount) / yesterdayCount) * 100;
-        return {
-            val: Math.abs(diff).toFixed(1) + "%",
-            dir: diff >= 0 ? "up" : "down",
-            msg: diff >= 0 ? "Up from yesterday" : "Down from yesterday"
+
+        const diff = ((currentWeekCount - prevWeekCount) / prevWeekCount) * 100;
+        return { 
+            val: Math.abs(diff).toFixed(1) + "%", 
+            dir: diff >= 0 ? "up" : "down", 
+            msg: "vs last 7 days" 
         };
     };
 
@@ -259,10 +247,10 @@ function Admin() {
       auto: carCount,
       consult: consultCount,
       trends: {
-          total: getTrend(data),
-          life: getTrend(data.filter(l => l.type === "Life")),
-          health: getTrend(data.filter(l => l.type === "Health")),
-          auto: getTrend(data.filter(l => l.type === "Car"))
+          total: getTrend('total'),
+          life: getTrend('Life'),
+          health: getTrend('Health'),
+          auto: getTrend('Car')
       }
     });
 
@@ -274,84 +262,24 @@ function Admin() {
   };
 
   const handleLogout = () => navigate("/admin");
-
-  const toggleLeadsMenu = () => {
-    setIsLeadsOpen(!isLeadsOpen);
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return "N/A";
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
-  };
-
-  const formatTime = (dateString) => {
-    if (!dateString) return "N/A";
-    const date = new Date(dateString);
-    return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
-  };
+  const formatDate = (dateString) => dateString ? new Date(dateString).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "N/A";
+  const formatTime = (dateString) => dateString ? new Date(dateString).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }) : "N/A";
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredLeads.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredLeads.length / itemsPerPage);
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(prev => prev + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(prev => prev - 1);
-    }
-  };
-
   const getTrendColor = (dir) => dir === 'up' ? "#10b981" : "#ef4444";
 
   return (
     <div className="admin-layout">
-      <aside className="sidebar">
-        <div className="logo-box">
-          <img src={logoImg} alt="PolicyXpert" className="sidebar-logo" />
-        </div>
-
-        <nav className="menu">
-          <div className={`menu-item ${activeTab === "Home" ? "active" : ""}`} onClick={() => setActiveTab("Home")}>
-            <RiHome5Line className="icon" /> Home
-          </div>
-
-          <div className="menu-item-group">
-            <div 
-              className={`menu-item ${activeTab !== "Home" && (isLeadsOpen || activeTab.includes("Insurance") || activeTab === "Consultation") ? "active" : ""}`} 
-              onClick={toggleLeadsMenu}
-              style={{ justifyContent: "space-between", cursor: "pointer" }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <RiUserFollowLine className="icon" /> Leads
-              </div>
-              {isLeadsOpen ? <FiChevronDown /> : <FiChevronRight />}
-            </div>
-
-            {isLeadsOpen && (
-              <div className="submenu" style={{ paddingLeft: "40px", display: "flex", flexDirection: "column", gap: "10px", marginTop: "5px" }}>
-                <div className="submenu-item" onClick={() => navigate("/admin/consultation")} style={{ cursor: "pointer", fontSize: "0.9rem", color: "#666" }}>Consultation</div>
-                <div className="submenu-item" onClick={() => navigate("/admin/life")} style={{ cursor: "pointer", fontSize: "0.9rem", color: "#666" }}>Life Insurance</div>
-                <div className="submenu-item" onClick={() => navigate("/admin/health")} style={{ cursor: "pointer", fontSize: "0.9rem", color: "#666" }}>Health Insurance</div>
-                <div className="submenu-item" onClick={() => navigate("/admin/car")} style={{ cursor: "pointer", fontSize: "0.9rem", color: "#666" }}>Car Insurance</div>
-              </div>
-            )}
-          </div>
-
-          <div className="menu-item"><RiFileChartLine className="icon" /> Reports</div>
-          <div className="menu-item"><RiGroupLine className="icon" /> Customer</div>
-        </nav>
-
-        <div className="logout-box" onClick={handleLogout}>
-          <FiLogOut className="icon" /> Logout
-        </div>
-      </aside>
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        navigate={navigate} 
+        handleLogout={handleLogout} 
+      />
 
       <main className="content-area">
         <header className="top-bar">
@@ -409,7 +337,6 @@ function Admin() {
         </div>
 
         <section className="stats-row">
-          
           <div className="stat-card">
             <div className="stat-top">
               <span className="stat-title">Total Leads</span>
@@ -477,7 +404,6 @@ function Admin() {
               </div>
             </div>
           </div>
-
         </section>
 
         <section className="charts-grid">
@@ -567,14 +493,6 @@ function Admin() {
                 )}
               </tbody>
             </table>
-          </div>
-          <div className="pagination">
-              <span>Showing {filteredLeads.length > 0 ? `${indexOfFirstItem + 1}-${Math.min(indexOfLastItem, filteredLeads.length)}` : "0"} of {filteredLeads.length} items</span>
-              <div className="page-controls">
-                <span onClick={handlePrevPage} style={{cursor: "pointer", opacity: currentPage === 1 ? 0.5 : 1}}>&lt; Previous</span>
-                <span className="page-num active">{currentPage}</span>
-                <span onClick={handleNextPage} style={{cursor: "pointer", opacity: currentPage === totalPages ? 0.5 : 1}}>Next &gt;</span>
-             </div>
           </div>
         </section>
       </main>

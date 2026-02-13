@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "./sidebar";
 import "./consultation.css";
-
-import { 
-  FiHome, FiUsers, FiFileText, FiLogOut, FiSearch, FiBell, 
-  FiChevronDown, FiChevronRight, FiX 
-} from "react-icons/fi";
-import { HiOutlineUserGroup } from "react-icons/hi";
-
-import logoImg from "../../assets/images/logo.png"; 
+import { FiSearch, FiBell, FiX } from "react-icons/fi";
 import adminImg from "../../assets/images/admin.png"; 
 
 function Consultation() {
   const navigate = useNavigate();
   
-  const [isLeadsOpen, setIsLeadsOpen] = useState(true);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [activeTab, setActiveTab] = useState("Leads");
 
   useEffect(() => {
     fetchData();
@@ -80,50 +74,12 @@ function Consultation() {
 
   return (
     <div className="consultation-layout">
-      <aside className="sidebar">
-        <div className="logo-box">
-          <img src={logoImg} alt="PolicyXpert" className="sidebar-logo" />
-        </div>
-
-        <nav className="menu">
-          <div className="menu-item" onClick={() => navigate("/admin/dashboard")}>
-            <FiHome className="icon" /> Home
-          </div>
-
-          <div className="menu-item-group">
-            <div 
-              className="menu-item active" 
-              onClick={() => setIsLeadsOpen(!isLeadsOpen)}
-              style={{ justifyContent: "space-between", cursor: "pointer" }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <FiUsers className="icon" /> Leads
-              </div>
-              {isLeadsOpen ? <FiChevronDown /> : <FiChevronRight />}
-            </div>
-
-            {isLeadsOpen && (
-              <div className="submenu">
-                <div className="submenu-item active-sub">Consultation</div>
-                <div className="submenu-item" onClick={() => navigate("/admin/life")}>Life Insurance</div>
-                <div className="submenu-item" onClick={() => navigate("/admin/health")}>Health Insurance</div>
-                <div className="submenu-item" onClick={() => navigate("/admin/car")}>Car Insurance</div>
-              </div>
-            )}
-          </div>
-
-          <div className="menu-item">
-            <FiFileText className="icon" /> Reports
-          </div>
-          <div className="menu-item">
-            <HiOutlineUserGroup className="icon" /> Customer
-          </div>
-        </nav>
-
-        <div className="logout-box" onClick={handleLogout}>
-          <FiLogOut className="icon" /> Logout
-        </div>
-      </aside>
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        navigate={navigate} 
+        handleLogout={handleLogout} 
+      />
 
       <main className="content-area">
         <header className="top-bar">
@@ -228,7 +184,7 @@ function Consultation() {
                 <span>&lt; Previous</span>
                 <span className="page-num active">1</span>
                 <span>Next &gt;</span>
-             </div>
+              </div>
           </div>
         </section>
 

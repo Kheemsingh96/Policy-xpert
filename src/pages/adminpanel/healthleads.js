@@ -1,32 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "./sidebar";
 import "./healthleads.css";
 
 import { 
-  FiSearch, FiBell, FiChevronDown, FiChevronRight, FiX, FiLogOut, FiEye 
+  FiSearch, FiBell, FiX, FiEye 
 } from "react-icons/fi";
 
-import { 
-  RiHome5Line, 
-  RiUserFollowLine, 
-  RiFileChartLine, 
-  RiGroupLine 
-} from "react-icons/ri";
-
-import logoImg from "../../assets/images/logo.png"; 
 import adminImg from "../../assets/images/admin.png"; 
 
 function HealthLeads() {
   const navigate = useNavigate();
   
-  const [isLeadsOpen, setIsLeadsOpen] = useState(true);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLead, setSelectedLead] = useState(null); 
+  const [activeTab, setActiveTab] = useState("Leads");
   const itemsPerPage = 10;
 
   useEffect(() => {
@@ -275,50 +268,12 @@ function HealthLeads() {
 
   return (
     <div className="health-layout">
-      <aside className="sidebar">
-        <div className="logo-box">
-          <img src={logoImg} alt="PolicyXpert" className="sidebar-logo" />
-        </div>
-
-        <nav className="menu">
-          <div className="menu-item" onClick={() => navigate("/admin/dashboard")}>
-            <RiHome5Line className="icon" /> Home
-          </div>
-
-          <div className="menu-item-group">
-            <div 
-              className="menu-item active" 
-              onClick={() => setIsLeadsOpen(!isLeadsOpen)}
-              style={{ justifyContent: "space-between", cursor: "pointer" }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <RiUserFollowLine className="icon" /> Leads
-              </div>
-              {isLeadsOpen ? <FiChevronDown /> : <FiChevronRight />}
-            </div>
-
-            {isLeadsOpen && (
-              <div className="submenu">
-                <div className="submenu-item" onClick={() => navigate("/admin/consultation")}>Consultation</div>
-                <div className="submenu-item" onClick={() => navigate("/admin/life")}>Life Insurance</div>
-                <div className="submenu-item active-sub">Health Insurance</div>
-                <div className="submenu-item" onClick={() => navigate("/admin/car")}>Car Insurance</div>
-              </div>
-            )}
-          </div>
-
-          <div className="menu-item">
-            <RiFileChartLine className="icon" /> Reports
-          </div>
-          <div className="menu-item">
-            <RiGroupLine className="icon" /> Customer
-          </div>
-        </nav>
-
-        <div className="logout-box" onClick={handleLogout}>
-          <FiLogOut className="icon" /> Logout
-        </div>
-      </aside>
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        navigate={navigate} 
+        handleLogout={handleLogout} 
+      />
 
       <main className="content-area">
         <header className="top-bar">

@@ -13,7 +13,7 @@ import Footer from "./components/footer/footer";
 import ConsultationForm from "./components/consultationForm/consultationForm";
 import StickyFooter from "./components/stickyfooter/stickyfooter";
 import Thanks from "./components/thanks/thanks";
-import ChatWidget from "./components/ChatWidget/ChatWidget";
+import Chatbot from "./components/chatbot/chatbot";
 
 import Blog from "./components/blog/blog";
 import Blog2 from "./components/blog2/blog2";
@@ -66,6 +66,11 @@ import Consultation from "./pages/adminpanel/consultation";
 import HealthLeads from "./pages/adminpanel/healthleads";
 import LifeLeads from "./pages/adminpanel/lifeleads";
 import CarLeads from "./pages/adminpanel/carleads";
+import ChatLeads from "./pages/adminpanel/chatsupport";
+import Sidebar from "./pages/adminpanel/sidebar";
+import ManageFaqs from "./pages/adminpanel/managefaqs";
+import ManageBlogs from "./pages/adminpanel/manageblogs";
+import ManageTestimonials from "./pages/adminpanel/managetestimonials";
 
 function Layout() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -73,24 +78,45 @@ function Layout() {
   const location = useLocation();
 
   const isAdminRoute = location.pathname.startsWith("/admin");
+  const isAdminLogin = location.pathname === "/admin";
 
   const openForm = () => setIsFormOpen(true);
   const closeForm = () => setIsFormOpen(false);
+
+  const handleLogout = () => {
+    window.location.href = "/admin";
+  };
 
   useEffect(() => {
     setIsFormOpen(false);
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  if (isAdminRoute) {
+  if (isAdminRoute && !isAdminLogin) {
+    return (
+      <div style={{ display: "flex", minHeight: "100vh" }}>
+        <Sidebar handleLogout={handleLogout} />
+        <div style={{ flex: 1, position: "relative" }}>
+          <Routes>
+            <Route path="/admin/dashboard" element={<Admin />} />
+            <Route path="/admin/consultation" element={<Consultation />} />
+            <Route path="/admin/health" element={<HealthLeads />} />
+            <Route path="/admin/life" element={<LifeLeads />} />
+            <Route path="/admin/car" element={<CarLeads />} />
+            <Route path="/admin/chatleads" element={<ChatLeads />} />
+            <Route path="/admin/faqs" element={<ManageFaqs />} />
+            <Route path="/admin/blogs" element={<ManageBlogs />} />
+            <Route path="/admin/testimonials" element={<ManageTestimonials />} />
+          </Routes>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAdminLogin) {
     return (
       <Routes>
         <Route path="/admin" element={<Login />} />
-        <Route path="/admin/dashboard" element={<Admin />} />
-        <Route path="/admin/consultation" element={<Consultation />} />
-        <Route path="/admin/health" element={<HealthLeads />} />
-        <Route path="/admin/life" element={<LifeLeads />} />
-        <Route path="/admin/car" element={<CarLeads />} />
       </Routes>
     );
   }
@@ -132,16 +158,11 @@ function Layout() {
               </>
             }
           />
-
           <Route path="/thanks" element={<Thanks />} />
-
           <Route path="/about-us" element={<AboutUs openForm={openForm} />} />
-          
           <Route path="/claims" element={<Claims />} />
-
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<Blog2 openForm={openForm} />} />
-
           <Route path="/life" element={<Life />} />
           <Route path="/life-insurance" element={<Life />} />
           <Route path="/life/step-2" element={<LifeStep2 />} />
@@ -156,7 +177,6 @@ function Layout() {
           <Route path="/life/step-11" element={<LifeStep11 />} />
           <Route path="/life/step-12" element={<LifeStep12 />} />
           <Route path="/life/report" element={<Lifereport openForm={openForm} />} />
-
           <Route path="/health" element={<Health />} />
           <Route path="/health-insurance" element={<Health />} />
           <Route path="/health/step-2" element={<HealthStep2 />} />
@@ -173,7 +193,6 @@ function Layout() {
           <Route path="/health/step-13" element={<HealthStep13 />} />
           <Route path="/health/step-14" element={<HealthStep14 />} />
           <Route path="/health/report" element={<HealthReport openForm={openForm} />} />
-
           <Route path="/auto" element={<Auto />} />
           <Route path="/car-insurance" element={<Auto />} />
           <Route path="/auto2" element={<Auto2 />} />
@@ -191,9 +210,7 @@ function Layout() {
       </div>
 
       <StickyFooter isFormOpen={isFormOpen} isMenuOpen={isMenuOpen} />
-      
-      <ChatWidget />
-
+      <Chatbot />
       {isFormOpen && <ConsultationForm onClose={closeForm} />}
     </div>
   );

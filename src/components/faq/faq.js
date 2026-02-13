@@ -1,39 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./faq.css";
 
 import ArrowIcon from "../../assets/images/arrow.png";
 import WhatsappIcon from "../../assets/images/whatsapp.png";
 
-const faqs = [
-  {
-    question: "What is Policy Xpert?",
-    answer:
-      "Policy Xpert is an online insurance comparison platform that helps users understand, compare, and choose the right insurance policies based on their needs. It allows you to compare health, life, auto, and travel insurance plans in one place to make informed decisions.",
-  },
-  {
-    question: "What types of insurance policies are available on Policy Xpert?",
-    answer:
-      "Policy Xpert offers a wide range of insurance options, including Health Insurance, Life Insurance, Auto Insurance, and Travel Insurance. Each category includes multiple plans from trusted insurers with detailed coverage information.",
-  },
-  {
-    question: "How does Policy Xpert help me choose the right policy?",
-    answer:
-      "Policy Xpert simplifies decision-making by allowing you to compare policies based on coverage, benefits, premiums, and exclusions. Expert guidance is also available to help you select a policy that best fits your budget and needs.",
-  },
-  {
-    question: "Is my personal information safe on Policy Xpert?",
-    answer:
-      "Yes. Policy Xpert follows strict security practices to protect your personal and financial information. Your data is used only for policy comparison and recommendation purposes and is never shared without consent.",
-  },
-  {
-    question: "Do I need to purchase a policy immediately after comparing plans?",
-    answer:
-      "No. You are free to explore and compare plans at your own pace. Policy Xpert is designed to help you make a confident decision without any pressure to purchase immediately.",
-  },
-];
-
 const Faq = () => {
+  const [faqs, setFaqs] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/faqs")
+      .then((res) => res.json())
+      .then((data) => {
+        // Filter active FAQs only (status === 1)
+        const activeFaqs = data.filter((item) => item.status === 1);
+        setFaqs(activeFaqs);
+      })
+      .catch((err) => console.error("Error fetching FAQs:", err));
+  }, []);
 
   const toggleFaq = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -42,8 +26,10 @@ const Faq = () => {
   const handleWhatsAppClick = () => {
     const phoneNumber = "918080854433";
     const message = "Hello Policy Xpert, I need help choosing a policy.";
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+
     window.open(whatsappUrl, "_blank");
   };
 
@@ -53,22 +39,28 @@ const Faq = () => {
         <h2 className="faq-title">Frequently Asked Questions</h2>
 
         <div className="faq-list">
-          {faqs.map((item, index) => (
-            <div
-              key={index}
-              className={`faq-item ${activeIndex === index ? "active" : ""}`}
-              onClick={() => toggleFaq(index)}
-            >
-              <div className="faq-question">
-                <h4>{item.question}</h4>
-                <img src={ArrowIcon} alt="Toggle" />
-              </div>
+          {faqs.length > 0 ? (
+            faqs.map((item, index) => (
+              <div
+                key={item.id}
+                className={`faq-item ${activeIndex === index ? "active" : ""}`}
+                onClick={() => toggleFaq(index)}
+              >
+                <div className="faq-question">
+                  <h4>{item.question}</h4>
+                  <img src={ArrowIcon} alt="Toggle" />
+                </div>
 
-              {activeIndex === index && (
-                <p className="faq-answer">{item.answer}</p>
-              )}
-            </div>
-          ))}
+                {activeIndex === index && (
+                  <p className="faq-answer">{item.answer}</p>
+                )}
+              </div>
+            ))
+          ) : (
+            <p style={{ textAlign: "center", color: "#666", padding: "20px" }}>
+              Loading FAQs...
+            </p>
+          )}
         </div>
 
         <div className="faq-cta">
